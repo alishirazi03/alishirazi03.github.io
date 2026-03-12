@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/x-icon" href="favicon.ico?v=2">
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico?v=2">
+  <link rel="apple-touch-icon" href="favicon.ico?v=2">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Syed Muhammad Ali Shirazi – Personal Website</title>
@@ -58,6 +60,37 @@
     }
     body.dark nav           { background: rgba(15,17,23,0.96); }
     body.dark .profile-name { color: #e2e8f0; }
+    .currently-widget {
+      background: #f8fffe;
+      border: 1px solid #e5e7eb;
+    }
+    body.dark .currently-widget {
+      background: #1a2f2d;
+      border: 1px solid #2d3748;
+      color: #e2e8f0;
+    }
+    body.dark .currently-widget p {
+      color: #cbd5e1;
+    }
+
+    .skills-section {
+      background: #f8fffe;
+    }
+    body.dark .skills-section {
+      background: #0d1117;
+    }
+    .skill-card {
+      background: white;
+      border: 1px solid #e5e7eb;
+    }
+    body.dark .skill-card {
+      background: #1a1f2e;
+      border: 1px solid #2d3748;
+    }
+    body.dark .skill-card p,
+    body.dark .skill-card h4 {
+      color: #cbd5e1;
+    }
 
     /* ── PRINT ───────────────────────────────────────── */
     @media print {
@@ -554,31 +587,13 @@
 
         <!-- Social Icons — using mailto: so they open the mail app -->
         <div class="social-links">
-          <a href="mailto:shirazi6503@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+          <a href="/cdn-cgi/l/email-protection#b6c5dedfc4d7ccdf80838685f6d1dbd7dfda98d5d9db"><i class="fas fa-envelope"></i> Email</a>
           <a href="https://github.com/alishirazi03" target="_blank"><i class="fab fa-github"></i> GitHub</a>
           <a href="https://linkedin.com/in/syedmuhammadalishirazi" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
           <a href="https://orcid.org/0009-0009-2379-2948" target="_blank"><i class="fab fa-orcid"></i> ORCID</a>
         </div>
 
-        <!-- Animated stats counters -->
-        <div style="display:flex;flex-wrap:wrap;gap:1.5rem;margin-top:1.4rem;">
-          <div style="text-align:center;">
-            <p class="count" data-target="1" style="font-family:'Crimson Pro',serif;font-size:2rem;font-weight:600;color:#1a2744;line-height:1;">0</p>
-            <p style="font-size:0.75rem;color:#6b7280;text-transform:uppercase;letter-spacing:0.06em;">Publication</p>
-          </div>
-          <div style="text-align:center;">
-            <p class="count" data-target="3" style="font-family:'Crimson Pro',serif;font-size:2rem;font-weight:600;color:#1a2744;line-height:1;">0</p>
-            <p style="font-size:0.75rem;color:#6b7280;text-transform:uppercase;letter-spacing:0.06em;">Projects</p>
-          </div>
-          <div style="text-align:center;">
-            <p class="count" data-target="4" style="font-family:'Crimson Pro',serif;font-size:2rem;font-weight:600;color:#1a2744;line-height:1;">0</p>
-            <p style="font-size:0.75rem;color:#6b7280;text-transform:uppercase;letter-spacing:0.06em;">Years Research</p>
-          </div>
-          <div style="text-align:center;">
-            <p class="count" data-target="5" style="font-family:'Crimson Pro',serif;font-size:2rem;font-weight:600;color:#1a2744;line-height:1;">0</p>
-            <p style="font-size:0.75rem;color:#6b7280;text-transform:uppercase;letter-spacing:0.06em;">Skills</p>
-          </div>
-        </div>
+
 
       </div>
     </div>
@@ -621,7 +636,7 @@
     </div>
 
     <!-- Currently widget -->
-    <div style="background:#f8fffe;border:1px solid #e5e7eb;border-left:3px solid #0f7b6c;border-radius:8px;padding:1rem 1.4rem;margin-top:1.8rem;max-width:520px;">
+    <div class="currently-widget" style="border-left:3px solid #0f7b6c;border-radius:8px;padding:1rem 1.4rem;margin-top:1.8rem;max-width:520px;">
       <p style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:#0f7b6c;margin-bottom:0.6rem;">Currently</p>
       <p style="font-size:0.9rem;margin-bottom:0.3rem;">📖 <strong>Reading:</strong> Bioinformatics Algorithms – Compeau &amp; Pevzner</p>
       <p style="font-size:0.9rem;margin-bottom:0.3rem;">🎓 <strong>Learning:</strong> Deep Learning for Genomics (Coursera)</p>
@@ -633,31 +648,31 @@
 <!-- ════════════════════════════════════════════
      SKILLS
 ════════════════════════════════════════════ -->
-<section id="skills" style="background:#f8fffe;">
+<section id="skills" class="skills-section">
   <div class="page-wrap fade-in">
     <p class="section-label">Expertise</p>
     <h2 class="section-title">Skills &amp; Expertise</h2>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.2rem;">
 
-      <div style="background:white;border:1px solid #e5e7eb;border-radius:8px;padding:1.2rem;">
+      <div class="skill-card" style="border-radius:8px;padding:1.2rem;">
         <p style="font-size:1.4rem;margin-bottom:0.5rem;">🧬</p>
         <h4 style="font-size:0.97rem;margin-bottom:0.3rem;">Bioinformatics</h4>
         <p style="font-size:0.84rem;color:#6b7280;">Genome sequence analysis, BLAST, sequence alignment, variant interpretation</p>
       </div>
 
-      <div style="background:white;border:1px solid #e5e7eb;border-radius:8px;padding:1.2rem;">
+      <div class="skill-card" style="border-radius:8px;padding:1.2rem;">
         <p style="font-size:1.4rem;margin-bottom:0.5rem;">💻</p>
         <h4 style="font-size:0.97rem;margin-bottom:0.3rem;">Programming</h4>
         <p style="font-size:0.84rem;color:#6b7280;">Python (BioPython, pandas, matplotlib), R (Bioconductor, ggplot2)</p>
       </div>
 
-      <div style="background:white;border:1px solid #e5e7eb;border-radius:8px;padding:1.2rem;">
+      <div class="skill-card" style="border-radius:8px;padding:1.2rem;">
         <p style="font-size:1.4rem;margin-bottom:0.5rem;">🔬</p>
         <h4 style="font-size:0.97rem;margin-bottom:0.3rem;">Wet Lab</h4>
         <p style="font-size:0.84rem;color:#6b7280;">DNA extraction, PCR, gel electrophoresis, essential microbiology techniques</p>
       </div>
 
-      <div style="background:white;border:1px solid #e5e7eb;border-radius:8px;padding:1.2rem;">
+      <div class="skill-card" style="border-radius:8px;padding:1.2rem;">
         <p style="font-size:1.4rem;margin-bottom:0.5rem;">🤖</p>
         <h4 style="font-size:0.97rem;margin-bottom:0.3rem;">AI &amp; Data Analysis</h4>
         <p style="font-size:0.84rem;color:#6b7280;">Machine learning for genomics, data visualization, statistical analysis</p>
@@ -782,7 +797,7 @@
 
     <h3 class="cv-section-title">Research Experience</h3>
     <div class="cv-item">
-      <div class="cv-year">Sep 2025 – Feb 2026</div>
+      <div class="cv-year">Feb 2026</div>
       <div class="cv-desc">
         <h4>Undergraduate Researcher – Genetic Basis of Gallstone Disease</h4>
         <p>COMSATS University Islamabad · Thesis project on ATP8B1 gene analysis</p>
@@ -815,14 +830,6 @@
   <div class="page-wrap fade-in">
     <p class="section-label">Projects</p>
     <h2 class="section-title">Portfolio</h2>
-
-    <!-- GitHub Stats cards -->
-    <div style="display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:2rem;">
-      <img src="https://github-readme-stats.vercel.app/api?username=alishirazi03&show_icons=true&theme=default&title_color=1a2744&icon_color=0f7b6c&hide_border=true"
-           alt="GitHub Stats" style="height:160px;border-radius:8px;border:1px solid #e5e7eb;">
-      <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=alishirazi03&layout=compact&title_color=1a2744&icon_color=0f7b6c&hide_border=true"
-           alt="Top Languages" style="height:160px;border-radius:8px;border:1px solid #e5e7eb;">
-    </div>
 
     <div class="portfolio-grid">
 
@@ -882,11 +889,6 @@
         <div class="faq-answer">I have hands-on experience with Python (BioPython, pandas, matplotlib), R (Bioconductor, ggplot2), BLAST, sequence alignment tools, and genome browser platforms including UCSC and Ensembl.</div>
       </details>
 
-      <details>
-        <summary>Can I contact you for advice on bioinformatics as a beginner?</summary>
-        <div class="faq-answer">Absolutely. I enjoy helping fellow biology students make the transition into computational biology. Send me an email and I will do my best to point you in the right direction.</div>
-      </details>
-
     </div>
   </div>
 </section>
@@ -902,7 +904,7 @@
 
       <div class="contact-info">
         <h4>Email</h4>
-        <p><a href="mailto:shirazi6503@gmail.com">shirazi6503@gmail.com</a></p>
+        <p><a href="/cdn-cgi/l/email-protection#f5869d9c87948f9cc3c0c5c6b59298949c99db969a98"><span class="__cf_email__" data-cfemail="cab9a2a3b8abb0a3fcfffaf98aada7aba3a6e4a9a5a7">[email&#160;protected]</span></a></p>
 
         <h4 style="margin-top:1.2rem;">Location</h4>
         <p>Islamabad, Pakistan</p>
@@ -927,7 +929,7 @@
           <textarea name="message" rows="5"   placeholder="Your message…" required></textarea>
           <button type="submit"><i class="fas fa-paper-plane"></i> &nbsp;Send Message</button>
           <p class="form-note">
-            Or email me directly at <a href="mailto:shirazi6503@gmail.com">shirazi6503@gmail.com</a>
+            Or email me directly at <a href="/cdn-cgi/l/email-protection#02716a6b7063786b3437323142656f636b6e2c616d6f"><span class="__cf_email__" data-cfemail="e89b80819a899281deddd8dba88f85898184c68b8785">[email&#160;protected]</span></a>
           </p>
         </form>
       </div>
@@ -947,7 +949,7 @@
      FLOATING BUTTONS
 ════════════════════════════════════════════ -->
 <button onclick="document.body.classList.toggle('dark')"
-  style="position:fixed;bottom:1.5rem;right:1.5rem;z-index:999;background:var(--navy);color:white;border:none;border-radius:50%;width:44px;height:44px;font-size:1.1rem;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.2);"
+  style="position:fixed;top:1.5rem;right:1.5rem;z-index:999;background:var(--navy);color:white;border:none;border-radius:50%;width:44px;height:44px;font-size:1.1rem;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.2);"
   title="Toggle dark mode">🌙</button>
 
 <a href="#home" id="topBtn"
@@ -956,7 +958,7 @@
 <!-- ════════════════════════════════════════════
      SCRIPTS
 ════════════════════════════════════════════ -->
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // ── Mobile nav toggle ─────────────────────────
   function toggleNav() {
     document.getElementById('navLinks').classList.toggle('open');
@@ -987,29 +989,6 @@
   window.addEventListener('scroll', () => {
     topBtn.style.display = window.scrollY > 400 ? 'block' : 'none';
   });
-
-  // ── Animated counters (completed — was cut off before) ──
-  const counts = document.querySelectorAll('.count');
-  const countObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const target = +entry.target.dataset.target;
-        let current = 0;
-        const step = Math.ceil(target / 30);
-        const timer = setInterval(() => {
-          current += step;
-          if (current >= target) {
-            entry.target.textContent = target;
-            clearInterval(timer);
-          } else {
-            entry.target.textContent = current;
-          }
-        }, 40);
-        countObserver.unobserve(entry.target);
-      }
-    });
-  });
-  counts.forEach(c => countObserver.observe(c));
 </script>
 
 </body>
