@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Name – Bioinformatics Researcher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    /* ── RESET & BASE ───────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #1a2744;
+      --teal:   #0f7b6c;
+      --teal-light: #e6f4f2;
+      --accent: #d4a84b;
+      --text:   #2d2d2d;
+      --muted:  #6b7280;
+      --border: #e5e7eb;
+      --bg:     #fafafa;
+      --white:  #ffffff;
+      --radius: 8px;
+      --shadow: 0 2px 20px rgba(0,0,0,0.07);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    a { color: var(--teal); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--navy); text-decoration: underline; }
+
+    h1, h2, h3, h4 {
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--navy);
+    }
+
+    /* ── NAVBAR ─────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+
+    .nav-logo {
+      font-family: 'Crimson Pro', serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--navy);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0.25rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.82rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 0.4rem 0.7rem;
+      border-radius: var(--radius);
+      transition: background 0.15s, color 0.15s;
+      text-decoration: none;
+    }
+
+    .nav-links a:hover { background: var(--teal-light); color: var(--teal); }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.3rem;
+      color: var(--navy);
+    }
+
+    /* ── LAYOUT WRAPPER ─────────────────────────────── */
+    .page-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* ── SECTION SHARED ─────────────────────────────── */
+    section {
+      padding: 5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    section:last-of-type { border-bottom: none; }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 1.75rem;
+    }
+
+    /* ── PROFILE SECTION ────────────────────────────── */
+    #home {
+      padding-top: 5rem;
+      padding-bottom: 4rem;
+    }
+
+    .profile-layout {
+      display: flex;
+      align-items: flex-start;
+      gap: 3rem;
+    }
+
+    .profile-photo-wrap {
+      flex-shrink: 0;
+    }
+
+    .profile-photo {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--white);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+      background: linear-gradient(135deg, #c8e6e3 0%, #a8d4d0 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* Placeholder initials when no photo */
+    .profile-photo-placeholder {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1a2744 0%, #0f7b6c 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Crimson Pro', serif;
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: white;
+      border: 4px solid var(--white);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+      flex-shrink: 0;
+    }
+
+    .profile-info { flex: 1; padding-top: 0.5rem; }
+
+    .profile-name {
+      font-size: 2.4rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 0.3rem;
+    }
+
+    .profile-title {
+      font-size: 1.05rem;
+      color: var(--teal);
+      font-weight: 400;
+      margin-bottom: 0.2rem;
+    }
+
+    .profile-affil {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .profile-bio {
+      font-size: 0.97rem;
+      color: #444;
+      max-width: 580px;
+      margin-bottom: 1.4rem;
+    }
+
+    /* ── SOCIAL ICONS ───────────────────────────────── */
+    .social-links {
+      display: flex;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+    }
+
+    .social-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 0.3rem 0.75rem;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .social-links a:hover {
+      background: var(--teal-light);
+      border-color: var(--teal);
+      color: var(--teal);
+      text-decoration: none;
+    }
+
+    .social-links i { font-size: 0.9rem; }
+
+    /* ── TAGS / CHIPS ───────────────────────────────── */
+    .tag-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.2rem; }
+
+    .tag {
+      background: var(--teal-light);
+      color: var(--teal);
+      border-radius: 20px;
+      padding: 0.25rem 0.8rem;
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── ABOUT SECTION ──────────────────────────────── */
+    #about .about-text p {
+      color: #444;
+      margin-bottom: 1.1rem;
+      max-width: 760px;
+    }
+
+    /* ── POSITIONS SECTION ──────────────────────────── */
+    .positions-list { display: flex; flex-direction: column; gap: 1.25rem; }
+
+    .position-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--teal);
+      border-radius: var(--radius);
+      padding: 1.2rem 1.5rem;
+      box-shadow: var(--shadow);
+    }
+
+    .position-card h4 { font-size: 1.05rem; margin-bottom: 0.2rem; }
+    .position-card .pos-org { color: var(--teal); font-size: 0.9rem; }
+    .position-card .pos-date { color: var(--muted); font-size: 0.82rem; margin-top: 0.2rem; }
+
+    /* ── PUBLICATIONS ───────────────────────────────── */
+    .pub-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.4rem 1.6rem;
+      margin-bottom: 1.1rem;
+      box-shadow: var(--shadow);
+      transition: box-shadow 0.2s;
+    }
+
+    .pub-card:hover { box-shadow: 0 4px 28px rgba(0,0,0,0.1); }
+
+    .pub-title { font-size: 1.05rem; font-family: 'Crimson Pro', serif; margin-bottom: 0.35rem; }
+    .pub-authors { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.2rem; }
+    .pub-venue { font-size: 0.83rem; color: var(--teal); font-style: italic; }
+    .pub-links { margin-top: 0.7rem; display: flex; gap: 0.6rem; }
+    .pub-badge {
+      font-size: 0.72rem;
+      font-weight: 500;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      border: 1px solid;
+    }
+    .pub-badge.pdf { border-color: #dc2626; color: #dc2626; }
+    .pub-badge.code { border-color: var(--navy); color: var(--navy); }
+    .pub-badge.doi { border-color: var(--teal); color: var(--teal); }
+
+    /* ── BLOG POSTS ─────────────────────────────────── */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .blog-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.4rem;
+      box-shadow: var(--shadow);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .blog-card:hover { box-shadow: 0 6px 30px rgba(0,0,0,0.1); transform: translateY(-2px); }
+    .blog-date { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.5rem; }
+    .blog-title { font-size: 1.1rem; font-family: 'Crimson Pro', serif; margin-bottom: 0.5rem; }
+    .blog-excerpt { font-size: 0.87rem; color: #555; line-height: 1.6; }
+    .blog-read-more { font-size: 0.8rem; color: var(--teal); margin-top: 0.8rem; display: inline-block; }
+
+    /* ── CV SECTION ─────────────────────────────────── */
+    #cv .cv-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--navy);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius);
+      font-size: 0.9rem;
+      font-weight: 400;
+      transition: background 0.2s;
+      text-decoration: none;
+      margin-bottom: 2rem;
+    }
+
+    #cv .cv-download:hover { background: var(--teal); color: white; text-decoration: none; }
+
+    .cv-section-title {
+      font-size: 1.1rem;
+      font-family: 'Crimson Pro', serif;
+      color: var(--navy);
+      margin: 1.6rem 0 0.8rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cv-item { display: flex; gap: 1.5rem; margin-bottom: 1rem; }
+    .cv-year { font-size: 0.82rem; color: var(--muted); white-space: nowrap; min-width: 80px; padding-top: 2px; }
+    .cv-desc h4 { font-size: 0.97rem; font-family: 'DM Sans', sans-serif; font-weight: 400; }
+    .cv-desc p { font-size: 0.86rem; color: var(--muted); }
+
+    /* ── PORTFOLIO ───────────────────────────────────── */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .portfolio-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .portfolio-card:hover { box-shadow: 0 6px 30px rgba(0,0,0,0.1); transform: translateY(-2px); }
+
+    .portfolio-banner {
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+
+    .portfolio-body { padding: 1.2rem 1.4rem; }
+    .portfolio-body h4 { font-size: 1rem; margin-bottom: 0.4rem; }
+    .portfolio-body p { font-size: 0.85rem; color: #555; line-height: 1.55; }
+    .portfolio-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.8rem; }
+    .portfolio-tag { background: #f1f5f9; color: var(--muted); border-radius: 4px; padding: 0.15rem 0.5rem; font-size: 0.72rem; }
+
+    /* ── FAQ ─────────────────────────────────────────── */
+    .faq-list { max-width: 720px; }
+
+    details {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 0.75rem;
+      background: var(--white);
+      overflow: hidden;
+    }
+
+    summary {
+      padding: 1rem 1.2rem;
+      cursor: pointer;
+      font-weight: 400;
+      font-size: 0.97rem;
+      color: var(--navy);
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+
+    summary::after { content: '+'; font-size: 1.2rem; color: var(--teal); font-weight: 300; }
+    details[open] summary::after { content: '−'; }
+    details[open] summary { background: var(--teal-light); }
+
+    .faq-answer { padding: 1rem 1.2rem; font-size: 0.92rem; color: #555; border-top: 1px solid var(--border); }
+
+    /* ── CONTACT ─────────────────────────────────────── */
+    #contact .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      max-width: 800px;
+    }
+
+    .contact-info h4 { font-size: 1rem; margin-bottom: 0.4rem; }
+    .contact-info p, .contact-info a { font-size: 0.92rem; color: #555; }
+
+    .contact-form { display: flex; flex-direction: column; gap: 0.9rem; }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 0.7rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text);
+      background: var(--white);
+      outline: none;
+      transition: border-color 0.2s;
+      resize: vertical;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus { border-color: var(--teal); }
+
+    .contact-form button {
+      background: var(--teal);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius);
+      font-size: 0.9rem;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: background 0.2s;
+      align-self: flex-start;
+    }
+
+    .contact-form button:hover { background: var(--navy); }
+
+    .form-note { font-size: 0.78rem; color: var(--muted); }
+
+    /* ── FOOTER ─────────────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 2.5rem 1rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    footer span { color: var(--teal); }
+
+    /* ── RESPONSIVE ──────────────────────────────────── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 60px; left: 0; right: 0; background: white; padding: 1rem; border-bottom: 1px solid var(--border); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+      .nav-links.open { display: flex; }
+      .hamburger { display: block; }
+
+      .profile-layout { flex-direction: column; gap: 1.5rem; align-items: center; text-align: center; }
+      .profile-name { font-size: 1.9rem; }
+      .social-links { justify-content: center; }
+      .tag-list { justify-content: center; }
+
+      #contact .contact-inner { grid-template-columns: 1fr; }
+      .section-title { font-size: 1.6rem; }
+    }
+
+    /* ── FADE-IN ANIMATION ───────────────────────────── */
+    .fade-in { opacity: 0; transform: translateY(18px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+
+<body>
+
+<!-- ════════════════════════════════════════════
+     NAVBAR
+════════════════════════════════════════════ -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#home">Your Name</a><!-- ✏️ Replace "Your Name" -->
+    <button class="hamburger" onclick="toggleNav()" aria-label="Toggle menu">
+      <i class="fas fa-bars"></i>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#publications" onclick="closeNav()">Publications</a></li>
+      <li><a href="#blog" onclick="closeNav()">Blog</a></li>
+      <li><a href="#cv" onclick="closeNav()">CV</a></li>
+      <li><a href="#portfolio" onclick="closeNav()">Portfolio</a></li>
+      <li><a href="#faq" onclick="closeNav()">FAQ</a></li>
+      <li><a href="#contact" onclick="closeNav()">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════════
+     PROFILE SECTION
+════════════════════════════════════════════ -->
+<section id="home">
+  <div class="page-wrap">
+    <div class="profile-layout fade-in">
+
+      <!-- Photo – replace src with your actual photo URL or upload photo.jpg -->
+      <!--
+        OPTION A: Use an online photo (paste your LinkedIn photo URL):
+          <img src="YOUR_PHOTO_URL_HERE" alt="Your Name" class="profile-photo" style="width:160px;height:160px;border-radius:50%;object-fit:cover;border:4px solid white;box-shadow:0 4px 24px rgba(0,0,0,.12);flex-shrink:0;">
+
+        OPTION B: Use initials placeholder (default, shown below):
+      -->
+      <div class="profile-photo-placeholder">YN</div><!-- ✏️ Replace initials -->
+
+      <div class="profile-info">
+        <h1 class="profile-name">Your Full Name</h1><!-- ✏️ -->
+        <p class="profile-title">Bioinformatics Researcher &amp; Computational Biologist</p><!-- ✏️ -->
+        <p class="profile-affil">
+          <i class="fas fa-map-marker-alt" style="font-size:0.8rem;margin-right:4px;"></i>
+          COMSATS University Islamabad, Pakistan<!-- ✏️ -->
+        </p>
+
+        <p class="profile-bio">
+          Biosciences graduate with a passion for uncovering the genetic mechanisms behind complex diseases.
+          I bridge traditional wet-lab techniques with computational biology — leveraging Python, R, and
+          bioinformatic tools to accelerate genomics discoveries.
+        </p><!-- ✏️ Adjust this short bio as you like -->
+
+        <!-- Social Icons -->
+        <div class="social-links">
+          <a href="mailto:your.email@example.com"><i class="fas fa-envelope"></i> Email</a><!-- ✏️ -->
+          <a href="https://github.com/yourusername" target="_blank"><i class="fab fa-github"></i> GitHub</a><!-- ✏️ -->
+          <a href="https://linkedin.com/in/yourprofile" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a><!-- ✏️ -->
+          <a href="https://twitter.com/yourhandle" target="_blank"><i class="fab fa-twitter"></i> Twitter</a><!-- ✏️ -->
+          <a href="https://scholar.google.com/citations?user=YOURID" target="_blank"><i class="fas fa-graduation-cap"></i> Scholar</a><!-- ✏️ -->
+          <a href="https://orcid.org/0000-0000-0000-0000" target="_blank"><i class="fab fa-orcid"></i> ORCID</a><!-- ✏️ -->
+        </div>
+
+        <div class="tag-list">
+          <span class="tag">Bioinformatics</span>
+          <span class="tag">Computational Biology</span>
+          <span class="tag">Genomics</span>
+          <span class="tag">Sequence Analysis</span>
+          <span class="tag">Python · R</span>
+          <span class="tag">AI in Biology</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     ABOUT ME
+════════════════════════════════════════════ -->
+<section id="about">
+  <div class="page-wrap fade-in">
+    <p class="section-label">Background</p>
+    <h2 class="section-title">About Me</h2>
+    <div class="about-text">
+      <p>
+        I am a Biosciences graduate from
+        <a href="https://www.comsats.edu.pk/" target="_blank">COMSATS University Islamabad</a>,
+        where my academic journey transitioned from traditional wet-lab techniques — including DNA extraction
+        and PCR — to the high-impact world of Bioinformatics and Computational Biology.
+      </p>
+      <p>
+        My undergraduate research focused on the <strong>Genetic Basis of Gallstone Disease</strong>,
+        specifically analyzing the role of the <em>ATP8B1</em> gene. This project deepened my skills in
+        genome sequence analysis and reinforced my commitment to using computational tools to solve
+        biological mysteries. I am particularly interested in how <strong>Artificial Intelligence (AI)
+        and modern data analytics</strong> can accelerate discoveries in genomics and molecular biology.
+      </p>
+      <p>
+        Having experience in both wet-lab DNA analysis and bioinformatic pipelines, I aim to solve
+        complex biological problems through an integrative approach. I am currently preparing to pursue
+        a <strong>Master's degree</strong> to further specialize in Bioinformatics and contribute to
+        global research efforts.
+      </p>
+      <p>
+        Outside research, I enjoy scientific communication and have a track record in scientific
+        presentations and collaborative group research. I am proficient in
+        <strong>Python</strong> and <strong>R</strong> for biological data analysis, data visualization,
+        and specialized bioinformatic software pipelines.
+      </p>
+    </div>
+    <!-- ✏️ You can freely edit the paragraphs above -->
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     CURRENT POSITIONS
+════════════════════════════════════════════ -->
+<section id="positions">
+  <div class="page-wrap fade-in">
+    <p class="section-label">Roles</p>
+    <h2 class="section-title">Current Positions</h2>
+    <div class="positions-list">
+
+      <div class="position-card">
+        <h4>B.Sc. Graduate – Biosciences</h4>
+        <p class="pos-org"><a href="https://www.comsats.edu.pk/" target="_blank">COMSATS University Islamabad</a></p>
+        <p class="pos-date">2021 – 2025</p>
+      </div><!-- ✏️ Edit or duplicate cards for each position -->
+
+      <div class="position-card">
+        <h4>Independent Researcher – Computational Genomics</h4>
+        <p class="pos-org">Self-directed Research</p>
+        <p class="pos-date">2024 – Present</p>
+      </div>
+
+      <div class="position-card">
+        <h4>Master's Applicant – Bioinformatics</h4>
+        <p class="pos-org">Upcoming · Target Year 2025/2026</p>
+        <p class="pos-date">In preparation</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     PUBLICATIONS
+════════════════════════════════════════════ -->
+<section id="publications">
+  <div class="page-wrap fade-in">
+    <p class="section-label">Research Output</p>
+    <h2 class="section-title">Publications</h2>
+
+    <!-- ✏️ Replace / duplicate this card for each publication -->
+    <div class="pub-card">
+      <p class="pub-title">Genetic Basis of Gallstone Disease: Role of the ATP8B1 Gene in Pakistani Patients</p>
+      <p class="pub-authors"><strong>Your Name</strong>, Supervisor Name, et al.</p>
+      <p class="pub-venue">Undergraduate Thesis, COMSATS University Islamabad · 2025</p>
+      <div class="pub-links">
+        <a href="#" class="pub-badge pdf">PDF</a>
+        <a href="#" class="pub-badge code">Code</a>
+        <a href="#" class="pub-badge doi">DOI</a>
+      </div>
+    </div>
+    <!-- ✏️ Add more pub-card blocks here as your list grows -->
+
+    <p style="color:var(--muted);font-size:0.88rem;margin-top:1rem;">
+      More publications forthcoming. See my <a href="https://scholar.google.com" target="_blank">Google Scholar</a> profile for updates.
+    </p>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     BLOG POSTS
+════════════════════════════════════════════ -->
+<section id="blog">
+  <div class="page-wrap fade-in">
+    <p class="section-label">Writing</p>
+    <h2 class="section-title">Blog Posts</h2>
+    <div class="blog-grid">
+
+      <!-- ✏️ Replace / add blog cards as you publish -->
+      <div class="blog-card">
+        <p class="blog-date">June 2025</p>
+        <h3 class="blog-title">How I Analyzed the ATP8B1 Gene Using Python</h3>
+        <p class="blog-excerpt">A walkthrough of the bioinformatic pipeline I built for my undergraduate thesis — from raw sequence data to meaningful biological insights.</p>
+        <a href="#" class="blog-read-more">Read more →</a>
+      </div>
+
+      <div class="blog-card">
+        <p class="blog-date">April 2025</p>
+        <h3 class="blog-title">Getting Started with Bioinformatics as a Biology Student</h3>
+        <p class="blog-excerpt">No CS background? No problem. Here are the tools, resources, and mindset shifts that helped me transition into computational biology.</p>
+        <a href="#" class="blog-read-more">Read more →</a>
+      </div>
+
+      <div class="blog-card">
+        <p class="blog-date">February 2025</p>
+        <h3 class="blog-title">AI in Genomics: What the Research Actually Says</h3>
+        <p class="blog-excerpt">A curated overview of how machine learning is reshaping variant calling, drug discovery, and disease prediction in the post-AlphaFold era.</p>
+        <a href="#" class="blog-read-more">Read more →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     CV
+════════════════════════════════════════════ -->
+<section id="cv">
+  <div class="page-wrap fade-in">
+    <p class="section-label">Curriculum Vitae</p>
+    <h2 class="section-title">CV</h2>
+
+    <!-- ✏️ Link to your actual CV PDF once uploaded to GitHub -->
+    <a href="cv.pdf" class="cv-download" target="_blank">
+      <i class="fas fa-file-pdf"></i> Download Full CV (PDF)
+    </a>
+
+    <h3 class="cv-section-title">Education</h3>
+    <div class="cv-item">
+      <div class="cv-year">2021 – 2025</div>
+      <div class="cv-desc">
+        <h4>B.Sc. Biosciences</h4>
+        <p>COMSATS University Islamabad, Pakistan</p>
+      </div>
+    </div>
+
+    <h3 class="cv-section-title">Research Experience</h3>
+    <div class="cv-item">
+      <div class="cv-year">2024 – 2025</div>
+      <div class="cv-desc">
+        <h4>Undergraduate Researcher – Genetic Basis of Gallstone Disease</h4>
+        <p>COMSATS University Islamabad · Thesis project on ATP8B1 gene analysis</p>
+      </div>
+    </div>
+
+    <h3 class="cv-section-title">Skills</h3>
+    <div class="cv-item">
+      <div class="cv-year">Technical</div>
+      <div class="cv-desc">
+        <h4>Bioinformatics &amp; Computation</h4>
+        <p>Python, R, genome sequence analysis, data visualization, bioinformatic software pipelines</p>
+      </div>
+    </div>
+    <div class="cv-item">
+      <div class="cv-year">Wet Lab</div>
+      <div class="cv-desc">
+        <h4>Laboratory Techniques</h4>
+        <p>DNA extraction, PCR, gel electrophoresis, essential microbiology techniques</p>
+      </div>
+    </div>
+
+    <!-- ✏️ Expand CV items freely — just copy a cv-item block -->
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     PORTFOLIO / PROJECTS
+════════════════════════════════════════════ -->
+<section id="portfolio">
+  <div class="page-wrap fade-in">
+    <p class="section-label">Projects</p>
+    <h2 class="section-title">Portfolio</h2>
+    <div class="portfolio-grid">
+
+      <!-- ✏️ Edit or add portfolio cards for each project -->
+      <div class="portfolio-card">
+        <div class="portfolio-banner" style="background:linear-gradient(135deg,#1a2744,#0f7b6c);">🧬</div>
+        <div class="portfolio-body">
+          <h4>ATP8B1 Gene Analysis Pipeline</h4>
+          <p>End-to-end bioinformatic pipeline for analyzing the genetic basis of gallstone disease in Pakistani patients using genome sequence data.</p>
+          <div class="portfolio-tags">
+            <span class="portfolio-tag">Python</span>
+            <span class="portfolio-tag">Bioinformatics</span>
+            <span class="portfolio-tag">Genomics</span>
+          </div>
+          <a href="https://github.com/yourusername/atp8b1-analysis" target="_blank" style="font-size:0.82rem;color:var(--teal);display:inline-block;margin-top:0.8rem;"><i class="fab fa-github"></i> View on GitHub</a>
+        </div>
+      </div>
+
+      <div class="portfolio-card">
+        <div class="portfolio-banner" style="background:linear-gradient(135deg,#d4a84b,#b8852a);">📊</div>
+        <div class="portfolio-body">
+          <h4>Genomics Data Visualization Dashboard</h4>
+          <p>Interactive R Shiny dashboard for exploring sequence variation data across gene families linked to metabolic disorders.</p>
+          <div class="portfolio-tags">
+            <span class="portfolio-tag">R</span>
+            <span class="portfolio-tag">Shiny</span>
+            <span class="portfolio-tag">Data Viz</span>
+          </div>
+          <a href="https://github.com/yourusername" target="_blank" style="font-size:0.82rem;color:var(--teal);display:inline-block;margin-top:0.8rem;"><i class="fab fa-github"></i> View on GitHub</a>
+        </div>
+      </div>
+
+      <div class="portfolio-card">
+        <div class="portfolio-banner" style="background:linear-gradient(135deg,#4a1d96,#7c3aed);">🤖</div>
+        <div class="portfolio-body">
+          <h4>AI-Assisted Variant Classification</h4>
+          <p>Exploration of machine learning approaches for classifying genetic variants of uncertain significance (VUS) in disease-associated genes.</p>
+          <div class="portfolio-tags">
+            <span class="portfolio-tag">Python</span>
+            <span class="portfolio-tag">ML</span>
+            <span class="portfolio-tag">Genomics</span>
+          </div>
+          <a href="https://github.com/yourusername" target="_blank" style="font-size:0.82rem;color:var(--teal);display:inline-block;margin-top:0.8rem;"><i class="fab fa-github"></i> View on GitHub</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     FAQ
+════════════════════════════════════════════ -->
+<section id="faq">
+  <div class="page-wrap fade-in">
+    <p class="section-label">Questions</p>
+    <h2 class="section-title">FAQ</h2>
+    <div class="faq-list">
+
+      <!-- ✏️ Edit questions and answers freely -->
+      <details>
+        <summary>Are you open to research collaborations?</summary>
+        <div class="faq-answer">Yes! I am actively looking for collaborations in bioinformatics, computational genomics, and AI-driven biological research. Feel free to reach out via email or LinkedIn.</div>
+      </details>
+
+      <details>
+        <summary>Are you currently applying for Master's programs?</summary>
+        <div class="faq-answer">Yes. I am preparing applications for Master's programs in Bioinformatics and Computational Biology for 2025/2026 intake. I am particularly interested in programs in Europe, North America, and the Asia-Pacific region.</div>
+      </details>
+
+      <details>
+        <summary>What bioinformatic tools are you proficient in?</summary>
+        <div class="faq-answer">I have hands-on experience with Python (BioPython, pandas, matplotlib), R (Bioconductor, ggplot2), BLAST, sequence alignment tools, and genome browser platforms including UCSC and Ensembl.</div>
+      </details>
+
+      <details>
+        <summary>Can I contact you for advice on bioinformatics as a beginner?</summary>
+        <div class="faq-answer">Absolutely. I enjoy helping fellow biology students make the transition into computational biology. Send me an email and I will do my best to point you in the right direction.</div>
+      </details>
+
+      <details>
+        <summary>Where can I read your blog posts or follow your work?</summary>
+        <div class="faq-answer">Blog posts are listed on this site. You can also follow me on GitHub for code projects and on Google Scholar for research updates.</div>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     CONTACT
+════════════════════════════════════════════ -->
+<section id="contact">
+  <div class="page-wrap fade-in">
+    <p class="section-label">Get in Touch</p>
+    <h2 class="section-title">Contact</h2>
+    <div class="contact-inner">
+
+      <div class="contact-info">
+        <h4>Email</h4>
+        <p><a href="mailto:your.email@example.com">your.email@example.com</a></p><!-- ✏️ -->
+
+        <h4 style="margin-top:1.2rem;">Location</h4>
+        <p>Islamabad, Pakistan</p>
+
+        <h4 style="margin-top:1.2rem;">Affiliation</h4>
+        <p><a href="https://www.comsats.edu.pk/" target="_blank">COMSATS University Islamabad</a></p>
+
+        <div class="social-links" style="margin-top:1.4rem;">
+          <a href="https://github.com/yourusername" target="_blank"><i class="fab fa-github"></i> GitHub</a><!-- ✏️ -->
+          <a href="https://linkedin.com/in/yourprofile" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a><!-- ✏️ -->
+          <a href="https://twitter.com/yourhandle" target="_blank"><i class="fab fa-twitter"></i> Twitter</a><!-- ✏️ -->
+        </div>
+      </div>
+
+      <div>
+        <p style="font-size:0.9rem;color:#555;margin-bottom:1rem;">
+          Send me a message below — I aim to respond within 2–3 business days.
+        </p>
+        <!-- ✏️ For a working contact form, sign up free at https://formspree.io and replace ACTION_URL below -->
+        <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <input type="text" name="name" placeholder="Your Name" required/>
+          <input type="email" name="email" placeholder="Your Email" required/>
+          <input type="text" name="subject" placeholder="Subject"/>
+          <textarea name="message" rows="5" placeholder="Your message…" required></textarea>
+          <button type="submit"><i class="fas fa-paper-plane"></i> &nbsp;Send Message</button>
+          <p class="form-note">
+            Or email me directly at <a href="mailto:your.email@example.com">your.email@example.com</a>
+          </p>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════ -->
+<footer>
+  <p>© 2025 <span>Your Name</span> · Built with HTML &amp; hosted on <a href="https://pages.github.com" target="_blank">GitHub Pages</a></p><!-- ✏️ -->
+</footer>
+
+<!-- ════════════════════════════════════════════
+     SCRIPTS
+════════════════════════════════════════════ -->
+<script>
+  // Mobile nav toggle
+  function toggleNav() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+  function closeNav() {
+    document.getElementById('navLinks').classList.remove('open');
+  }
+  // Close nav on outside click
+  document.addEventListener('click', function(e) {
+    const nav = document.getElementById('navLinks');
+    if (!nav.contains(e.target) && !e.target.closest('.hamburger')) {
+      nav.classList.remove('open');
+    }
+  });
+
+  // Scroll fade-in animation
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
