@@ -5,70 +5,72 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Syed Muhammad Ali Shirazi – Personal Website</title>
+
   <!-- SEO -->
-<meta name="description" content="Bioinformatics researcher specializing in computational genomics, AI in biology, and sequence analysis. Graduate of COMSATS University Islamabad.">
-<meta name="keywords" content="bioinformatics, computational biology, genomics, ATP8B1, COMSATS, Pakistan researcher">
-<meta name="author" content="Your Full Name">
+  <meta name="description" content="Bioinformatics researcher specializing in computational genomics, AI in biology, and sequence analysis. Graduate of COMSATS University Islamabad.">
+  <meta name="keywords" content="bioinformatics, computational biology, genomics, ATP8B1, COMSATS, Pakistan researcher">
+  <meta name="author" content="Syed Muhammad Ali Shirazi">
 
-<!-- Social sharing preview (Open Graph) -->
-<meta property="og:title" content="Syed Muhammad Ali Shirazi – Biosciences Graduate">
-<meta property="og:description" content="BS Biosciences Graduate | Molecular Genetics | Aspiring MS in Bioinformatics & Computational Biology">
-<meta property="og:image" content="https://yourusername.github.io/mypic.jpg">
-<meta property="og:url" content="https://yourusername.github.io">
-<meta property="og:type" content="website">
+  <!-- Social sharing preview (Open Graph) -->
+  <meta property="og:title" content="Syed Muhammad Ali Shirazi – Biosciences Graduate">
+  <meta property="og:description" content="BS Biosciences Graduate | Molecular Genetics | Aspiring MS in Bioinformatics & Computational Biology">
+  <meta property="og:image" content="https://alishirazi03.github.io/mypic.jpg">
+  <meta property="og:url" content="https://alishirazi03.github.io">
+  <meta property="og:type" content="website">
 
-<!-- Twitter card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Syed Muhammad Ali Shirazi – Biosciences Graduate">
-<meta name="twitter:image" content="https://yourusername.github.io/mypic.jpg">
-  
+  <!-- Twitter card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Syed Muhammad Ali Shirazi – Biosciences Graduate">
+  <meta name="twitter:image" content="https://alishirazi03.github.io/mypic.jpg">
+
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
   <style>
-
-    body.dark {
-  --bg: #0f1117;
-  --white: #1a1f2e;
-  --text: #e2e8f0;
-  --muted: #94a3b8;
-  --border: #2d3748;
-  --navy: #7dd3c8;
-  --teal-light: #1a2f2d;
-}
-body.dark nav { background: rgba(15,17,23,0.96); }
-body.dark .profile-name { color: #e2e8f0; }
-
-
-    @media print {
-  nav, footer, .social-links, #blog, #portfolio, #faq, #contact, #skills { display: none; }
-  section { padding: 1rem 0; border: none; }
-  body { font-size: 13px; }
-  .cv-download { display: none; }
-}
-
-    @keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(1.4); }
-}
-    
     /* ── RESET & BASE ───────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --navy:   #1a2744;
-      --teal:   #0f7b6c;
+      --navy:       #1a2744;
+      --teal:       #0f7b6c;
       --teal-light: #e6f4f2;
-      --accent: #d4a84b;
-      --text:   #2d2d2d;
-      --muted:  #6b7280;
-      --border: #e5e7eb;
-      --bg:     #fafafa;
-      --white:  #ffffff;
-      --radius: 8px;
-      --shadow: 0 2px 20px rgba(0,0,0,0.07);
+      --accent:     #d4a84b;
+      --text:       #2d2d2d;
+      --muted:      #6b7280;
+      --border:     #e5e7eb;
+      --bg:         #fafafa;
+      --white:      #ffffff;
+      --radius:     8px;
+      --shadow:     0 2px 20px rgba(0,0,0,0.07);
+    }
+
+    /* ── DARK MODE ───────────────────────────────────── */
+    body.dark {
+      --bg:         #0f1117;
+      --white:      #1a1f2e;
+      --text:       #e2e8f0;
+      --muted:      #94a3b8;
+      --border:     #2d3748;
+      --navy:       #7dd3c8;
+      --teal-light: #1a2f2d;
+    }
+    body.dark nav           { background: rgba(15,17,23,0.96); }
+    body.dark .profile-name { color: #e2e8f0; }
+
+    /* ── PRINT ───────────────────────────────────────── */
+    @media print {
+      nav, footer, .social-links, #blog, #portfolio, #faq, #contact, #skills { display: none; }
+      section      { padding: 1rem 0; border: none; }
+      body         { font-size: 13px; }
+      .cv-download { display: none; }
+    }
+
+    /* ── ANIMATIONS ──────────────────────────────────── */
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(1.4); }
     }
 
     html { scroll-behavior: smooth; }
@@ -191,42 +193,6 @@ body.dark .profile-name { color: #e2e8f0; }
       gap: 3rem;
     }
 
-    .profile-photo-wrap {
-      flex-shrink: 0;
-    }
-
-    .profile-photo {
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid var(--white);
-      box-shadow: 0 4px 24px rgba(0,0,0,0.12);
-      background: linear-gradient(135deg, #c8e6e3 0%, #a8d4d0 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    /* Placeholder initials when no photo */
-    .profile-photo-placeholder {
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #1a2744 0%, #0f7b6c 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Crimson Pro', serif;
-      font-size: 2.5rem;
-      font-weight: 600;
-      color: white;
-      border: 4px solid var(--white);
-      box-shadow: 0 4px 24px rgba(0,0,0,0.15);
-      flex-shrink: 0;
-    }
-
     .profile-info { flex: 1; padding-top: 0.5rem; }
 
     .profile-name {
@@ -246,13 +212,8 @@ body.dark .profile-name { color: #e2e8f0; }
     .profile-affil {
       font-size: 0.9rem;
       color: var(--muted);
-      margin-bottom: 1rem;
+      margin-bottom: 0.75rem;
     }
-    
-    <p style="display:inline-flex;align-items:center;gap:0.4rem;background:#dcfce7;color:#166534;border-radius:20px;padding:0.25rem 0.9rem;font-size:0.8rem;font-weight:400;margin-bottom:1rem;">
-  <span style="width:7px;height:7px;background:#22c55e;border-radius:50%;display:inline-block;animation:pulse 2s infinite;"></span>
-  Open to Master's positions & research collaborations
-</p>
 
     .profile-bio {
       font-size: 0.97rem;
@@ -291,19 +252,6 @@ body.dark .profile-name { color: #e2e8f0; }
 
     .social-links i { font-size: 0.9rem; }
 
-    /* ── TAGS / CHIPS ───────────────────────────────── */
-    .tag-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.2rem; }
-
-    .tag {
-      background: var(--teal-light);
-      color: var(--teal);
-      border-radius: 20px;
-      padding: 0.25rem 0.8rem;
-      font-size: 0.78rem;
-      font-weight: 400;
-      letter-spacing: 0.02em;
-    }
-
     /* ── ABOUT SECTION ──────────────────────────────── */
     #about .about-text p {
       color: #444;
@@ -323,8 +271,8 @@ body.dark .profile-name { color: #e2e8f0; }
       box-shadow: var(--shadow);
     }
 
-    .position-card h4 { font-size: 1.05rem; margin-bottom: 0.2rem; }
-    .position-card .pos-org { color: var(--teal); font-size: 0.9rem; }
+    .position-card h4        { font-size: 1.05rem; margin-bottom: 0.2rem; }
+    .position-card .pos-org  { color: var(--teal); font-size: 0.9rem; }
     .position-card .pos-date { color: var(--muted); font-size: 0.82rem; margin-top: 0.2rem; }
 
     /* ── PUBLICATIONS ───────────────────────────────── */
@@ -338,12 +286,13 @@ body.dark .profile-name { color: #e2e8f0; }
       transition: box-shadow 0.2s;
     }
 
-    .pub-card:hover { box-shadow: 0 4px 28px rgba(0,0,0,0.1); }
+    .pub-card:hover    { box-shadow: 0 4px 28px rgba(0,0,0,0.1); }
+    .pub-title         { font-size: 1.05rem; font-family: 'Crimson Pro', serif; margin-bottom: 0.35rem; }
+    .pub-authors       { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.2rem; }
+    .pub-supervisor    { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.2rem; }
+    .pub-venue         { font-size: 0.83rem; color: var(--teal); font-style: italic; }
+    .pub-links         { margin-top: 0.7rem; display: flex; gap: 0.6rem; }
 
-    .pub-title { font-size: 1.05rem; font-family: 'Crimson Pro', serif; margin-bottom: 0.35rem; }
-    .pub-authors { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.2rem; }
-    .pub-venue { font-size: 0.83rem; color: var(--teal); font-style: italic; }
-    .pub-links { margin-top: 0.7rem; display: flex; gap: 0.6rem; }
     .pub-badge {
       font-size: 0.72rem;
       font-weight: 500;
@@ -351,9 +300,9 @@ body.dark .profile-name { color: #e2e8f0; }
       border-radius: 4px;
       border: 1px solid;
     }
-    .pub-badge.pdf { border-color: #dc2626; color: #dc2626; }
+    .pub-badge.pdf  { border-color: #dc2626; color: #dc2626; }
     .pub-badge.code { border-color: var(--navy); color: var(--navy); }
-    .pub-badge.doi { border-color: var(--teal); color: var(--teal); }
+    .pub-badge.doi  { border-color: var(--teal); color: var(--teal); }
 
     /* ── BLOG POSTS ─────────────────────────────────── */
     .blog-grid {
@@ -371,11 +320,11 @@ body.dark .profile-name { color: #e2e8f0; }
       transition: box-shadow 0.2s, transform 0.2s;
     }
 
-    .blog-card:hover { box-shadow: 0 6px 30px rgba(0,0,0,0.1); transform: translateY(-2px); }
-    .blog-date { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.5rem; }
-    .blog-title { font-size: 1.1rem; font-family: 'Crimson Pro', serif; margin-bottom: 0.5rem; }
-    .blog-excerpt { font-size: 0.87rem; color: #555; line-height: 1.6; }
-    .blog-read-more { font-size: 0.8rem; color: var(--teal); margin-top: 0.8rem; display: inline-block; }
+    .blog-card:hover  { box-shadow: 0 6px 30px rgba(0,0,0,0.1); transform: translateY(-2px); }
+    .blog-date        { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.5rem; }
+    .blog-title       { font-size: 1.1rem; font-family: 'Crimson Pro', serif; margin-bottom: 0.5rem; }
+    .blog-excerpt     { font-size: 0.87rem; color: #555; line-height: 1.6; }
+    .blog-read-more   { font-size: 0.8rem; color: var(--teal); margin-top: 0.8rem; display: inline-block; }
 
     /* ── CV SECTION ─────────────────────────────────── */
     #cv .cv-download {
@@ -390,7 +339,7 @@ body.dark .profile-name { color: #e2e8f0; }
       font-weight: 400;
       transition: background 0.2s;
       text-decoration: none;
-      margin-bottom: 2rem;
+      margin-bottom: 0.75rem;
     }
 
     #cv .cv-download:hover { background: var(--teal); color: white; text-decoration: none; }
@@ -404,10 +353,10 @@ body.dark .profile-name { color: #e2e8f0; }
       border-bottom: 1px solid var(--border);
     }
 
-    .cv-item { display: flex; gap: 1.5rem; margin-bottom: 1rem; }
-    .cv-year { font-size: 0.82rem; color: var(--muted); white-space: nowrap; min-width: 80px; padding-top: 2px; }
-    .cv-desc h4 { font-size: 0.97rem; font-family: 'DM Sans', sans-serif; font-weight: 400; }
-    .cv-desc p { font-size: 0.86rem; color: var(--muted); }
+    .cv-item     { display: flex; gap: 1.5rem; margin-bottom: 1rem; }
+    .cv-year     { font-size: 0.82rem; color: var(--muted); white-space: nowrap; min-width: 80px; padding-top: 2px; }
+    .cv-desc h4  { font-size: 0.97rem; font-family: 'DM Sans', sans-serif; font-weight: 400; }
+    .cv-desc p   { font-size: 0.86rem; color: var(--muted); }
 
     /* ── PORTFOLIO ───────────────────────────────────── */
     .portfolio-grid {
@@ -435,11 +384,11 @@ body.dark .profile-name { color: #e2e8f0; }
       font-size: 2rem;
     }
 
-    .portfolio-body { padding: 1.2rem 1.4rem; }
+    .portfolio-body    { padding: 1.2rem 1.4rem; }
     .portfolio-body h4 { font-size: 1rem; margin-bottom: 0.4rem; }
-    .portfolio-body p { font-size: 0.85rem; color: #555; line-height: 1.55; }
-    .portfolio-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.8rem; }
-    .portfolio-tag { background: #f1f5f9; color: var(--muted); border-radius: 4px; padding: 0.15rem 0.5rem; font-size: 0.72rem; }
+    .portfolio-body p  { font-size: 0.85rem; color: #555; line-height: 1.55; }
+    .portfolio-tags    { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.8rem; }
+    .portfolio-tag     { background: #f1f5f9; color: var(--muted); border-radius: 4px; padding: 0.15rem 0.5rem; font-size: 0.72rem; }
 
     /* ── FAQ ─────────────────────────────────────────── */
     .faq-list { max-width: 720px; }
@@ -465,9 +414,9 @@ body.dark .profile-name { color: #e2e8f0; }
       user-select: none;
     }
 
-    summary::after { content: '+'; font-size: 1.2rem; color: var(--teal); font-weight: 300; }
+    summary::after              { content: '+'; font-size: 1.2rem; color: var(--teal); font-weight: 300; }
     details[open] summary::after { content: '−'; }
-    details[open] summary { background: var(--teal-light); }
+    details[open] summary       { background: var(--teal-light); }
 
     .faq-answer { padding: 1rem 1.2rem; font-size: 0.92rem; color: #555; border-top: 1px solid var(--border); }
 
@@ -479,10 +428,11 @@ body.dark .profile-name { color: #e2e8f0; }
       max-width: 800px;
     }
 
-    .contact-info h4 { font-size: 1rem; margin-bottom: 0.4rem; }
-    .contact-info p, .contact-info a { font-size: 0.92rem; color: #555; }
+    .contact-info h4       { font-size: 1rem; margin-bottom: 0.4rem; }
+    .contact-info p,
+    .contact-info a        { font-size: 0.92rem; color: #555; }
 
-    .contact-form { display: flex; flex-direction: column; gap: 0.9rem; }
+    .contact-form          { display: flex; flex-direction: column; gap: 0.9rem; }
 
     .contact-form input,
     .contact-form textarea {
@@ -516,7 +466,6 @@ body.dark .profile-name { color: #e2e8f0; }
     }
 
     .contact-form button:hover { background: var(--navy); }
-
     .form-note { font-size: 0.78rem; color: var(--muted); }
 
     /* ── FOOTER ─────────────────────────────────────── */
@@ -537,16 +486,15 @@ body.dark .profile-name { color: #e2e8f0; }
       .hamburger { display: block; }
 
       .profile-layout { flex-direction: column; gap: 1.5rem; align-items: center; text-align: center; }
-      .profile-name { font-size: 1.9rem; }
-      .social-links { justify-content: center; }
-      .tag-list { justify-content: center; }
+      .profile-name   { font-size: 1.9rem; }
+      .social-links   { justify-content: center; }
 
       #contact .contact-inner { grid-template-columns: 1fr; }
-      .section-title { font-size: 1.6rem; }
+      .section-title  { font-size: 1.6rem; }
     }
 
     /* ── FADE-IN ANIMATION ───────────────────────────── */
-    .fade-in { opacity: 0; transform: translateY(18px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .fade-in         { opacity: 0; transform: translateY(18px); transition: opacity 0.55s ease, transform 0.55s ease; }
     .fade-in.visible { opacity: 1; transform: none; }
   </style>
 </head>
@@ -558,17 +506,17 @@ body.dark .profile-name { color: #e2e8f0; }
 ════════════════════════════════════════════ -->
 <nav>
   <div class="nav-inner">
-    <a class="nav-logo" href="#home">Syed Muhammad Ali Shirzi</a><!-- ✏️ Replace "Your Name" -->
+    <a class="nav-logo" href="#home">Syed Muhammad Ali Shirazi</a>
     <button class="hamburger" onclick="toggleNav()" aria-label="Toggle menu">
       <i class="fas fa-bars"></i>
     </button>
     <ul class="nav-links" id="navLinks">
       <li><a href="#publications" onclick="closeNav()">Publications</a></li>
-      <li><a href="#blog" onclick="closeNav()">Blog</a></li>
-      <li><a href="#cv" onclick="closeNav()">CV</a></li>
-      <li><a href="#portfolio" onclick="closeNav()">Portfolio</a></li>
-      <li><a href="#faq" onclick="closeNav()">FAQ</a></li>
-      <li><a href="#contact" onclick="closeNav()">Contact</a></li>
+      <li><a href="#blog"         onclick="closeNav()">Blog</a></li>
+      <li><a href="#cv"           onclick="closeNav()">CV</a></li>
+      <li><a href="#portfolio"    onclick="closeNav()">Portfolio</a></li>
+      <li><a href="#faq"          onclick="closeNav()">FAQ</a></li>
+      <li><a href="#contact"      onclick="closeNav()">Contact</a></li>
     </ul>
   </div>
 </nav>
@@ -580,48 +528,58 @@ body.dark .profile-name { color: #e2e8f0; }
   <div class="page-wrap">
     <div class="profile-layout fade-in">
 
-      <img src="mypic.jpg" alt="Your Name" style="width:160px;height:160px;border-radius:50%;object-fit:cover;object-position:top;border:4px solid white;box-shadow:0 4px 24px rgba(0,0,0,.12);flex-shrink:0;"><!-- ✏️ pfp -->
+      <!-- Profile photo -->
+      <img src="mypic.jpg" alt="Syed Muhammad Ali Shirazi"
+           style="width:160px;height:160px;border-radius:50%;object-fit:cover;object-position:top;border:4px solid white;box-shadow:0 4px 24px rgba(0,0,0,.12);flex-shrink:0;">
 
       <div class="profile-info">
-        <h1 class="profile-name">Syed Muhammad Ali Shirazi</h1><!-- ✏️ -->
-        <p class="profile-title">Bachelors in BioSciences</p><!-- ✏️ -->
+        <h1 class="profile-name">Syed Muhammad Ali Shirazi</h1>
+        <p class="profile-title">Bachelors in BioSciences</p>
         <p class="profile-affil">
           <i class="fas fa-map-marker-alt" style="font-size:0.8rem;margin-right:4px;"></i>
-          COMSATS University Islamabad, Pakistan<!-- ✏️ -->
+          COMSATS University Islamabad, Pakistan
+        </p>
+
+        <!-- "Open to opportunities" badge — correctly placed in HTML -->
+        <p style="display:inline-flex;align-items:center;gap:0.4rem;background:#dcfce7;color:#166534;border-radius:20px;padding:0.25rem 0.9rem;font-size:0.8rem;font-weight:400;margin-bottom:1rem;">
+          <span style="width:7px;height:7px;background:#22c55e;border-radius:50%;display:inline-block;animation:pulse 2s infinite;"></span>
+          Open to Master's positions &amp; research collaborations
         </p>
 
         <p class="profile-bio">
           Biosciences graduate with a passion for uncovering the genetic mechanisms behind complex diseases.
           I bridge traditional wet-lab techniques with computational biology — leveraging Python, R, and
           bioinformatic tools to accelerate genomics discoveries.
-        </p><!-- ✏️ Adjust this short bio as you like -->
+        </p>
 
-        <!-- Social Icons -->
+        <!-- Social Icons — using mailto: so they open the mail app -->
         <div class="social-links">
-          <a href="https://mail.google.com/mail/u/0/?fs=1&tf=cm&source=mailto&to=shirazi6503@gmail.com"><i class="fas fa-envelope"></i> Email</a><!-- ✏️ -->
-          <a href="https://github.com/alishirazi03" target="_blank"><i class="fab fa-github"></i> GitHub</a><!-- ✏️ -->
-          <a href="https://linkedin.com/in/syedmuhammadalishirazi" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a><!-- ✏️ -->
-          <a href="https://orcid.org/0009-0009-2379-2948" target="_blank"><i class="fab fa-orcid"></i> ORCID</a><!-- ✏️ -->
+          <a href="mailto:shirazi6503@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+          <a href="https://github.com/alishirazi03" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+          <a href="https://linkedin.com/in/syedmuhammadalishirazi" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+          <a href="https://orcid.org/0009-0009-2379-2948" target="_blank"><i class="fab fa-orcid"></i> ORCID</a>
         </div>
 
-<div style="display:flex;flex-wrap:wrap;gap:1.5rem;margin-top:1.4rem;">
-  <div style="text-align:center;">
-    <p style="font-family:'Crimson Pro',serif;font-size:2rem;font-weight:600;color:#1a2744;line-height:1;" class="count" data-target="1">0</p>
-    <p style="font-size:0.75rem;color:#6b7280;text-transform:uppercase;letter-spacing:0.06em;">Publication</p>
-  </div>
-  <div style="text-align:center;">
-    <p style="font-family:'Crimson Pro',serif;font-size:2rem;font-weight:600;color:#1a2744;line-height:1;" class="count" data-target="3">0</p>
-    <p style="font-size:0.75rem;color:#6b7280;text-transform:uppercase;letter-spacing:0.06em;">Projects</p>
-  </div>
-  <div style="text-align:center;">
-    <p style="font-family:'Crimson Pro',serif;font-size:2rem;font-weight:600;color:#1a2744;line-height:1;" class="count" data-target="4">0</p>
-    <p style="font-size:0.75rem;color:#6b7280;text-transform:uppercase;letter-spacing:0.06em;">Years Research</p>
-  </div>
-  <div style="text-align:center;">
-    <p style="font-family:'Crimson Pro',serif;font-size:2rem;font-weight:600;color:#1a2744;line-height:1;" class="count" data-target="5">0</p>
-    <p style="font-size:0.75rem;color:#6b7280;text-transform:uppercase;letter-spacing:0.06em;">Skills</p>
-  </div>
-</div>
+        <!-- Animated stats counters -->
+        <div style="display:flex;flex-wrap:wrap;gap:1.5rem;margin-top:1.4rem;">
+          <div style="text-align:center;">
+            <p class="count" data-target="1" style="font-family:'Crimson Pro',serif;font-size:2rem;font-weight:600;color:#1a2744;line-height:1;">0</p>
+            <p style="font-size:0.75rem;color:#6b7280;text-transform:uppercase;letter-spacing:0.06em;">Publication</p>
+          </div>
+          <div style="text-align:center;">
+            <p class="count" data-target="3" style="font-family:'Crimson Pro',serif;font-size:2rem;font-weight:600;color:#1a2744;line-height:1;">0</p>
+            <p style="font-size:0.75rem;color:#6b7280;text-transform:uppercase;letter-spacing:0.06em;">Projects</p>
+          </div>
+          <div style="text-align:center;">
+            <p class="count" data-target="4" style="font-family:'Crimson Pro',serif;font-size:2rem;font-weight:600;color:#1a2744;line-height:1;">0</p>
+            <p style="font-size:0.75rem;color:#6b7280;text-transform:uppercase;letter-spacing:0.06em;">Years Research</p>
+          </div>
+          <div style="text-align:center;">
+            <p class="count" data-target="5" style="font-family:'Crimson Pro',serif;font-size:2rem;font-weight:600;color:#1a2744;line-height:1;">0</p>
+            <p style="font-size:0.75rem;color:#6b7280;text-transform:uppercase;letter-spacing:0.06em;">Skills</p>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -661,7 +619,51 @@ body.dark .profile-name { color: #e2e8f0; }
         and specialized bioinformatic software pipelines.
       </p>
     </div>
-    <!-- ✏️ You can freely edit the paragraphs above -->
+
+    <!-- Currently widget -->
+    <div style="background:#f8fffe;border:1px solid #e5e7eb;border-left:3px solid #0f7b6c;border-radius:8px;padding:1rem 1.4rem;margin-top:1.8rem;max-width:520px;">
+      <p style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:#0f7b6c;margin-bottom:0.6rem;">Currently</p>
+      <p style="font-size:0.9rem;margin-bottom:0.3rem;">📖 <strong>Reading:</strong> Bioinformatics Algorithms – Compeau &amp; Pevzner</p>
+      <p style="font-size:0.9rem;margin-bottom:0.3rem;">🎓 <strong>Learning:</strong> Deep Learning for Genomics (Coursera)</p>
+      <p style="font-size:0.9rem;">🔬 <strong>Working on:</strong> ATP8B1 variant pipeline in Python</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     SKILLS
+════════════════════════════════════════════ -->
+<section id="skills" style="background:#f8fffe;">
+  <div class="page-wrap fade-in">
+    <p class="section-label">Expertise</p>
+    <h2 class="section-title">Skills &amp; Expertise</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.2rem;">
+
+      <div style="background:white;border:1px solid #e5e7eb;border-radius:8px;padding:1.2rem;">
+        <p style="font-size:1.4rem;margin-bottom:0.5rem;">🧬</p>
+        <h4 style="font-size:0.97rem;margin-bottom:0.3rem;">Bioinformatics</h4>
+        <p style="font-size:0.84rem;color:#6b7280;">Genome sequence analysis, BLAST, sequence alignment, variant interpretation</p>
+      </div>
+
+      <div style="background:white;border:1px solid #e5e7eb;border-radius:8px;padding:1.2rem;">
+        <p style="font-size:1.4rem;margin-bottom:0.5rem;">💻</p>
+        <h4 style="font-size:0.97rem;margin-bottom:0.3rem;">Programming</h4>
+        <p style="font-size:0.84rem;color:#6b7280;">Python (BioPython, pandas, matplotlib), R (Bioconductor, ggplot2)</p>
+      </div>
+
+      <div style="background:white;border:1px solid #e5e7eb;border-radius:8px;padding:1.2rem;">
+        <p style="font-size:1.4rem;margin-bottom:0.5rem;">🔬</p>
+        <h4 style="font-size:0.97rem;margin-bottom:0.3rem;">Wet Lab</h4>
+        <p style="font-size:0.84rem;color:#6b7280;">DNA extraction, PCR, gel electrophoresis, essential microbiology techniques</p>
+      </div>
+
+      <div style="background:white;border:1px solid #e5e7eb;border-radius:8px;padding:1.2rem;">
+        <p style="font-size:1.4rem;margin-bottom:0.5rem;">🤖</p>
+        <h4 style="font-size:0.97rem;margin-bottom:0.3rem;">AI &amp; Data Analysis</h4>
+        <p style="font-size:0.84rem;color:#6b7280;">Machine learning for genomics, data visualization, statistical analysis</p>
+      </div>
+
+    </div>
   </div>
 </section>
 
@@ -678,7 +680,7 @@ body.dark .profile-name { color: #e2e8f0; }
         <h4>B.Sc. Graduate – Biosciences</h4>
         <p class="pos-org"><a href="https://www.comsats.edu.pk/" target="_blank">COMSATS University Islamabad</a></p>
         <p class="pos-date">2022 – 2026</p>
-      </div><!-- ✏️ Edit or duplicate cards for each position -->
+      </div>
 
       <div class="position-card">
         <h4>Independent Researcher – Computational Genomics</h4>
@@ -704,22 +706,19 @@ body.dark .profile-name { color: #e2e8f0; }
     <p class="section-label">Research Output</p>
     <h2 class="section-title">Final Year Project</h2>
 
-    <!-- ✏️ Replace / duplicate this card for each publication -->
     <div class="pub-card">
-      <p class="pub-title">Assessment of the Role of ATP8B1 gene in Gallstone Disease in the Paksitani Population</p>
-      <p class="pub-authors"><strong>Syed Muhammad Ali Shirazi</p>
-      <p class="pub-supervisor"><strong>Supervisors: Dr. Muhammad Ajmal, Dr. Nasir Masood</p>
+      <p class="pub-title">Assessment of the Role of ATP8B1 gene in Gallstone Disease in the Pakistani Population</p>
+      <p class="pub-authors"><strong>Syed Muhammad Ali Shirazi</strong></p>
+      <p class="pub-supervisor"><strong>Supervisors:</strong> Dr. Muhammad Ajmal, Dr. Nasir Masood</p>
       <p class="pub-venue">Undergraduate Thesis, COMSATS University Islamabad · 2025</p>
       <div class="pub-links">
         <a href="#" class="pub-badge pdf">PDF</a>
       </div>
     </div>
-    <!-- ✏️ Add more pub-card blocks here as your list grows -->
 
     <p style="color:var(--muted);font-size:0.88rem;margin-top:1rem;">
-      Looking for more Projects and publications in the coming years.
+      Looking for more projects and publications in the coming years.
     </p>
-
   </div>
 </section>
 
@@ -732,7 +731,6 @@ body.dark .profile-name { color: #e2e8f0; }
     <h2 class="section-title">Blog Posts</h2>
     <div class="blog-grid">
 
-      <!-- ✏️ Replace / add blog cards as you publish -->
       <div class="blog-card">
         <p class="blog-date">Feb 2026</p>
         <h3 class="blog-title">How I Analyzed the ATP8B1 Gene Using Python</h3>
@@ -766,13 +764,12 @@ body.dark .profile-name { color: #e2e8f0; }
     <p class="section-label">Curriculum Vitae</p>
     <h2 class="section-title">CV</h2>
 
-    <!-- ✏️ Link to your actual CV PDF once uploaded to GitHub -->
     <a href="cv.pdf" class="cv-download" target="_blank">
       <i class="fas fa-file-pdf"></i> Download Full CV (PDF)
     </a>
-    <p style="font-size:0.8rem;color:#6b7280;margin-top:-1rem;margin-bottom:1.5rem;">
-  <i class="fas fa-clock" style="margin-right:4px;"></i>Last updated: June 2025
-</p>
+    <p style="font-size:0.8rem;color:#6b7280;margin-bottom:1.5rem;">
+      <i class="fas fa-clock" style="margin-right:4px;"></i>Last updated: June 2025
+    </p>
 
     <h3 class="cv-section-title">Education</h3>
     <div class="cv-item">
@@ -808,7 +805,6 @@ body.dark .profile-name { color: #e2e8f0; }
       </div>
     </div>
 
-    <!-- ✏️ Expand CV items freely — just copy a cv-item block -->
   </div>
 </section>
 
@@ -819,9 +815,17 @@ body.dark .profile-name { color: #e2e8f0; }
   <div class="page-wrap fade-in">
     <p class="section-label">Projects</p>
     <h2 class="section-title">Portfolio</h2>
+
+    <!-- GitHub Stats cards -->
+    <div style="display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:2rem;">
+      <img src="https://github-readme-stats.vercel.app/api?username=alishirazi03&show_icons=true&theme=default&title_color=1a2744&icon_color=0f7b6c&hide_border=true"
+           alt="GitHub Stats" style="height:160px;border-radius:8px;border:1px solid #e5e7eb;">
+      <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=alishirazi03&layout=compact&title_color=1a2744&icon_color=0f7b6c&hide_border=true"
+           alt="Top Languages" style="height:160px;border-radius:8px;border:1px solid #e5e7eb;">
+    </div>
+
     <div class="portfolio-grid">
 
-      <!-- ✏️ Edit or add portfolio cards for each project -->
       <div class="portfolio-card">
         <div class="portfolio-banner" style="background:linear-gradient(135deg,#1a2744,#0f7b6c);">🧬</div>
         <div class="portfolio-body">
@@ -832,7 +836,7 @@ body.dark .profile-name { color: #e2e8f0; }
             <span class="portfolio-tag">Bioinformatics</span>
             <span class="portfolio-tag">Genomics</span>
           </div>
-          <a href="https://github.com/yourusername/atp8b1-analysis" target="_blank" style="font-size:0.82rem;color:var(--teal);display:inline-block;margin-top:0.8rem;"><i class="fab fa-github"></i> View on GitHub</a>
+          <a href="https://github.com/alishirazi03" target="_blank" style="font-size:0.82rem;color:var(--teal);display:inline-block;margin-top:0.8rem;"><i class="fab fa-github"></i> View on GitHub</a>
         </div>
       </div>
 
@@ -846,7 +850,7 @@ body.dark .profile-name { color: #e2e8f0; }
             <span class="portfolio-tag">Shiny</span>
             <span class="portfolio-tag">Data Viz</span>
           </div>
-          <a href="https://github.com/yourusername" target="_blank" style="font-size:0.82rem;color:var(--teal);display:inline-block;margin-top:0.8rem;"><i class="fab fa-github"></i> View on GitHub</a>
+          <a href="https://github.com/alishirazi03" target="_blank" style="font-size:0.82rem;color:var(--teal);display:inline-block;margin-top:0.8rem;"><i class="fab fa-github"></i> View on GitHub</a>
         </div>
       </div>
 
@@ -863,7 +867,6 @@ body.dark .profile-name { color: #e2e8f0; }
     <h2 class="section-title">FAQ</h2>
     <div class="faq-list">
 
-      <!-- ✏️ Edit questions and answers freely -->
       <details>
         <summary>Are you open to research collaborations?</summary>
         <div class="faq-answer">Yes! I am actively looking for collaborations in bioinformatics, computational genomics, and AI-driven biological research. Feel free to reach out via email or LinkedIn.</div>
@@ -871,7 +874,7 @@ body.dark .profile-name { color: #e2e8f0; }
 
       <details>
         <summary>Are you currently applying for Master's programs?</summary>
-        <div class="faq-answer">Yes. I am preparing applications for Master's programs in Bioinformatics and Computational Biology for Fall 2026 intake. </div>
+        <div class="faq-answer">Yes. I am preparing applications for Master's programs in Bioinformatics and Computational Biology for Fall 2026 intake.</div>
       </details>
 
       <details>
@@ -899,7 +902,7 @@ body.dark .profile-name { color: #e2e8f0; }
 
       <div class="contact-info">
         <h4>Email</h4>
-        <p><a href="https://mail.google.com/mail/u/0/?fs=1&tf=cm&source=mailto&to=shirazi6503@gmail.com">shirazi6503@gmail.com</a></p><!-- ✏️ -->
+        <p><a href="mailto:shirazi6503@gmail.com">shirazi6503@gmail.com</a></p>
 
         <h4 style="margin-top:1.2rem;">Location</h4>
         <p>Islamabad, Pakistan</p>
@@ -908,8 +911,8 @@ body.dark .profile-name { color: #e2e8f0; }
         <p><a href="https://www.comsats.edu.pk/" target="_blank">COMSATS University Islamabad</a></p>
 
         <div class="social-links" style="margin-top:1.4rem;">
-          <a href="https://github.com/alishirazi03" target="_blank"><i class="fab fa-github"></i> GitHub</a><!-- ✏️ -->
-          <a href="https://linkedin.com/in/syedmuhammadalishirazi" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a><!-- ✏️ -->
+          <a href="https://github.com/alishirazi03"               target="_blank"><i class="fab fa-github"></i> GitHub</a>
+          <a href="https://linkedin.com/in/syedmuhammadalishirazi" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
         </div>
       </div>
 
@@ -917,15 +920,14 @@ body.dark .profile-name { color: #e2e8f0; }
         <p style="font-size:0.9rem;color:#555;margin-bottom:1rem;">
           Send me a message below.
         </p>
-        <!-- ✏️ For a working contact form, sign up free at https://formspree.io and replace ACTION_URL below -->
         <form class="contact-form" action="https://formspree.io/f/mvzwrpww" method="POST">
-          <input type="text" name="name" placeholder="Your Name" required/>
-          <input type="email" name="email" placeholder="Your Email" required/>
-          <input type="text" name="subject" placeholder="Subject"/>
-          <textarea name="message" rows="5" placeholder="Your message…" required></textarea>
+          <input  type="text"  name="name"    placeholder="Your Name"  required/>
+          <input  type="email" name="email"   placeholder="Your Email" required/>
+          <input  type="text"  name="subject" placeholder="Subject"/>
+          <textarea name="message" rows="5"   placeholder="Your message…" required></textarea>
           <button type="submit"><i class="fas fa-paper-plane"></i> &nbsp;Send Message</button>
           <p class="form-note">
-            Or email me directly at <a href="https://mail.google.com/mail/u/0/?fs=1&tf=cm&source=mailto&to=shirazi6503@gmail.com">shirazi6503@gmail.com</a>
+            Or email me directly at <a href="mailto:shirazi6503@gmail.com">shirazi6503@gmail.com</a>
           </p>
         </form>
       </div>
@@ -938,21 +940,30 @@ body.dark .profile-name { color: #e2e8f0; }
      FOOTER
 ════════════════════════════════════════════ -->
 <footer>
-  <p>© 2026 <span>Syed Muhammad Ali Shirazi</span> · Built with HTML &amp; hosted on <a href="https://pages.github.com" target="_blank">GitHub Pages</a></p><!-- ✏️ -->
+  <p>© 2026 <span>Syed Muhammad Ali Shirazi</span> · Built with HTML &amp; hosted on <a href="https://pages.github.com" target="_blank">GitHub Pages</a></p>
 </footer>
+
+<!-- ════════════════════════════════════════════
+     FLOATING BUTTONS
+════════════════════════════════════════════ -->
+<button onclick="document.body.classList.toggle('dark')"
+  style="position:fixed;bottom:1.5rem;right:1.5rem;z-index:999;background:var(--navy);color:white;border:none;border-radius:50%;width:44px;height:44px;font-size:1.1rem;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.2);"
+  title="Toggle dark mode">🌙</button>
+
+<a href="#home" id="topBtn"
+  style="display:none;position:fixed;bottom:5rem;right:1.5rem;z-index:999;background:var(--teal);color:white;border-radius:50%;width:40px;height:40px;text-align:center;line-height:40px;font-size:1rem;text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,0.2);">↑</a>
 
 <!-- ════════════════════════════════════════════
      SCRIPTS
 ════════════════════════════════════════════ -->
 <script>
-  // Mobile nav toggle
+  // ── Mobile nav toggle ─────────────────────────
   function toggleNav() {
     document.getElementById('navLinks').classList.toggle('open');
   }
   function closeNav() {
     document.getElementById('navLinks').classList.remove('open');
   }
-  // Close nav on outside click
   document.addEventListener('click', function(e) {
     const nav = document.getElementById('navLinks');
     if (!nav.contains(e.target) && !e.target.closest('.hamburger')) {
@@ -960,7 +971,7 @@ body.dark .profile-name { color: #e2e8f0; }
     }
   });
 
-  // Scroll fade-in animation
+  // ── Scroll fade-in animation ──────────────────
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -969,29 +980,15 @@ body.dark .profile-name { color: #e2e8f0; }
       }
     });
   }, { threshold: 0.08 });
-
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-</script>
 
-<button onclick="document.body.classList.toggle('dark')" 
-  style="position:fixed;bottom:1.5rem;right:1.5rem;z-index:999;background:var(--navy);color:white;border:none;border-radius:50%;width:44px;height:44px;font-size:1.1rem;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.2);">
-  🌙
-</button>
-
-
-<a href="#home" id="topBtn" 
-  style="display:none;position:fixed;bottom:5rem;right:1.5rem;z-index:999;background:var(--teal);color:white;border-radius:50%;width:40px;height:40px;text-align:center;line-height:40px;font-size:1rem;text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,0.2);">
-  ↑
-</a>
-
-<script>
+  // ── Back to top button ────────────────────────
   const topBtn = document.getElementById('topBtn');
   window.addEventListener('scroll', () => {
     topBtn.style.display = window.scrollY > 400 ? 'block' : 'none';
   });
-</script>
 
-<script>
+  // ── Animated counters (completed — was cut off before) ──
   const counts = document.querySelectorAll('.count');
   const countObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -1001,8 +998,12 @@ body.dark .profile-name { color: #e2e8f0; }
         const step = Math.ceil(target / 30);
         const timer = setInterval(() => {
           current += step;
-          if (current >= target) { entry.target.textContent = target; clearInterval(timer); }
-          else entry.target.textContent = current;
+          if (current >= target) {
+            entry.target.textContent = target;
+            clearInterval(timer);
+          } else {
+            entry.target.textContent = current;
+          }
         }, 40);
         countObserver.unobserve(entry.target);
       }
