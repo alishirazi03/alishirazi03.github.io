@@ -8,19 +8,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Syed Muhammad Ali Shirazi – Personal Website</title>
 
-  <!-- SEO -->
   <meta name="description" content="Bioinformatics researcher specializing in computational genomics, AI in biology, and sequence analysis. Graduate of COMSATS University Islamabad.">
   <meta name="keywords" content="bioinformatics, computational biology, genomics, ATP8B1, COMSATS, Pakistan researcher">
   <meta name="author" content="Syed Muhammad Ali Shirazi">
-
-  <!-- Social sharing preview (Open Graph) -->
   <meta property="og:title" content="Syed Muhammad Ali Shirazi – Biosciences Graduate">
   <meta property="og:description" content="BS Biosciences Graduate | Molecular Genetics | Aspiring MS in Bioinformatics & Computational Biology">
   <meta property="og:image" content="https://alishirazi03.github.io/mypic.jpg">
   <meta property="og:url" content="https://alishirazi03.github.io">
   <meta property="og:type" content="website">
-
-  <!-- Twitter card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Syed Muhammad Ali Shirazi – Biosciences Graduate">
   <meta name="twitter:image" content="https://alishirazi03.github.io/mypic.jpg">
@@ -31,7 +26,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
   <style>
-    /* ── RESET & BASE ───────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
@@ -48,7 +42,6 @@
       --shadow:     0 2px 20px rgba(0,0,0,0.07);
     }
 
-    /* ── DARK MODE ───────────────────────────────────── */
     body.dark {
       --bg:         #0f1117;
       --white:      #1a1f2e;
@@ -58,584 +51,259 @@
       --navy:       #7dd3c8;
       --teal-light: #1a2f2d;
     }
-    body.dark nav           { background: rgba(15,17,23,0.96); }
-    body.dark .profile-name { color: #e2e8f0; }
-    .currently-widget {
-      background: #f8fffe;
-      border: 1px solid #e5e7eb;
-    }
-    body.dark .currently-widget {
-      background: #1a2f2d;
-      border: 1px solid #2d3748;
-      color: #e2e8f0;
-    }
-    body.dark .currently-widget p {
-      color: #cbd5e1;
-    }
+    body.dark nav            { background: rgba(15,17,23,0.96); }
+    body.dark .profile-name  { color: #e2e8f0; }
 
-    .skills-section {
-      background: #f8fffe;
-    }
-    body.dark .skills-section {
-      background: #0d1117;
-    }
-    .skill-card {
-      background: white;
-      border: 1px solid #e5e7eb;
-    }
-    body.dark .skill-card {
-      background: #1a1f2e;
-      border: 1px solid #2d3748;
-    }
-    body.dark .skill-card p,
-    body.dark .skill-card h4 {
-      color: #cbd5e1;
-    }
+    .currently-widget { background: #f8fffe; border: 1px solid #e5e7eb; }
+    body.dark .currently-widget { background: #1a2f2d; border: 1px solid #2d3748; }
+    body.dark .currently-widget p { color: #cbd5e1; }
 
-    /* ── PRINT ───────────────────────────────────────── */
+    .skills-section { background: #f8fffe; }
+    body.dark .skills-section { background: #0d1117; }
+    .skill-card { background: white; border: 1px solid #e5e7eb; }
+    body.dark .skill-card { background: #1a1f2e; border: 1px solid #2d3748; }
+    body.dark .skill-card p, body.dark .skill-card h4 { color: #cbd5e1; }
+
     @media print {
-      nav, footer, .social-links, #blog, #portfolio, #faq, #contact, #skills { display: none; }
-      section      { padding: 1rem 0; border: none; }
-      body         { font-size: 13px; }
+      nav, footer, .social-links, #blog, #portfolio, #faq, #contact, #skills, #interests, #volunteering { display: none; }
+      section { padding: 1rem 0; border: none; }
+      body { font-size: 13px; }
       .cv-download { display: none; }
     }
 
-    /* ── ANIMATIONS ──────────────────────────────────── */
     @keyframes pulse {
       0%, 100% { opacity: 1; transform: scale(1); }
       50%       { opacity: 0.5; transform: scale(1.4); }
     }
 
     html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 16px;
-      line-height: 1.75;
-      color: var(--text);
-      background: var(--bg);
-    }
-
+    body { font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 16px; line-height: 1.75; color: var(--text); background: var(--bg); }
     a { color: var(--teal); text-decoration: none; transition: color 0.2s; }
     a:hover { color: var(--navy); text-decoration: underline; }
+    h1, h2, h3, h4 { font-family: 'Crimson Pro', Georgia, serif; font-weight: 600; line-height: 1.2; color: var(--navy); }
 
-    h1, h2, h3, h4 {
-      font-family: 'Crimson Pro', Georgia, serif;
-      font-weight: 600;
-      line-height: 1.2;
-      color: var(--navy);
-    }
-
-    /* ── NAVBAR ─────────────────────────────────────── */
     nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      position: sticky; top: 0; z-index: 100;
       background: rgba(255,255,255,0.96);
       backdrop-filter: blur(8px);
       border-bottom: 1px solid var(--border);
       padding: 0 2rem;
     }
-
-    .nav-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 60px;
-    }
-
-    .nav-logo {
-      font-family: 'Crimson Pro', serif;
-      font-size: 1.15rem;
-      font-weight: 600;
-      color: var(--navy);
-      text-decoration: none;
-      white-space: nowrap;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 0.25rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-size: 0.82rem;
-      font-weight: 400;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--muted);
-      padding: 0.4rem 0.7rem;
-      border-radius: var(--radius);
-      transition: background 0.15s, color 0.15s;
-      text-decoration: none;
-    }
-
+    .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+    .nav-logo  { font-family: 'Crimson Pro', serif; font-size: 1.15rem; font-weight: 600; color: var(--navy); text-decoration: none; white-space: nowrap; }
+    .nav-links { display: flex; gap: 0.2rem; list-style: none; }
+    .nav-links a { font-size: 0.76rem; font-weight: 400; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); padding: 0.32rem 0.55rem; border-radius: var(--radius); transition: background 0.15s, color 0.15s; text-decoration: none; }
     .nav-links a:hover { background: var(--teal-light); color: var(--teal); }
+    .hamburger { display: none; background: none; border: none; cursor: pointer; font-size: 1.3rem; color: var(--navy); }
 
-    .hamburger {
-      display: none;
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 1.3rem;
-      color: var(--navy);
-    }
-
-    /* ── LAYOUT WRAPPER ─────────────────────────────── */
-    .page-wrap {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
-
-    /* ── SECTION SHARED ─────────────────────────────── */
-    section {
-      padding: 5rem 0;
-      border-bottom: 1px solid var(--border);
-    }
-
+    .page-wrap { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+    section { padding: 5rem 0; border-bottom: 1px solid var(--border); }
     section:last-of-type { border-bottom: none; }
+    .section-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.5rem; }
+    .section-title { font-size: 2rem; margin-bottom: 1.75rem; }
 
-    .section-label {
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 0.5rem;
-    }
+    #home { padding-top: 5rem; padding-bottom: 4rem; }
+    .profile-layout { display: flex; align-items: flex-start; gap: 3rem; }
+    .profile-info   { flex: 1; padding-top: 0.5rem; }
+    .profile-name   { font-size: 2.4rem; font-weight: 600; color: var(--navy); margin-bottom: 0.3rem; }
+    .profile-title  { font-size: 1.05rem; color: var(--teal); font-weight: 400; margin-bottom: 0.2rem; }
+    .profile-affil  { font-size: 0.9rem; color: var(--muted); margin-bottom: 0.75rem; }
+    .profile-bio    { font-size: 0.97rem; color: #444; max-width: 580px; margin-bottom: 1.4rem; }
 
-    .section-title {
-      font-size: 2rem;
-      margin-bottom: 1.75rem;
-    }
-
-    /* ── PROFILE SECTION ────────────────────────────── */
-    #home {
-      padding-top: 5rem;
-      padding-bottom: 4rem;
-    }
-
-    .profile-layout {
-      display: flex;
-      align-items: flex-start;
-      gap: 3rem;
-    }
-
-    .profile-info { flex: 1; padding-top: 0.5rem; }
-
-    .profile-name {
-      font-size: 2.4rem;
-      font-weight: 600;
-      color: var(--navy);
-      margin-bottom: 0.3rem;
-    }
-
-    .profile-title {
-      font-size: 1.05rem;
-      color: var(--teal);
-      font-weight: 400;
-      margin-bottom: 0.2rem;
-    }
-
-    .profile-affil {
-      font-size: 0.9rem;
-      color: var(--muted);
-      margin-bottom: 0.75rem;
-    }
-
-    .profile-bio {
-      font-size: 0.97rem;
-      color: #444;
-      max-width: 580px;
-      margin-bottom: 1.4rem;
-    }
-
-    /* ── SOCIAL ICONS ───────────────────────────────── */
-    .social-links {
-      display: flex;
-      gap: 0.65rem;
-      flex-wrap: wrap;
-    }
-
-    .social-links a {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.8rem;
-      font-weight: 400;
-      color: var(--muted);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 0.3rem 0.75rem;
-      transition: all 0.2s;
-      text-decoration: none;
-    }
-
-    .social-links a:hover {
-      background: var(--teal-light);
-      border-color: var(--teal);
-      color: var(--teal);
-      text-decoration: none;
-    }
-
+    .social-links { display: flex; gap: 0.65rem; flex-wrap: wrap; }
+    .social-links a { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; font-weight: 400; color: var(--muted); border: 1px solid var(--border); border-radius: 20px; padding: 0.3rem 0.75rem; transition: all 0.2s; text-decoration: none; }
+    .social-links a:hover { background: var(--teal-light); border-color: var(--teal); color: var(--teal); text-decoration: none; }
     .social-links i { font-size: 0.9rem; }
 
-    /* ── ABOUT SECTION ──────────────────────────────── */
-    #about .about-text p {
-      color: #444;
-      margin-bottom: 1.1rem;
-      max-width: 760px;
-    }
+    #about .about-text p { color: #444; margin-bottom: 1.1rem; max-width: 760px; }
 
-    /* ── POSITIONS SECTION ──────────────────────────── */
+    /* Research interests */
+    .research-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.2rem; }
+    .research-card { background: var(--white); border: 1px solid var(--border); border-top: 3px solid var(--teal); border-radius: var(--radius); padding: 1.3rem 1.4rem; box-shadow: var(--shadow); }
+    .research-card h4 { font-size: 0.97rem; margin-bottom: 0.4rem; }
+    .research-card p  { font-size: 0.84rem; color: var(--muted); line-height: 1.6; }
+
+    /* Positions / Affiliations */
     .positions-list { display: flex; flex-direction: column; gap: 1.25rem; }
-
-    .position-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--teal);
-      border-radius: var(--radius);
-      padding: 1.2rem 1.5rem;
-      box-shadow: var(--shadow);
-    }
-
+    .position-card { background: var(--white); border: 1px solid var(--border); border-left: 3px solid var(--teal); border-radius: var(--radius); padding: 1.2rem 1.5rem; box-shadow: var(--shadow); }
     .position-card h4        { font-size: 1.05rem; margin-bottom: 0.2rem; }
     .position-card .pos-org  { color: var(--teal); font-size: 0.9rem; }
     .position-card .pos-date { color: var(--muted); font-size: 0.82rem; margin-top: 0.2rem; }
+    .position-card .pos-desc { font-size: 0.84rem; color: var(--muted); margin-top: 0.3rem; }
 
-    /* ── PUBLICATIONS ───────────────────────────────── */
-    .pub-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.4rem 1.6rem;
-      margin-bottom: 1.1rem;
-      box-shadow: var(--shadow);
-      transition: box-shadow 0.2s;
-    }
+    /* Publications / Presentations */
+    .pub-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem 1.6rem; margin-bottom: 1.1rem; box-shadow: var(--shadow); transition: box-shadow 0.2s; }
+    .pub-card:hover  { box-shadow: 0 4px 28px rgba(0,0,0,0.1); }
+    .pub-title       { font-size: 1.05rem; font-family: 'Crimson Pro', serif; margin-bottom: 0.35rem; }
+    .pub-authors     { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.2rem; }
+    .pub-supervisor  { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.2rem; }
+    .pub-venue       { font-size: 0.83rem; color: var(--teal); font-style: italic; }
+    .pub-links       { margin-top: 0.7rem; display: flex; gap: 0.6rem; flex-wrap: wrap; }
+    .pub-badge       { font-size: 0.72rem; font-weight: 500; padding: 0.2rem 0.6rem; border-radius: 4px; border: 1px solid; text-decoration: none; }
+    .pub-badge.pdf    { border-color: #dc2626; color: #dc2626; }
+    .pub-badge.code   { border-color: var(--navy); color: var(--navy); }
+    .pub-badge.doi    { border-color: var(--teal); color: var(--teal); }
+    .pub-badge.slides { border-color: #7c3aed; color: #7c3aed; }
+    .pub-badge.poster { border-color: var(--accent); color: var(--accent); }
 
-    .pub-card:hover    { box-shadow: 0 4px 28px rgba(0,0,0,0.1); }
-    .pub-title         { font-size: 1.05rem; font-family: 'Crimson Pro', serif; margin-bottom: 0.35rem; }
-    .pub-authors       { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.2rem; }
-    .pub-supervisor    { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.2rem; }
-    .pub-venue         { font-size: 0.83rem; color: var(--teal); font-style: italic; }
-    .pub-links         { margin-top: 0.7rem; display: flex; gap: 0.6rem; }
+    /* Event cards */
+    .event-list { display: flex; flex-direction: column; gap: 0.9rem; }
+    .event-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.4rem; box-shadow: var(--shadow); display: flex; gap: 1.4rem; align-items: flex-start; }
+    .event-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+    .event-body h4 { font-size: 0.97rem; margin-bottom: 0.15rem; }
+    .event-body p  { font-size: 0.84rem; color: var(--muted); }
+    .event-body .event-date { font-size: 0.78rem; color: var(--teal); margin-top: 0.15rem; }
 
-    .pub-badge {
-      font-size: 0.72rem;
-      font-weight: 500;
-      padding: 0.2rem 0.6rem;
-      border-radius: 4px;
-      border: 1px solid;
-    }
-    .pub-badge.pdf  { border-color: #dc2626; color: #dc2626; }
-    .pub-badge.code { border-color: var(--navy); color: var(--navy); }
-    .pub-badge.doi  { border-color: var(--teal); color: var(--teal); }
+    /* Certificate grid */
+    .cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.1rem; }
+    .cert-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.3rem; box-shadow: var(--shadow); display: flex; gap: 1rem; align-items: center; }
+    .cert-icon     { font-size: 1.6rem; flex-shrink: 0; }
+    .cert-body h4  { font-size: 0.93rem; margin-bottom: 0.1rem; }
+    .cert-body p   { font-size: 0.8rem; color: var(--muted); }
 
-    /* ── BLOG POSTS ─────────────────────────────────── */
-    .blog-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.5rem;
-    }
+    /* Blog */
+    .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+    .blog-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem; box-shadow: var(--shadow); transition: box-shadow 0.2s, transform 0.2s; }
+    .blog-card:hover { box-shadow: 0 6px 30px rgba(0,0,0,0.1); transform: translateY(-2px); }
+    .blog-date      { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.5rem; }
+    .blog-title     { font-size: 1.1rem; font-family: 'Crimson Pro', serif; margin-bottom: 0.5rem; }
+    .blog-excerpt   { font-size: 0.87rem; color: #555; line-height: 1.6; }
+    .blog-read-more { font-size: 0.8rem; color: var(--teal); margin-top: 0.8rem; display: inline-block; }
 
-    .blog-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.4rem;
-      box-shadow: var(--shadow);
-      transition: box-shadow 0.2s, transform 0.2s;
-    }
-
-    .blog-card:hover  { box-shadow: 0 6px 30px rgba(0,0,0,0.1); transform: translateY(-2px); }
-    .blog-date        { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.5rem; }
-    .blog-title       { font-size: 1.1rem; font-family: 'Crimson Pro', serif; margin-bottom: 0.5rem; }
-    .blog-excerpt     { font-size: 0.87rem; color: #555; line-height: 1.6; }
-    .blog-read-more   { font-size: 0.8rem; color: var(--teal); margin-top: 0.8rem; display: inline-block; }
-
-    /* ── CV SECTION ─────────────────────────────────── */
-    #cv .cv-download {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      background: var(--navy);
-      color: white;
-      padding: 0.75rem 1.5rem;
-      border-radius: var(--radius);
-      font-size: 0.9rem;
-      font-weight: 400;
-      transition: background 0.2s;
-      text-decoration: none;
-      margin-bottom: 0.75rem;
-    }
-
+    /* CV */
+    #cv .cv-download { display: inline-flex; align-items: center; gap: 0.6rem; background: var(--navy); color: white; padding: 0.75rem 1.5rem; border-radius: var(--radius); font-size: 0.9rem; font-weight: 400; transition: background 0.2s; text-decoration: none; margin-bottom: 0.75rem; }
     #cv .cv-download:hover { background: var(--teal); color: white; text-decoration: none; }
+    .cv-section-title { font-size: 1.1rem; font-family: 'Crimson Pro', serif; color: var(--navy); margin: 1.6rem 0 0.8rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); }
+    .cv-item    { display: flex; gap: 1.5rem; margin-bottom: 1rem; }
+    .cv-year    { font-size: 0.82rem; color: var(--muted); white-space: nowrap; min-width: 95px; padding-top: 2px; }
+    .cv-desc h4 { font-size: 0.97rem; font-family: 'DM Sans', sans-serif; font-weight: 400; }
+    .cv-desc p  { font-size: 0.86rem; color: var(--muted); }
+    .course-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.55rem; }
+    .course-tag  { background: var(--teal-light); color: var(--teal); border-radius: 4px; padding: 0.15rem 0.55rem; font-size: 0.75rem; }
 
-    .cv-section-title {
-      font-size: 1.1rem;
-      font-family: 'Crimson Pro', serif;
-      color: var(--navy);
-      margin: 1.6rem 0 0.8rem;
-      padding-bottom: 0.4rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .cv-item     { display: flex; gap: 1.5rem; margin-bottom: 1rem; }
-    .cv-year     { font-size: 0.82rem; color: var(--muted); white-space: nowrap; min-width: 80px; padding-top: 2px; }
-    .cv-desc h4  { font-size: 0.97rem; font-family: 'DM Sans', sans-serif; font-weight: 400; }
-    .cv-desc p   { font-size: 0.86rem; color: var(--muted); }
-
-    /* ── PORTFOLIO ───────────────────────────────────── */
-    .portfolio-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .portfolio-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      transition: box-shadow 0.2s, transform 0.2s;
-    }
-
+    /* Portfolio */
+    .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+    .portfolio-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); transition: box-shadow 0.2s, transform 0.2s; }
     .portfolio-card:hover { box-shadow: 0 6px 30px rgba(0,0,0,0.1); transform: translateY(-2px); }
-
-    .portfolio-banner {
-      height: 100px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-    }
-
+    .portfolio-banner { height: 100px; display: flex; align-items: center; justify-content: center; font-size: 2rem; }
     .portfolio-body    { padding: 1.2rem 1.4rem; }
     .portfolio-body h4 { font-size: 1rem; margin-bottom: 0.4rem; }
     .portfolio-body p  { font-size: 0.85rem; color: #555; line-height: 1.55; }
     .portfolio-tags    { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.8rem; }
     .portfolio-tag     { background: #f1f5f9; color: var(--muted); border-radius: 4px; padding: 0.15rem 0.5rem; font-size: 0.72rem; }
 
-    /* ── FAQ ─────────────────────────────────────────── */
+    /* Hobbies */
+    .hobby-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.1rem; }
+    .hobby-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.2rem; box-shadow: var(--shadow); text-align: center; }
+    .hobby-card .hobby-icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
+    .hobby-card h4 { font-size: 0.93rem; margin-bottom: 0.2rem; }
+    .hobby-card p  { font-size: 0.82rem; color: var(--muted); }
+
+    /* References */
+    .ref-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.3rem; }
+    .ref-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.4rem; box-shadow: var(--shadow); }
+    .ref-card h4          { font-size: 1rem; margin-bottom: 0.2rem; }
+    .ref-card .ref-title   { font-size: 0.85rem; color: var(--teal); margin-bottom: 0.1rem; }
+    .ref-card .ref-org     { font-size: 0.83rem; color: var(--muted); margin-bottom: 0.6rem; }
+    .ref-card .ref-contact { font-size: 0.82rem; color: var(--muted); }
+    .ref-card .ref-contact a { color: var(--teal); }
+
+    /* FAQ */
     .faq-list { max-width: 720px; }
-
-    details {
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      margin-bottom: 0.75rem;
-      background: var(--white);
-      overflow: hidden;
-    }
-
-    summary {
-      padding: 1rem 1.2rem;
-      cursor: pointer;
-      font-weight: 400;
-      font-size: 0.97rem;
-      color: var(--navy);
-      list-style: none;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      user-select: none;
-    }
-
-    summary::after              { content: '+'; font-size: 1.2rem; color: var(--teal); font-weight: 300; }
+    details { border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 0.75rem; background: var(--white); overflow: hidden; }
+    summary { padding: 1rem 1.2rem; cursor: pointer; font-weight: 400; font-size: 0.97rem; color: var(--navy); list-style: none; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+    summary::after               { content: '+'; font-size: 1.2rem; color: var(--teal); font-weight: 300; }
     details[open] summary::after { content: '−'; }
-    details[open] summary       { background: var(--teal-light); }
-
+    details[open] summary        { background: var(--teal-light); }
     .faq-answer { padding: 1rem 1.2rem; font-size: 0.92rem; color: #555; border-top: 1px solid var(--border); }
 
-    /* ── CONTACT ─────────────────────────────────────── */
-    #contact .contact-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      max-width: 800px;
-    }
-
-    .contact-info h4       { font-size: 1rem; margin-bottom: 0.4rem; }
-    .contact-info p,
-    .contact-info a        { font-size: 0.92rem; color: #555; }
-
-    .contact-form          { display: flex; flex-direction: column; gap: 0.9rem; }
-
-    .contact-form input,
-    .contact-form textarea {
-      width: 100%;
-      padding: 0.7rem 1rem;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.9rem;
-      color: var(--text);
-      background: var(--white);
-      outline: none;
-      transition: border-color 0.2s;
-      resize: vertical;
-    }
-
-    .contact-form input:focus,
-    .contact-form textarea:focus { border-color: var(--teal); }
-
-    .contact-form button {
-      background: var(--teal);
-      color: white;
-      border: none;
-      padding: 0.75rem 1.5rem;
-      border-radius: var(--radius);
-      font-size: 0.9rem;
-      cursor: pointer;
-      font-family: 'DM Sans', sans-serif;
-      transition: background 0.2s;
-      align-self: flex-start;
-    }
-
+    /* Contact */
+    #contact .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; max-width: 800px; }
+    .contact-info h4    { font-size: 1rem; margin-bottom: 0.4rem; }
+    .contact-info p, .contact-info a { font-size: 0.92rem; color: #555; }
+    .contact-form { display: flex; flex-direction: column; gap: 0.9rem; }
+    .contact-form input, .contact-form textarea { width: 100%; padding: 0.7rem 1rem; border: 1px solid var(--border); border-radius: var(--radius); font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--text); background: var(--white); outline: none; transition: border-color 0.2s; resize: vertical; }
+    .contact-form input:focus, .contact-form textarea:focus { border-color: var(--teal); }
+    .contact-form button { background: var(--teal); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: var(--radius); font-size: 0.9rem; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.2s; align-self: flex-start; }
     .contact-form button:hover { background: var(--navy); }
     .form-note { font-size: 0.78rem; color: var(--muted); }
 
-    /* ── FOOTER ─────────────────────────────────────── */
-    footer {
-      text-align: center;
-      padding: 2.5rem 1rem;
-      font-size: 0.8rem;
-      color: var(--muted);
-      border-top: 1px solid var(--border);
-    }
-
+    footer { text-align: center; padding: 2.5rem 1rem; font-size: 0.8rem; color: var(--muted); border-top: 1px solid var(--border); }
     footer span { color: var(--teal); }
 
-    /* ── RESPONSIVE ──────────────────────────────────── */
     @media (max-width: 768px) {
-      .nav-links { display: none; flex-direction: column; position: absolute; top: 60px; left: 0; right: 0; background: white; padding: 1rem; border-bottom: 1px solid var(--border); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 60px; left: 0; right: 0; background: white; padding: 1rem; border-bottom: 1px solid var(--border); box-shadow: 0 4px 12px rgba(0,0,0,0.08); z-index: 99; }
       .nav-links.open { display: flex; }
       .hamburger { display: block; }
-
       .profile-layout { flex-direction: column; gap: 1.5rem; align-items: center; text-align: center; }
-      .profile-name   { font-size: 1.9rem; }
-      .social-links   { justify-content: center; }
-
+      .profile-name { font-size: 1.9rem; }
+      .social-links { justify-content: center; }
       #contact .contact-inner { grid-template-columns: 1fr; }
-      .section-title  { font-size: 1.6rem; }
+      .section-title { font-size: 1.6rem; }
+      .event-card { flex-direction: column; gap: 0.5rem; }
+      .cv-item { flex-direction: column; gap: 0.3rem; }
     }
 
-    /* ── FADE-IN ANIMATION ───────────────────────────── */
     .fade-in         { opacity: 0; transform: translateY(18px); transition: opacity 0.55s ease, transform 0.55s ease; }
     .fade-in.visible { opacity: 1; transform: none; }
   </style>
 </head>
-
 <body>
 
-<!-- ════════════════════════════════════════════
-     NAVBAR
-════════════════════════════════════════════ -->
+<!-- ══ NAVBAR ══════════════════════════════════ -->
 <nav>
   <div class="nav-inner">
     <a class="nav-logo" href="#home">Syed Muhammad Ali Shirazi</a>
-    <button class="hamburger" onclick="toggleNav()" aria-label="Toggle menu">
-      <i class="fas fa-bars"></i>
-    </button>
+    <button class="hamburger" onclick="toggleNav()" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
     <ul class="nav-links" id="navLinks">
+      <li><a href="#research"     onclick="closeNav()">Research</a></li>
       <li><a href="#publications" onclick="closeNav()">Publications</a></li>
-      <li><a href="#blog"         onclick="closeNav()">Blog</a></li>
       <li><a href="#cv"           onclick="closeNav()">CV</a></li>
       <li><a href="#portfolio"    onclick="closeNav()">Portfolio</a></li>
+      <li><a href="#blog"         onclick="closeNav()">Blog</a></li>
       <li><a href="#faq"          onclick="closeNav()">FAQ</a></li>
       <li><a href="#contact"      onclick="closeNav()">Contact</a></li>
     </ul>
   </div>
 </nav>
 
-<!-- ════════════════════════════════════════════
-     PROFILE SECTION
-════════════════════════════════════════════ -->
+<!-- ══ 1. PROFILE ══════════════════════════════ -->
 <section id="home">
   <div class="page-wrap">
     <div class="profile-layout fade-in">
-
-      <!-- Profile photo -->
       <img src="mypic.jpg" alt="Syed Muhammad Ali Shirazi"
            style="width:160px;height:160px;border-radius:50%;object-fit:cover;object-position:top;border:4px solid white;box-shadow:0 4px 24px rgba(0,0,0,.12);flex-shrink:0;">
-
       <div class="profile-info">
         <h1 class="profile-name">Syed Muhammad Ali Shirazi</h1>
         <p class="profile-title">Bachelors in BioSciences</p>
-        <p class="profile-affil">
-          <i class="fas fa-map-marker-alt" style="font-size:0.8rem;margin-right:4px;"></i>
-          COMSATS University Islamabad, Pakistan
-        </p>
-
-        <!-- "Open to opportunities" badge — correctly placed in HTML -->
+        <p class="profile-affil"><i class="fas fa-map-marker-alt" style="font-size:0.8rem;margin-right:4px;"></i>COMSATS University Islamabad, Pakistan</p>
         <p style="display:inline-flex;align-items:center;gap:0.4rem;background:#dcfce7;color:#166534;border-radius:20px;padding:0.25rem 0.9rem;font-size:0.8rem;font-weight:400;margin-bottom:1rem;">
           <span style="width:7px;height:7px;background:#22c55e;border-radius:50%;display:inline-block;animation:pulse 2s infinite;"></span>
           Open to Master's positions &amp; research collaborations
         </p>
-
-        <p class="profile-bio">
-          Biosciences graduate with a passion for uncovering the genetic mechanisms behind complex diseases.
-          I bridge traditional wet-lab techniques with computational biology — leveraging Python, R, and
-          bioinformatic tools to accelerate genomics discoveries.
-        </p>
-
-        <!-- Social Icons — using mailto: so they open the mail app -->
+        <p class="profile-bio">Biosciences graduate with a passion for uncovering the genetic mechanisms behind complex diseases. I bridge traditional wet-lab techniques with computational biology — leveraging Python, R, and bioinformatic tools to accelerate genomics discoveries.</p>
         <div class="social-links">
-          <a href="/cdn-cgi/l/email-protection#b6c5dedfc4d7ccdf80838685f6d1dbd7dfda98d5d9db"><i class="fas fa-envelope"></i> Email</a>
+          <a href="mailto:shirazi6503@gmail.com"><i class="fas fa-envelope"></i> Email</a>
           <a href="https://github.com/alishirazi03" target="_blank"><i class="fab fa-github"></i> GitHub</a>
           <a href="https://linkedin.com/in/syedmuhammadalishirazi" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
           <a href="https://orcid.org/0009-0009-2379-2948" target="_blank"><i class="fab fa-orcid"></i> ORCID</a>
         </div>
-
-
-
       </div>
     </div>
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════
-     ABOUT ME
-════════════════════════════════════════════ -->
+<!-- ══ 2. ABOUT ME ═════════════════════════════ -->
 <section id="about">
   <div class="page-wrap fade-in">
     <p class="section-label">Background</p>
     <h2 class="section-title">About Me</h2>
     <div class="about-text">
-      <p>
-        I am a Biosciences graduate from
-        <a href="https://www.comsats.edu.pk/" target="_blank">COMSATS University Islamabad</a>,
-        where my academic journey transitioned from traditional wet-lab techniques — including DNA extraction
-        and PCR — to the high-impact world of Bioinformatics and Computational Biology.
-      </p>
-      <p>
-        My undergraduate research focused on the <strong>Genetic Basis of Gallstone Disease</strong>,
-        specifically analyzing the role of the <em>ATP8B1</em> gene. This project deepened my skills in
-        genome sequence analysis and reinforced my commitment to using computational tools to solve
-        biological mysteries. I am particularly interested in how <strong>Artificial Intelligence (AI)
-        and modern data analytics</strong> can accelerate discoveries in genomics and molecular biology.
-      </p>
-      <p>
-        Having experience in both wet-lab DNA analysis and bioinformatic pipelines, I aim to solve
-        complex biological problems through an integrative approach. I am currently preparing to pursue
-        a <strong>Master's degree</strong> to further specialize in Bioinformatics and contribute to
-        global research efforts.
-      </p>
-      <p>
-        Outside research, I enjoy scientific communication and have a track record in scientific
-        presentations and collaborative group research. I am proficient in
-        <strong>Python</strong> and <strong>R</strong> for biological data analysis, data visualization,
-        and specialized bioinformatic software pipelines.
-      </p>
+      <p>I am a Biosciences graduate from <a href="https://www.comsats.edu.pk/" target="_blank">COMSATS University Islamabad</a>, where my academic journey transitioned from traditional wet-lab techniques — including DNA extraction and PCR — to the high-impact world of Bioinformatics and Computational Biology.</p>
+      <p>My undergraduate research focused on the <strong>Genetic Basis of Gallstone Disease</strong>, specifically analyzing the role of the <em>ATP8B1</em> gene. This project deepened my skills in genome sequence analysis and reinforced my commitment to using computational tools to solve biological mysteries. I am particularly interested in how <strong>Artificial Intelligence (AI) and modern data analytics</strong> can accelerate discoveries in genomics and molecular biology.</p>
+      <p>Having experience in both wet-lab DNA analysis and bioinformatic pipelines, I aim to solve complex biological problems through an integrative approach. I am currently preparing to pursue a <strong>Master's degree</strong> to further specialize in Bioinformatics and contribute to global research efforts.</p>
+      <p>Outside research, I enjoy scientific communication and have a track record in scientific presentations and collaborative group research. I am proficient in <strong>Python</strong> and <strong>R</strong> for biological data analysis, data visualization, and specialized bioinformatic software pipelines.</p>
     </div>
-
-    <!-- Currently widget -->
     <div class="currently-widget" style="border-left:3px solid #0f7b6c;border-radius:8px;padding:1rem 1.4rem;margin-top:1.8rem;max-width:520px;">
       <p style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:#0f7b6c;margin-bottom:0.6rem;">Currently</p>
       <p style="font-size:0.9rem;margin-bottom:0.3rem;">📖 <strong>Reading:</strong> Bioinformatics Algorithms – Compeau &amp; Pevzner</p>
@@ -645,146 +313,224 @@
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════
-     SKILLS
-════════════════════════════════════════════ -->
+<!-- ══ 3. RESEARCH INTERESTS ═══════════════════
+     ✏️ Edit each card's title and description    -->
+<section id="research">
+  <div class="page-wrap fade-in">
+    <p class="section-label">Academic Focus</p>
+    <h2 class="section-title">Research Interests</h2>
+    <div class="research-grid">
+      <div class="research-card">
+        <h4>🧬 Genomics &amp; Molecular Genetics</h4>
+        <p>Investigating the genetic basis of complex diseases, with a focus on rare variants in metabolic and hepatobiliary disorders such as gallstone disease.</p>
+      </div>
+      <div class="research-card">
+        <h4>🤖 AI &amp; Machine Learning in Biology</h4>
+        <p>Applying deep learning and statistical models to accelerate variant classification, biomarker discovery, and disease prediction from genomic data.</p>
+      </div>
+      <div class="research-card">
+        <h4>💊 Computational Drug Discovery</h4>
+        <p>Exploring how bioinformatic pipelines and molecular docking tools can identify novel therapeutic targets in human disease genes.</p>
+      </div>
+      <div class="research-card">
+        <h4>📊 Bioinformatics Pipeline Development</h4>
+        <p>Building reproducible, automated workflows for sequence analysis, variant calling, and downstream biological interpretation using Python and R.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 4. SKILLS & EXPERTISE ══════════════════ -->
 <section id="skills" class="skills-section">
   <div class="page-wrap fade-in">
     <p class="section-label">Expertise</p>
     <h2 class="section-title">Skills &amp; Expertise</h2>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.2rem;">
-
       <div class="skill-card" style="border-radius:8px;padding:1.2rem;">
         <p style="font-size:1.4rem;margin-bottom:0.5rem;">🧬</p>
         <h4 style="font-size:0.97rem;margin-bottom:0.3rem;">Bioinformatics</h4>
         <p style="font-size:0.84rem;color:#6b7280;">Genome sequence analysis, BLAST, sequence alignment, variant interpretation</p>
       </div>
-
       <div class="skill-card" style="border-radius:8px;padding:1.2rem;">
         <p style="font-size:1.4rem;margin-bottom:0.5rem;">💻</p>
         <h4 style="font-size:0.97rem;margin-bottom:0.3rem;">Programming</h4>
         <p style="font-size:0.84rem;color:#6b7280;">Python (BioPython, pandas, matplotlib), R (Bioconductor, ggplot2)</p>
       </div>
-
       <div class="skill-card" style="border-radius:8px;padding:1.2rem;">
         <p style="font-size:1.4rem;margin-bottom:0.5rem;">🔬</p>
         <h4 style="font-size:0.97rem;margin-bottom:0.3rem;">Wet Lab</h4>
         <p style="font-size:0.84rem;color:#6b7280;">DNA extraction, PCR, gel electrophoresis, essential microbiology techniques</p>
       </div>
-
       <div class="skill-card" style="border-radius:8px;padding:1.2rem;">
         <p style="font-size:1.4rem;margin-bottom:0.5rem;">🤖</p>
         <h4 style="font-size:0.97rem;margin-bottom:0.3rem;">AI &amp; Data Analysis</h4>
         <p style="font-size:0.84rem;color:#6b7280;">Machine learning for genomics, data visualization, statistical analysis</p>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════
-     CURRENT POSITIONS
-════════════════════════════════════════════ -->
+<!-- ══ 5. CURRENT POSITIONS ════════════════════ -->
 <section id="positions">
   <div class="page-wrap fade-in">
     <p class="section-label">Roles</p>
     <h2 class="section-title">Current Positions</h2>
     <div class="positions-list">
-
       <div class="position-card">
         <h4>B.Sc. Graduate – Biosciences</h4>
         <p class="pos-org"><a href="https://www.comsats.edu.pk/" target="_blank">COMSATS University Islamabad</a></p>
         <p class="pos-date">2022 – 2026</p>
       </div>
-
       <div class="position-card">
         <h4>Independent Researcher – Computational Genomics</h4>
         <p class="pos-org">Self-directed Research</p>
         <p class="pos-date">2024 – Present</p>
       </div>
-
       <div class="position-card">
         <h4>Master's Applicant – Bioinformatics</h4>
         <p class="pos-org">Upcoming · Target Year 2025/2026</p>
         <p class="pos-date">In preparation</p>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════
-     PUBLICATIONS
-════════════════════════════════════════════ -->
+<!-- ══ 6. AFFILIATIONS ═════════════════════════
+     ✏️ Add societies, student bodies, organisations -->
+<section id="affiliations">
+  <div class="page-wrap fade-in">
+    <p class="section-label">Memberships</p>
+    <h2 class="section-title">Affiliations</h2>
+    <div class="positions-list">
+      <div class="position-card">
+        <h4>Student Member – Department of Biosciences</h4>
+        <p class="pos-org"><a href="https://www.comsats.edu.pk/" target="_blank">COMSATS University Islamabad</a></p>
+        <p class="pos-date">2022 – 2026</p>
+        <p class="pos-desc">Active participant in departmental research activities, seminars, and academic events.</p>
+      </div>
+      <!-- ✏️ Copy this block to add more affiliations:
+      <div class="position-card">
+        <h4>Associate Member</h4>
+        <p class="pos-org"><a href="#" target="_blank">Organisation Name</a></p>
+        <p class="pos-date">Year – Present</p>
+        <p class="pos-desc">Brief description of your role or involvement.</p>
+      </div>
+      -->
+    </div>
+  </div>
+</section>
+
+<!-- ══ 7. PUBLICATIONS / FINAL YEAR PROJECT ════ -->
 <section id="publications">
   <div class="page-wrap fade-in">
     <p class="section-label">Research Output</p>
     <h2 class="section-title">Final Year Project</h2>
-
     <div class="pub-card">
       <p class="pub-title">Assessment of the Role of ATP8B1 gene in Gallstone Disease in the Pakistani Population</p>
       <p class="pub-authors"><strong>Syed Muhammad Ali Shirazi</strong></p>
       <p class="pub-supervisor"><strong>Supervisors:</strong> Dr. Muhammad Ajmal, Dr. Nasir Masood</p>
       <p class="pub-venue">Undergraduate Thesis, COMSATS University Islamabad · 2025</p>
-      <div class="pub-links">
-        <a href="#" class="pub-badge pdf">PDF</a>
-      </div>
+      <div class="pub-links"><a href="#" class="pub-badge pdf">PDF</a></div>
     </div>
-
-    <p style="color:var(--muted);font-size:0.88rem;margin-top:1rem;">
-      Looking for more projects and publications in the coming years.
-    </p>
+    <p style="color:var(--muted);font-size:0.88rem;margin-top:1rem;">Looking for more projects and publications in the coming years.</p>
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════
-     BLOG POSTS
-════════════════════════════════════════════ -->
-<section id="blog">
+<!-- ══ 8. COLLEGIATE PRESENTATIONS ════════════
+     ✏️ Add each presentation you have given      -->
+<section id="presentations">
   <div class="page-wrap fade-in">
-    <p class="section-label">Writing</p>
-    <h2 class="section-title">Blog Posts</h2>
-    <div class="blog-grid">
+    <p class="section-label">Talks &amp; Posters</p>
+    <h2 class="section-title">Collegiate Presentations</h2>
+    <div class="pub-card">
+      <p class="pub-title">Genetic Determinants of Gallstone Disease: Focus on ATP8B1 Variants in the Pakistani Population</p>
+      <p class="pub-authors"><strong>Syed Muhammad Ali Shirazi</strong></p>
+      <p class="pub-venue">Undergraduate Research Symposium, COMSATS University Islamabad · 2025</p>
+      <p style="font-size:0.83rem;color:var(--muted);margin-top:0.3rem;">Oral presentation of final year thesis findings to department faculty and students.</p>
+      <div class="pub-links"><a href="#" class="pub-badge slides">Slides</a></div>
+    </div>
+    <!-- ✏️ Copy this pub-card to add more presentations:
+    <div class="pub-card">
+      <p class="pub-title">Your Presentation Title</p>
+      <p class="pub-authors"><strong>Syed Muhammad Ali Shirazi</strong></p>
+      <p class="pub-venue">Event Name · Year</p>
+      <div class="pub-links"><a href="#" class="pub-badge poster">Poster</a></div>
+    </div>
+    -->
+    <p style="color:var(--muted);font-size:0.88rem;margin-top:1rem;">More presentations expected as research progresses.</p>
+  </div>
+</section>
 
-      <div class="blog-card">
-        <p class="blog-date">Feb 2026</p>
-        <h3 class="blog-title">How I Analyzed the ATP8B1 Gene Using Python</h3>
-        <p class="blog-excerpt">A walkthrough of the bioinformatic pipeline I built for my undergraduate thesis — from raw sequence data to meaningful biological insights.</p>
-        <a href="#" class="blog-read-more">Read more →</a>
+<!-- ══ 9. CONFERENCES, SEMINARS & ATTENDANCE ══
+     ✏️ Add every academic event you attended    -->
+<section id="conferences">
+  <div class="page-wrap fade-in">
+    <p class="section-label">Academic Events</p>
+    <h2 class="section-title">Conferences &amp; Seminars Attended</h2>
+    <div class="event-list">
+      <div class="event-card">
+        <div class="event-icon">🎤</div>
+        <div class="event-body">
+          <h4>Departmental Research Symposium</h4>
+          <p>COMSATS University Islamabad – Biosciences Department · Attendee</p>
+          <p class="event-date">2025 · Islamabad, Pakistan</p>
+        </div>
       </div>
-
-      <div class="blog-card">
-        <p class="blog-date">Dec 2025</p>
-        <h3 class="blog-title">Getting Started with Bioinformatics as a Biology Student</h3>
-        <p class="blog-excerpt">No CS background? No problem. Here are the tools, resources, and mindset shifts that helped me transition into computational biology.</p>
-        <a href="#" class="blog-read-more">Read more →</a>
+      <!-- ✏️ Copy this block for each event:
+      <div class="event-card">
+        <div class="event-icon">🧬</div>
+        <div class="event-body">
+          <h4>Event / Conference Name</h4>
+          <p>Organiser · Role (Attendee / Speaker / Poster presenter)</p>
+          <p class="event-date">Month Year · City, Country</p>
+        </div>
       </div>
-
-      <div class="blog-card">
-        <p class="blog-date">Jun 2025</p>
-        <h3 class="blog-title">AI in Genomics: What the Research Actually Says</h3>
-        <p class="blog-excerpt">A curated overview of how machine learning is reshaping variant calling, drug discovery, and disease prediction in the post-AlphaFold era.</p>
-        <a href="#" class="blog-read-more">Read more →</a>
-      </div>
-
+      -->
     </div>
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════
-     CV
-════════════════════════════════════════════ -->
+<!-- ══ 10. PORTFOLIO ════════════════════════════ -->
+<section id="portfolio">
+  <div class="page-wrap fade-in">
+    <p class="section-label">Projects</p>
+    <h2 class="section-title">Portfolio</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:2rem;">
+      <img src="https://github-readme-stats.vercel.app/api?username=alishirazi03&show_icons=true&theme=default&title_color=1a2744&icon_color=0f7b6c&hide_border=true" alt="GitHub Stats" style="height:160px;border-radius:8px;border:1px solid #e5e7eb;">
+      <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=alishirazi03&layout=compact&title_color=1a2744&icon_color=0f7b6c&hide_border=true" alt="Top Languages" style="height:160px;border-radius:8px;border:1px solid #e5e7eb;">
+    </div>
+    <div class="portfolio-grid">
+      <div class="portfolio-card">
+        <div class="portfolio-banner" style="background:linear-gradient(135deg,#1a2744,#0f7b6c);">🧬</div>
+        <div class="portfolio-body">
+          <h4>ATP8B1 Gene Analysis Pipeline</h4>
+          <p>End-to-end bioinformatic pipeline for analyzing the genetic basis of gallstone disease in Pakistani patients using genome sequence data.</p>
+          <div class="portfolio-tags"><span class="portfolio-tag">Python</span><span class="portfolio-tag">Bioinformatics</span><span class="portfolio-tag">Genomics</span></div>
+          <a href="https://github.com/alishirazi03" target="_blank" style="font-size:0.82rem;color:var(--teal);display:inline-block;margin-top:0.8rem;"><i class="fab fa-github"></i> View on GitHub</a>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <div class="portfolio-banner" style="background:linear-gradient(135deg,#d4a84b,#b8852a);">📊</div>
+        <div class="portfolio-body">
+          <h4>Genomics Data Visualization Dashboard</h4>
+          <p>Interactive R Shiny dashboard for exploring sequence variation data across gene families linked to metabolic disorders.</p>
+          <div class="portfolio-tags"><span class="portfolio-tag">R</span><span class="portfolio-tag">Shiny</span><span class="portfolio-tag">Data Viz</span></div>
+          <a href="https://github.com/alishirazi03" target="_blank" style="font-size:0.82rem;color:var(--teal);display:inline-block;margin-top:0.8rem;"><i class="fab fa-github"></i> View on GitHub</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 11. CV ════════════════════════════════════
+     Education · Courses · Thesis · Research
+     Workshops · Certificates · Skills           -->
 <section id="cv">
   <div class="page-wrap fade-in">
     <p class="section-label">Curriculum Vitae</p>
     <h2 class="section-title">CV</h2>
-
-    <a href="cv.pdf" class="cv-download" target="_blank">
-      <i class="fas fa-file-pdf"></i> Download Full CV (PDF)
-    </a>
-    <p style="font-size:0.8rem;color:#6b7280;margin-bottom:1.5rem;">
-      <i class="fas fa-clock" style="margin-right:4px;"></i>Last updated: June 2025
-    </p>
+    <a href="cv.pdf" class="cv-download" target="_blank"><i class="fas fa-file-pdf"></i> Download Full CV (PDF)</a>
+    <p style="font-size:0.8rem;color:#6b7280;margin-bottom:1.5rem;"><i class="fas fa-clock" style="margin-right:4px;"></i>Last updated: June 2025</p>
 
     <h3 class="cv-section-title">Education</h3>
     <div class="cv-item">
@@ -792,203 +538,281 @@
       <div class="cv-desc">
         <h4>B.Sc. Biosciences</h4>
         <p>COMSATS University Islamabad, Pakistan</p>
+        <p style="margin-top:0.4rem;font-size:0.84rem;color:var(--muted);">Key undergraduate courses:</p>
+        <div class="course-tags">
+          <span class="course-tag">Molecular Biology</span>
+          <span class="course-tag">Genetics</span>
+          <span class="course-tag">Biochemistry</span>
+          <span class="course-tag">Microbiology</span>
+          <span class="course-tag">Bioinformatics</span>
+          <span class="course-tag">Cell Biology</span>
+          <span class="course-tag">Immunology</span>
+          <span class="course-tag">Biostatistics</span>
+          <span class="course-tag">Genomics</span>
+          <span class="course-tag">Pharmacology</span>
+          <!-- ✏️ Add or remove courses as needed -->
+        </div>
+      </div>
+    </div>
+
+    <h3 class="cv-section-title">Undergraduate Thesis</h3>
+    <div class="cv-item">
+      <div class="cv-year">Sep 2025 – Feb 2026</div>
+      <div class="cv-desc">
+        <h4>Assessment of the Role of ATP8B1 Gene in Gallstone Disease in the Pakistani Population</h4>
+        <p><strong>Supervisors:</strong> Dr. Muhammad Ajmal, Dr. Nasir Masood</p>
+        <p style="margin-top:0.3rem;">Conducted genome sequence analysis and variant interpretation to investigate the genetic contribution of ATP8B1 to gallstone disease. Developed a bioinformatic pipeline in Python for data processing and statistical analysis.</p>
       </div>
     </div>
 
     <h3 class="cv-section-title">Research Experience</h3>
     <div class="cv-item">
-      <div class="cv-year">Feb 2026</div>
+      <div class="cv-year">Sep 2025 – Feb 2026</div>
       <div class="cv-desc">
         <h4>Undergraduate Researcher – Genetic Basis of Gallstone Disease</h4>
-        <p>COMSATS University Islamabad · Thesis project on ATP8B1 gene analysis</p>
+        <p>COMSATS University Islamabad · Genome sequence analysis, variant calling, bioinformatic pipeline development</p>
       </div>
+    </div>
+
+    <h3 class="cv-section-title">Workshops Attended</h3>
+    <div class="event-list" style="margin-bottom:1rem;">
+      <div class="event-card">
+        <div class="event-icon">🛠️</div>
+        <div class="event-body">
+          <h4>✏️ Workshop Title</h4>
+          <p>✏️ Organiser / Institution</p>
+          <p class="event-date">✏️ Month Year · Location</p>
+        </div>
+      </div>
+      <!-- ✏️ Copy this block for each workshop -->
+    </div>
+
+    <h3 class="cv-section-title">Certificates</h3>
+    <div class="cert-grid">
+      <div class="cert-card">
+        <div class="cert-icon">🎓</div>
+        <div class="cert-body"><h4>✏️ Certificate Name</h4><p>✏️ Issuing Organisation · Year</p></div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">🎓</div>
+        <div class="cert-body"><h4>✏️ Certificate Name</h4><p>✏️ Issuing Organisation · Year</p></div>
+      </div>
+      <!-- ✏️ Copy a cert-card for each certificate -->
     </div>
 
     <h3 class="cv-section-title">Skills</h3>
     <div class="cv-item">
       <div class="cv-year">Technical</div>
-      <div class="cv-desc">
-        <h4>Bioinformatics &amp; Computation</h4>
-        <p>Python, R, genome sequence analysis, data visualization, bioinformatic software pipelines</p>
-      </div>
+      <div class="cv-desc"><h4>Bioinformatics &amp; Computation</h4><p>Python, R, genome sequence analysis, data visualization, bioinformatic software pipelines</p></div>
     </div>
     <div class="cv-item">
       <div class="cv-year">Wet Lab</div>
-      <div class="cv-desc">
-        <h4>Laboratory Techniques</h4>
-        <p>DNA extraction, PCR, gel electrophoresis, essential microbiology techniques</p>
-      </div>
+      <div class="cv-desc"><h4>Laboratory Techniques</h4><p>DNA extraction, PCR, gel electrophoresis, essential microbiology techniques</p></div>
     </div>
-
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════
-     PORTFOLIO / PROJECTS
-════════════════════════════════════════════ -->
-<section id="portfolio">
+<!-- ══ 12. BLOG POSTS ═══════════════════════════ -->
+<section id="blog">
   <div class="page-wrap fade-in">
-    <p class="section-label">Projects</p>
-    <h2 class="section-title">Portfolio</h2>
-
-    <div class="portfolio-grid">
-
-      <div class="portfolio-card">
-        <div class="portfolio-banner" style="background:linear-gradient(135deg,#1a2744,#0f7b6c);">🧬</div>
-        <div class="portfolio-body">
-          <h4>ATP8B1 Gene Analysis Pipeline</h4>
-          <p>End-to-end bioinformatic pipeline for analyzing the genetic basis of gallstone disease in Pakistani patients using genome sequence data.</p>
-          <div class="portfolio-tags">
-            <span class="portfolio-tag">Python</span>
-            <span class="portfolio-tag">Bioinformatics</span>
-            <span class="portfolio-tag">Genomics</span>
-          </div>
-          <a href="https://github.com/alishirazi03" target="_blank" style="font-size:0.82rem;color:var(--teal);display:inline-block;margin-top:0.8rem;"><i class="fab fa-github"></i> View on GitHub</a>
-        </div>
+    <p class="section-label">Writing</p>
+    <h2 class="section-title">Blog Posts</h2>
+    <div class="blog-grid">
+      <div class="blog-card">
+        <p class="blog-date">Feb 2026</p>
+        <h3 class="blog-title">How I Analyzed the ATP8B1 Gene Using Python</h3>
+        <p class="blog-excerpt">A walkthrough of the bioinformatic pipeline I built for my undergraduate thesis — from raw sequence data to meaningful biological insights.</p>
+        <a href="#" class="blog-read-more">Read more →</a>
       </div>
-
-      <div class="portfolio-card">
-        <div class="portfolio-banner" style="background:linear-gradient(135deg,#d4a84b,#b8852a);">📊</div>
-        <div class="portfolio-body">
-          <h4>Genomics Data Visualization Dashboard</h4>
-          <p>Interactive R Shiny dashboard for exploring sequence variation data across gene families linked to metabolic disorders.</p>
-          <div class="portfolio-tags">
-            <span class="portfolio-tag">R</span>
-            <span class="portfolio-tag">Shiny</span>
-            <span class="portfolio-tag">Data Viz</span>
-          </div>
-          <a href="https://github.com/alishirazi03" target="_blank" style="font-size:0.82rem;color:var(--teal);display:inline-block;margin-top:0.8rem;"><i class="fab fa-github"></i> View on GitHub</a>
-        </div>
+      <div class="blog-card">
+        <p class="blog-date">Dec 2025</p>
+        <h3 class="blog-title">Getting Started with Bioinformatics as a Biology Student</h3>
+        <p class="blog-excerpt">No CS background? No problem. Here are the tools, resources, and mindset shifts that helped me transition into computational biology.</p>
+        <a href="#" class="blog-read-more">Read more →</a>
       </div>
-
+      <div class="blog-card">
+        <p class="blog-date">Jun 2025</p>
+        <h3 class="blog-title">AI in Genomics: What the Research Actually Says</h3>
+        <p class="blog-excerpt">A curated overview of how machine learning is reshaping variant calling, drug discovery, and disease prediction in the post-AlphaFold era.</p>
+        <a href="#" class="blog-read-more">Read more →</a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════
-     FAQ
-════════════════════════════════════════════ -->
+<!-- ══ 13. VOLUNTEERING & COMMUNITY SERVICE ═══
+     ✏️ Add your volunteer roles and activities  -->
+<section id="volunteering">
+  <div class="page-wrap fade-in">
+    <p class="section-label">Giving Back</p>
+    <h2 class="section-title">Volunteering &amp; Community Service</h2>
+    <div class="event-list">
+      <div class="event-card">
+        <div class="event-icon">🤝</div>
+        <div class="event-body">
+          <h4>✏️ Volunteer Role / Activity</h4>
+          <p>✏️ Organisation or Event Name</p>
+          <p class="event-date">✏️ Month Year – Month Year</p>
+        </div>
+      </div>
+      <!-- ✏️ Copy this block for each volunteering activity:
+      <div class="event-card">
+        <div class="event-icon">🏥</div>
+        <div class="event-body">
+          <h4>Health Awareness Campaign Volunteer</h4>
+          <p>Local Community Health Initiative · Islamabad</p>
+          <p class="event-date">March 2024</p>
+        </div>
+      </div>
+      -->
+    </div>
+  </div>
+</section>
+
+<!-- ══ 14. OTHER INTERESTS ══════════════════════
+     ✏️ Edit the hobby cards with your real interests -->
+<section id="interests">
+  <div class="page-wrap fade-in">
+    <p class="section-label">Beyond the Lab</p>
+    <h2 class="section-title">Other Interests</h2>
+    <div class="hobby-grid">
+      <div class="hobby-card">
+        <div class="hobby-icon">📚</div>
+        <h4>Science Reading</h4>
+        <p>Popular science books, research papers, and science journalism on genomics and AI.</p>
+      </div>
+      <div class="hobby-card">
+        <div class="hobby-icon">✍️</div>
+        <h4>Science Writing</h4>
+        <p>Communicating complex biological concepts to general audiences through blogs and articles.</p>
+      </div>
+      <div class="hobby-card">
+        <div class="hobby-icon">🏃</div>
+        <h4>✏️ Your Hobby</h4>
+        <p>✏️ Brief description of this hobby or leisure activity.</p>
+      </div>
+      <div class="hobby-card">
+        <div class="hobby-icon">🌍</div>
+        <h4>✏️ Your Hobby</h4>
+        <p>✏️ Brief description of this hobby or leisure activity.</p>
+      </div>
+      <!-- ✏️ Copy a hobby-card block to add more interests -->
+    </div>
+  </div>
+</section>
+
+<!-- ══ 15. FAQ ══════════════════════════════════ -->
 <section id="faq">
   <div class="page-wrap fade-in">
     <p class="section-label">Questions</p>
     <h2 class="section-title">FAQ</h2>
     <div class="faq-list">
-
       <details>
         <summary>Are you open to research collaborations?</summary>
         <div class="faq-answer">Yes! I am actively looking for collaborations in bioinformatics, computational genomics, and AI-driven biological research. Feel free to reach out via email or LinkedIn.</div>
       </details>
-
       <details>
         <summary>Are you currently applying for Master's programs?</summary>
         <div class="faq-answer">Yes. I am preparing applications for Master's programs in Bioinformatics and Computational Biology for Fall 2026 intake.</div>
       </details>
-
       <details>
         <summary>What bioinformatic tools are you proficient in?</summary>
         <div class="faq-answer">I have hands-on experience with Python (BioPython, pandas, matplotlib), R (Bioconductor, ggplot2), BLAST, sequence alignment tools, and genome browser platforms including UCSC and Ensembl.</div>
       </details>
-
+      <details>
+        <summary>Can I contact you for advice on bioinformatics as a beginner?</summary>
+        <div class="faq-answer">Absolutely. I enjoy helping fellow biology students make the transition into computational biology. Send me an email and I will do my best to point you in the right direction.</div>
+      </details>
     </div>
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════
-     CONTACT
-════════════════════════════════════════════ -->
+<!-- ══ 16. REFERENCES ═══════════════════════════
+     ✏️ Only list referees who gave permission
+     ✏️ Add their real emails before publishing  -->
+<section id="references">
+  <div class="page-wrap fade-in">
+    <p class="section-label">Academic Referees</p>
+    <h2 class="section-title">References</h2>
+    <p style="font-size:0.9rem;color:var(--muted);margin-bottom:1.5rem;max-width:640px;">The following individuals have agreed to provide references. Please contact them directly or reach out to me first and I will facilitate the introduction.</p>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <h4>Dr. Muhammad Ajmal</h4>
+        <p class="ref-title">Thesis Supervisor</p>
+        <p class="ref-org">COMSATS University Islamabad – Dept. of Biosciences</p>
+        <p class="ref-contact"><i class="fas fa-envelope" style="margin-right:4px;"></i><a href="mailto:">✏️ email@comsats.edu.pk</a></p>
+      </div>
+      <div class="ref-card">
+        <h4>Dr. Nasir Masood</h4>
+        <p class="ref-title">Co-Supervisor</p>
+        <p class="ref-org">COMSATS University Islamabad – Dept. of Biosciences</p>
+        <p class="ref-contact"><i class="fas fa-envelope" style="margin-right:4px;"></i><a href="mailto:">✏️ email@comsats.edu.pk</a></p>
+      </div>
+      <!-- ✏️ Copy a ref-card block to add more references -->
+    </div>
+  </div>
+</section>
+
+<!-- ══ 17. CONTACT ══════════════════════════════ -->
 <section id="contact">
   <div class="page-wrap fade-in">
     <p class="section-label">Get in Touch</p>
     <h2 class="section-title">Contact</h2>
     <div class="contact-inner">
-
       <div class="contact-info">
         <h4>Email</h4>
-        <p><a href="/cdn-cgi/l/email-protection#f5869d9c87948f9cc3c0c5c6b59298949c99db969a98"><span class="__cf_email__" data-cfemail="cab9a2a3b8abb0a3fcfffaf98aada7aba3a6e4a9a5a7">[email&#160;protected]</span></a></p>
-
+        <p><a href="mailto:shirazi6503@gmail.com">shirazi6503@gmail.com</a></p>
         <h4 style="margin-top:1.2rem;">Location</h4>
         <p>Islamabad, Pakistan</p>
-
         <h4 style="margin-top:1.2rem;">Affiliation</h4>
         <p><a href="https://www.comsats.edu.pk/" target="_blank">COMSATS University Islamabad</a></p>
-
         <div class="social-links" style="margin-top:1.4rem;">
-          <a href="https://github.com/alishirazi03"               target="_blank"><i class="fab fa-github"></i> GitHub</a>
+          <a href="https://github.com/alishirazi03" target="_blank"><i class="fab fa-github"></i> GitHub</a>
           <a href="https://linkedin.com/in/syedmuhammadalishirazi" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
         </div>
       </div>
-
       <div>
-        <p style="font-size:0.9rem;color:#555;margin-bottom:1rem;">
-          Send me a message below.
-        </p>
+        <p style="font-size:0.9rem;color:#555;margin-bottom:1rem;">Send me a message below.</p>
         <form class="contact-form" action="https://formspree.io/f/mvzwrpww" method="POST">
           <input  type="text"  name="name"    placeholder="Your Name"  required/>
           <input  type="email" name="email"   placeholder="Your Email" required/>
           <input  type="text"  name="subject" placeholder="Subject"/>
           <textarea name="message" rows="5"   placeholder="Your message…" required></textarea>
           <button type="submit"><i class="fas fa-paper-plane"></i> &nbsp;Send Message</button>
-          <p class="form-note">
-            Or email me directly at <a href="/cdn-cgi/l/email-protection#02716a6b7063786b3437323142656f636b6e2c616d6f"><span class="__cf_email__" data-cfemail="e89b80819a899281deddd8dba88f85898184c68b8785">[email&#160;protected]</span></a>
-          </p>
+          <p class="form-note">Or email me directly at <a href="mailto:shirazi6503@gmail.com">shirazi6503@gmail.com</a></p>
         </form>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════
-     FOOTER
-════════════════════════════════════════════ -->
+<!-- ══ FOOTER ════════════════════════════════════ -->
 <footer>
   <p>© 2026 <span>Syed Muhammad Ali Shirazi</span> · Built with HTML &amp; hosted on <a href="https://pages.github.com" target="_blank">GitHub Pages</a></p>
 </footer>
 
-<!-- ════════════════════════════════════════════
-     FLOATING BUTTONS
-════════════════════════════════════════════ -->
+<!-- ══ FLOATING BUTTONS ══════════════════════════ -->
 <button onclick="document.body.classList.toggle('dark')"
   style="position:fixed;top:1.5rem;right:1.5rem;z-index:999;background:var(--navy);color:white;border:none;border-radius:50%;width:44px;height:44px;font-size:1.1rem;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.2);"
   title="Toggle dark mode">🌙</button>
 
 <a href="#home" id="topBtn"
-  style="display:none;position:fixed;bottom:5rem;right:1.5rem;z-index:999;background:var(--teal);color:white;border-radius:50%;width:40px;height:40px;text-align:center;line-height:40px;font-size:1rem;text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,0.2);">↑</a>
+  style="display:none;position:fixed;bottom:1.5rem;right:1.5rem;z-index:999;background:var(--teal);color:white;border-radius:50%;width:40px;height:40px;text-align:center;line-height:40px;font-size:1rem;text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,0.2);">↑</a>
 
-<!-- ════════════════════════════════════════════
-     SCRIPTS
-════════════════════════════════════════════ -->
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  // ── Mobile nav toggle ─────────────────────────
-  function toggleNav() {
-    document.getElementById('navLinks').classList.toggle('open');
-  }
-  function closeNav() {
-    document.getElementById('navLinks').classList.remove('open');
-  }
+<!-- ══ SCRIPTS ════════════════════════════════════ -->
+<script>
+  function toggleNav() { document.getElementById('navLinks').classList.toggle('open'); }
+  function closeNav()  { document.getElementById('navLinks').classList.remove('open'); }
   document.addEventListener('click', function(e) {
     const nav = document.getElementById('navLinks');
-    if (!nav.contains(e.target) && !e.target.closest('.hamburger')) {
-      nav.classList.remove('open');
-    }
+    if (!nav.contains(e.target) && !e.target.closest('.hamburger')) nav.classList.remove('open');
   });
-
-  // ── Scroll fade-in animation ──────────────────
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
+    entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
   }, { threshold: 0.08 });
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-  // ── Back to top button ────────────────────────
   const topBtn = document.getElementById('topBtn');
-  window.addEventListener('scroll', () => {
-    topBtn.style.display = window.scrollY > 400 ? 'block' : 'none';
-  });
+  window.addEventListener('scroll', () => { topBtn.style.display = window.scrollY > 400 ? 'block' : 'none'; });
 </script>
 
 </body>
