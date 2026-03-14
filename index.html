@@ -273,16 +273,32 @@
     <div class="profile-layout fade-in">
       <img src="mypic.jpg" alt="Syed Muhammad Ali Shirazi"
            style="width:160px;height:160px;border-radius:50%;object-fit:cover;object-position:top;border:4px solid white;box-shadow:0 4px 24px rgba(0,0,0,.12);flex-shrink:0;">
-      <div class="profile-info">
+       <div class="profile-info">
         <h1 class="profile-name">Syed Muhammad Ali Shirazi</h1>
         <p class="profile-title">Bachelors in BioSciences</p>
         <p class="profile-affil"><i class="fas fa-map-marker-alt" style="font-size:0.8rem;margin-right:4px;"></i>COMSATS University Islamabad, Pakistan</p>
+        
         <p style="display:inline-flex;align-items:center;gap:0.4rem;background:#dcfce7;color:#166534;border-radius:20px;padding:0.25rem 0.9rem;font-size:0.8rem;font-weight:400;margin-bottom:1rem;">
           <span style="width:7px;height:7px;background:#22c55e;border-radius:50%;display:inline-block;animation:pulse 2s infinite;"></span>
           Open to Master's positions &amp; research collaborations
         </p>
-        <p class="profile-bio">Biosciences graduate with a passion for uncovering the genetic mechanisms behind complex diseases. I bridge traditional wet-lab techniques with computational biology — leveraging Python, R, and bioinformatic tools to accelerate genomics discoveries.</p>
-        <div class="social-links">
+      
+        <div class="profile-bio">
+          <p>As a Biosciences graduate with a strong foundation in genomics, I am deeply interested in the intersection of biological data and computational power. My focus lies in <strong>bioinformatics</strong> and <strong>computational biology</strong>, specifically using data driven approaches to uncover the genetic mechanisms behind complex diseases.</p>
+      
+          <h3 style="margin: 1rem 0 0.5rem; font-size: 1.1rem;">Core Interests &amp; Expertise</h3>
+          <ul style="list-style-type: none; padding: 0; margin: 0;">
+            <li style="margin-bottom: 0.5rem;"><strong>Clinical Data Analysis:</strong> I am dedicated to analyzing clinical and genomic datasets to identify biomarkers and disease drivers. My research has focused on the genetic analysis of gallstone disease, particularly the role of the <em>ATP8B1</em> gene within the Pakistani population.</li>
+            <li style="margin-bottom: 0.5rem;"><strong>Genomics &amp; Sequencing:</strong> I have experience in the end to end process of genome assembly and annotation. This includes assembling viral genomes like SARS-CoV-2 using k-mer based algorithms and identifying functional protein coding regions through advanced annotation pipelines.</li>
+            <li style="margin-bottom: 0.5rem;"><strong>Computational Tooling:</strong> I bridge the gap between biology and technology by developing custom scripts in <strong>Python</strong> and <strong>R</strong> to automate data analysis and streamline genomics workflows.</li>
+            <li style="margin-bottom: 0.5rem;"><strong>Diagnostic Innovation:</strong> I am interested in leveraging bioinformatics to design precise diagnostic tools, such as optimizing RT-PCR primer pairs to ensure high specificity and sensitivity in detecting pathogens.</li>
+          </ul>
+      
+          <h3 style="margin: 1rem 0 0.5rem; font-size: 1.1rem;">Professional Philosophy</h3>
+          <p>I believe that the future of medicine lies in <strong>transitional genomics</strong>, where high throughput sequencing and computational models transform raw biological data into life saving clinical insights. Whether it is analyzing protein families through Hidden Markov Models or investigating evolutionary distances via sequence alignment, my goal is to accelerate the pace of genetic discovery.</p>
+        </div>
+      
+        <div class="social-links" style="margin-top: 1.5rem;">
           <a href="mailto:shirazi6503@gmail.com"><i class="fas fa-envelope"></i> Email</a>
           <a href="https://github.com/alishirazi03" target="_blank"><i class="fab fa-github"></i> GitHub</a>
           <a href="https://linkedin.com/in/syedmuhammadalishirazi" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
@@ -496,22 +512,89 @@
     <p class="section-label">Projects</p>
     <h2 class="section-title">Portfolio</h2>
     <div class="portfolio-grid">
-      <div class="portfolio-card">
-        <div class="portfolio-banner" style="background:linear-gradient(135deg,#1a2744,#0f7b6c);">🧬</div>
-        <div class="portfolio-body">
-          <h4>ATP8B1 Gene Analysis Pipeline</h4>
-          <p>End-to-end bioinformatic pipeline for analyzing the genetic basis of gallstone disease in Pakistani patients using genome sequence data.</p>
-          <div class="portfolio-tags"><span class="portfolio-tag">Python</span><span class="portfolio-tag">Bioinformatics</span><span class="portfolio-tag">Genomics</span></div>
-          <a href="https://github.com/alishirazi03" target="_blank" style="font-size:0.82rem;color:var(--teal);display:inline-block;margin-top:0.8rem;"><i class="fab fa-github"></i> View on GitHub</a>
+      <div class="portfolio-card featured-project" style="grid-column: 1 / -1; border: 2px solid var(--teal);">
+        <div class="portfolio-banner" style="background:linear-gradient(135deg,#0f7b6c,#1a2744); padding: 2rem; text-align: center;">
+          <div style="font-size: 4rem; margin-bottom: 0.5rem;">🦠</div>
+          <h3 style="color: white; font-size: 1.3rem; margin: 0;">SARS-CoV-2 Genomic Analysis Pipeline</h3>
+          <p style="color: rgba(255,255,255,0.9); font-size: 0.9rem; margin-top: 0.5rem;">From Assembly to Drug Target Discovery</p>
+        </div>
+        <div class="portfolio-body" style="padding: 1.8rem;">
+          <p style="font-size: 0.95rem; line-height: 1.7; margin-bottom: 1rem;">
+            Comprehensive end-to-end bioinformatics pipeline analyzing real SARS-CoV-2 pandemic data. 
+            Assembled complete viral genome (29,903 bp), performed functional annotation identifying 11 major ORFs, 
+            traced evolutionary origins through phylogenetic analysis, and identified guanylate kinase as a 
+            potential antiviral drug target. Self-directed learning project demonstrating transition from 
+            wet-lab to computational biology.
+          </p>
+          
+          <div style="margin: 1.2rem 0;">
+            <strong style="color: var(--navy); font-size: 0.9rem;">Key Analyses:</strong>
+            <ul style="margin-top: 0.5rem; padding-left: 1.3rem; color: var(--muted); font-size: 0.88rem; line-height: 1.8;">
+              <li><strong>Genome Assembly:</strong> SPAdes de novo assembly from raw Illumina reads (N50: 29,903 bp)</li>
+              <li><strong>Genome Annotation:</strong> Prokka functional annotation, PCR primer design for diagnostics</li>
+              <li><strong>Evolutionary Analysis:</strong> Multiple sequence alignment, natural origin confirmation</li>
+              <li><strong>Phylogenetic Dating:</strong> Molecular clock analysis, tMRCA estimation (Oct-Nov 2019)</li>
+              <li><strong>Drug Target Discovery:</strong> Metabolic pathway analysis, therapeutic target identification</li>
+            </ul>
+          </div>
+      
+          <div class="portfolio-tags">
+            <span class="portfolio-tag">Genome Assembly</span>
+            <span class="portfolio-tag">Phylogenetics</span>
+            <span class="portfolio-tag">Python</span>
+            <span class="portfolio-tag">R</span>
+            <span class="portfolio-tag">BLAST</span>
+            <span class="portfolio-tag">Galaxy</span>
+            <span class="portfolio-tag">Drug Discovery</span>
+          </div>
+      
+          <div style="display: flex; gap: 1rem; margin-top: 1.2rem; flex-wrap: wrap;">
+            <a href="https://github.com/alishirazi03/SARS-CoV-2-Analysis" target="_blank" 
+               style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.85rem;font-weight:500;
+                      color:white;background:var(--teal);border-radius:6px;padding:0.6rem 1rem;
+                      text-decoration:none;transition:all 0.2s;">
+              <i class="fab fa-github"></i> View on GitHub
+            </a>
+            <a href="https://drive.google.com/drive/u/0/folders/1SwaxL0km2cO2957i7C7aY76NCkbdhD5A" target="_blank"
+               style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.85rem;font-weight:500;
+                      color:var(--teal);border:1.5px solid var(--teal);border-radius:6px;padding:0.6rem 1rem;
+                      text-decoration:none;transition:all 0.2s;">
+              <i class="fas fa-database"></i> View Raw Data
+            </a>
+            <a href="#blog" 
+               style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.85rem;font-weight:500;
+                      color:var(--muted);border:1.5px solid var(--border);border-radius:6px;padding:0.6rem 1rem;
+                      text-decoration:none;transition:all 0.2s;">
+              <i class="fas fa-book-open"></i> Read Blog Posts
+            </a>
+          </div>
+      
+          <div style="background: var(--teal-light); border-left: 3px solid var(--teal); 
+                      padding: 0.9rem 1.1rem; border-radius: 6px; margin-top: 1.3rem;">
+            <p style="font-size: 0.85rem; color: var(--text); margin: 0;">
+              <strong>🎓 Learning Context:</strong> This project was completed as part of the 
+              <em>Applied Bioinformatics Specialization</em> (UC San Diego, Coursera) to develop 
+              computational biology skills beyond my wet-lab molecular biology background.
+            </p>
+          </div>
         </div>
       </div>
       <div class="portfolio-card">
-        <div class="portfolio-banner" style="background:linear-gradient(135deg,#d4a84b,#b8852a);">📊</div>
+        <div class="portfolio-banner" style="background:linear-gradient(135deg,#1a2744,#0f7b6c);">🧬</div>
         <div class="portfolio-body">
-          <h4>Genomics Data Visualization Dashboard</h4>
-          <p>Interactive R Shiny dashboard for exploring sequence variation data across gene families linked to metabolic disorders.</p>
-          <div class="portfolio-tags"><span class="portfolio-tag">R</span><span class="portfolio-tag">Shiny</span><span class="portfolio-tag">Data Viz</span></div>
-          <a href="https://github.com/alishirazi03" target="_blank" style="font-size:0.82rem;color:var(--teal);display:inline-block;margin-top:0.8rem;"><i class="fab fa-github"></i> View on GitHub</a>
+          <h4>ATP8B1 Gene Analysis in Gallstone Disease</h4>
+          <p>Wet-lab and computational investigation of ATP8B1 genetic variants in Pakistani 
+          gallstone patients. PCR amplification, Sanger sequencing, and bioinformatic analysis 
+          of disease-associated mutations.</p>
+          <div class="portfolio-tags">
+            <span class="portfolio-tag">Molecular Biology</span>
+            <span class="portfolio-tag">PCR</span>
+            <span class="portfolio-tag">Sanger Sequencing</span>
+            <span class="portfolio-tag">Variant Analysis</span>
+          </div>
+          <a href="#FYP" style="font-size:0.82rem;color:var(--teal);display:inline-block;margin-top:0.8rem;">
+            <i class="fas fa-arrow-right"></i> View Thesis Details
+          </a>
         </div>
       </div>
     </div>
@@ -661,23 +744,36 @@
     <p class="section-label">Writing</p>
     <h2 class="section-title">Blog Posts</h2>
     <div class="blog-grid">
-      <div class="blog-card">
-        <p class="blog-date">Feb 2026</p>
-        <h3 class="blog-title">How I Analyzed the ATP8B1 Gene Using Python</h3>
-        <p class="blog-excerpt">A walkthrough of the bioinformatic pipeline I built for my undergraduate thesis — from raw sequence data to meaningful biological insights.</p>
-        <a href="#" class="blog-read-more">Read more →</a>
+     <div class="blog-card">
+        <div class="blog-meta">
+          <span class="blog-date">March 2026</span>
+          <span class="blog-tag">Career Development</span>
+        </div>
+        <h4>From Wet Lab to Code: My Journey into Bioinformatics</h4>
+        <p>How I transitioned from pipetting and PCR to Python and phylogenetics. 
+        Lessons learned from my first computational biology project analyzing SARS-CoV-2 genomes.</p>
+        <a href="blog/wet-lab-to-code.html">Read more →</a>
       </div>
       <div class="blog-card">
-        <p class="blog-date">Dec 2025</p>
-        <h3 class="blog-title">Getting Started with Bioinformatics as a Biology Student</h3>
-        <p class="blog-excerpt">No CS background? No problem. Here are the tools, resources, and mindset shifts that helped me transition into computational biology.</p>
-        <a href="#" class="blog-read-more">Read more →</a>
+        <div class="blog-meta">
+          <span class="blog-date">March 2026</span>
+          <span class="blog-tag">Bioinformatics</span>
+        </div>
+        <h4>Assembling a Pandemic: My First Genome Assembly</h4>
+        <p>Walking through the process of reconstructing the complete SARS-CoV-2 genome from 
+        millions of short DNA reads using SPAdes and Galaxy. Understanding N50, de Bruijn graphs, 
+        and why assembly is like solving a massive jigsaw puzzle.</p>
+        <a href="blog/genome-assembly.html">Read more →</a>
       </div>
       <div class="blog-card">
-        <p class="blog-date">Jun 2025</p>
-        <h3 class="blog-title">AI in Genomics: What the Research Actually Says</h3>
-        <p class="blog-excerpt">A curated overview of how machine learning is reshaping variant calling, drug discovery, and disease prediction in the post-AlphaFold era.</p>
-        <a href="#" class="blog-read-more">Read more →</a>
+        <div class="blog-meta">
+          <span class="blog-date">March 2026</span>
+          <span class="blog-tag">Tutorial</span>
+        </div>
+        <h4>Tools I Learned: A Bioinformatics Toolkit for Viral Genomics</h4>
+        <p>A beginner's guide to the essential bioinformatics tools for viral genome analysis: 
+        SPAdes, QUAST, Prokka, MUSCLE, FastTree, and more. What each does and when to use them.</p>
+        <a href="blog/bioinformatics-toolkit.html">Read more →</a>
       </div>
     </div>
   </div>
