@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>From Wet Lab to Code: My Journey into Bioinformatics | Syed Muhammad Ali Shirazi</title>
+  <meta name="description" content="From Wet Lab to Code: My Journey into Bioinformatics">
+  <link rel="stylesheet" href="blog-style.css">
+</head>
+<body>
+  <article class="blog-post">
+<h1>From Wet Lab to Code: My Journey into Bioinformatics</h1>
+<p><strong>How I transitioned from pipetting and PCR to Python and phylogenetics, and what I learned analyzing SARS-CoV-2 genomes</strong></p>
+<hr />
+<h2>The Pipette and the Terminal</h2>
+<p>I still remember the first time I successfully amplified the ATP8B1 gene fragment. After hours of optimizing PCR conditions, adjusting annealing temperatures, and troubleshooting failed reactions, those beautiful DNA bands finally appeared under UV light. That moment of seeing my target amplicon at exactly 486 bp on the agarose gel felt like pure victory. I had coaxed genetic information out of blood samples using nothing but precise volumes, careful timing, and a thermal cycler.</p>
+<p>That was my world as an undergraduate biosciences student at COMSATS University Islamabad—a world of micropipettes, gel electrophoresis, PCR tubes, and UV transilluminators. My final year project investigated the role of ATP8B1 gene variants in gallstone disease in Pakistani patients. I spent months in the lab extracting DNA, designing TETRA-ARMS PCR primers, running gels, and genotyping samples. It was meticulous, hands-on work that taught me patience, precision, and the fundamental principles of molecular biology.</p>
+<p>But something was missing.</p>
+<h2>The Realization</h2>
+<p>As I analyzed my genotyping results, manually recording each band pattern and calculating allele frequencies in Excel, a question kept nagging at me: <em>What happens to all this genomic data after we generate it?</em> </p>
+<p>My thesis concluded that the ATP8B1 rs766737165 (T&gt;A) variant wasn't associated with gallstone disease in our population—everyone had the wild-type TT genotype. But I found myself wondering: What about other variants in this gene? What about the entire exome? How do researchers analyze thousands of variants simultaneously? How did scientists sequence the first SARS-CoV-2 genome in just weeks during the pandemic?</p>
+<p>The answer, I realized, wasn't in more pipettes. It was in code.</p>
+<p>Every major breakthrough I read about—from GWAS studies identifying disease genes to the rapid characterization of emerging pathogens—relied heavily on computational analysis. The wet-lab work I loved was essential, but it was only half the story. The other half was happening in terminals and programming languages I didn't know.</p>
+<p>That realization was both exciting and terrifying. I had spent four years becoming proficient at PCR, gel electrophoresis, and DNA extraction. Now I was contemplating starting over in a completely different domain. Could a biology student with minimal coding experience really learn bioinformatics?</p>
+<h2>Taking the Leap</h2>
+<p>In late 2024, while writing up my thesis results, I made a decision that would change my research trajectory: I enrolled in the <strong>Applied Bioinformatics Specialization</strong> offered by UC San Diego on Coursera. The course was called "Hacking COVID-19," and it promised to teach genome assembly, annotation, and phylogenetics using real SARS-CoV-2 pandemic data.</p>
+<p>I'll be honest—the first week was intimidating. Terms like "de Bruijn graphs," "k-mers," and "N50 statistics" felt as foreign as a new language. I was used to thinking about DNA as something tangible that I could see on a gel. Now I had to think about it as <em>data</em>—millions of short reads that needed to be computationally assembled into a genome.</p>
+<p>But I had an advantage I didn't initially recognize: <strong>my wet-lab experience gave me biological intuition that pure programmers often lack.</strong> When the course talked about paired-end sequencing, I immediately understood it because I'd worked with PCR primers that flank a target region. When we discussed open reading frames, I knew exactly what start and stop codons were from my genetics courses. The biology wasn't the hard part—learning to think computationally was.</p>
+<h2>The Transformation: From Bench to Terminal</h2>
+<p>Let me give you a concrete example of how my thinking changed.</p>
+<h3>Wet-Lab Approach (ATP8B1 Project):</h3>
+<ol>
+<li><strong>Design primers</strong> using Primer3 software (manual, ~2 hours)</li>
+<li><strong>Optimize PCR</strong> through trial and error (1-2 days of bench work)</li>
+<li><strong>Run gel electrophoresis</strong> and manually photograph bands (~30 minutes per gel)</li>
+<li><strong>Score genotypes</strong> by visual inspection under UV light</li>
+<li><strong>Calculate frequencies</strong> in Excel spreadsheet</li>
+<li><strong>Analyze</strong> 104 samples over 3-4 months</li>
+</ol>
+<p><strong>Result:</strong> Determined that one specific SNP (rs766737165) is monomorphic in our population.</p>
+<h3>Computational Approach (SARS-CoV-2 Project):</h3>
+<ol>
+<li><strong>Download raw sequencing data</strong> from NCBI SRA (millions of reads, minutes)</li>
+<li><strong>Assemble genome</strong> using SPAdes algorithm (automated, ~1 hour compute time)</li>
+<li><strong>Assess quality</strong> with QUAST (generates comprehensive statistics automatically)</li>
+<li><strong>Annotate genes</strong> using Prokka (identifies all 11 ORFs in minutes)</li>
+<li><strong>Build phylogenetic tree</strong> with 100 sequences using FastTree (minutes to hours)</li>
+<li><strong>Date evolutionary emergence</strong> using molecular clock methods</li>
+</ol>
+<p><strong>Result:</strong> Complete genomic characterization, evolutionary timeline, drug target identification, and phylogenetic context—all from publicly available data.</p>
+<p>The contrast was staggering. What took me months of painstaking lab work for a single gene variant could be accomplished computationally in hours for an entire genome. But here's the crucial insight: <strong>neither approach invalidates the other.</strong> Wet-lab work generates the data; computational work makes sense of it at scale. The future belongs to scientists who can bridge both worlds.</p>
+<h2>Five Things I Wish I'd Known Before Starting</h2>
+<h3>1. <strong>You Don't Need to Be a Programmer (Yet)</strong></h3>
+<p>My biggest fear was that I'd need years of computer science background. I didn't. The specialization started with web-based platforms like Galaxy that require zero coding. I learned to use tools like SPAdes and BLAST through graphical interfaces before ever touching command-line tools.</p>
+<p><strong>Lesson:</strong> Start with GUI-based tools. Understanding <em>what</em> tools do is more important than <em>how</em> they're coded.</p>
+<h3>2. <strong>Biology Knowledge Is Your Superpower</strong></h3>
+<p>In one assignment, I had to design diagnostic PCR primers for SARS-CoV-2. My wet-lab experience with primer design (Tm calculations, avoiding hairpins, checking specificity) made this trivial. Classmates without lab background struggled with concepts I took for granted.</p>
+<p><strong>Lesson:</strong> Your wet-lab skills aren't obsolete—they're contextual knowledge that makes you a better bioinformatician.</p>
+<h3>3. <strong>Failed PCRs Taught Me Troubleshooting</strong></h3>
+<p>Remember those failed PCR reactions I mentioned? Every failed assembly, alignment error, or crashed program in bioinformatics requires the same systematic troubleshooting: check your inputs, verify your parameters, read the error messages, try different conditions. The mindset is identical.</p>
+<p><strong>Lesson:</strong> Lab skills transfer. Patience, systematic thinking, and troubleshooting are universal.</p>
+<h3>4. <strong>The Data Tells Stories Wet Labs Can't</strong></h3>
+<p>When I built my first phylogenetic tree of SARS-CoV-2 sequences and dated the pandemic's emergence to October-November 2019 using molecular clock analysis, I experienced something profound: <strong>I was looking at evolutionary history.</strong> No amount of PCR work could have revealed that timeline. Computational biology doesn't replace wet-lab work—it answers different questions.</p>
+<p><strong>Lesson:</strong> Each approach has unique strengths. Choose your methods based on your biological questions.</p>
+<h3>5. <strong>The Learning Curve Is Steep but Conquerable</strong></h3>
+<p>Here's what I learned in 5 months:
+- Genome assembly (SPAdes, QUAST)
+- Functional annotation (Prokka, BLAST)
+- Sequence alignment (MUSCLE, MAFFT)
+- Phylogenetics (FastTree, LSD2, molecular clock dating)
+- Pathway analysis (BioCyc, metabolic networks)
+- Basic Python and R for data handling</p>
+<p>Could I have learned this alongside my wet-lab thesis? Absolutely. Would I recommend doing both simultaneously? Only if you enjoy sleep deprivation.</p>
+<p><strong>Lesson:</strong> The skills build on each other. Master one tool before adding the next.</p>
+<h2>The Moment It Clicked</h2>
+<p>There was a specific moment when everything came together. I was analyzing the spike protein of SARS-CoV-2 using multiple sequence alignment to compare it with related coronaviruses. The alignment showed that SARS-CoV-2 had 6 key amino acid substitutions in the receptor-binding domain compared to SARS-CoV-1. These weren't random—they were precisely the residues that contact the human ACE2 receptor.</p>
+<p>Suddenly, I understood why this virus was so transmissible. I could <em>see</em> evolution optimizing the spike protein for human cell entry. And I realized something profound: <strong>I was doing the same kind of detective work I did in the wet lab, but at a completely different scale.</strong> Instead of genotyping 104 samples for one variant, I was comparing entire viral genomes across evolutionary time.</p>
+<p>That's when the wet-lab researcher and the computational biologist merged into one person.</p>
+<h2>Comparing Workflows: Then and Now</h2>
+<p>Let me show you how my thinking has evolved by contrasting my two projects:</p>
+<h3>ATP8B1 Gallstone Study (Wet-Lab)</h3>
+<p><strong>Question:</strong> Is this specific SNP associated with disease?<br />
+<strong>Sample Size:</strong> 104 patients (75 cases, 29 controls)<br />
+<strong>Time Investment:</strong> 4-5 months of daily lab work<br />
+<strong>Consumables Cost:</strong> ~$500-1000 (DNA extraction kits, PCR reagents, gels)<br />
+<strong>Skills Required:</strong> DNA extraction, PCR, gel electrophoresis, primer design<br />
+<strong>Output:</strong> Genotypic frequencies, allele distribution<br />
+<strong>Conclusion:</strong> This variant is monomorphic (not informative)</p>
+<p><strong>Limitations I Encountered:</strong>
+- Could only test one variant at a time
+- Sample collection was time-consuming and required ethical approval
+- Failed PCR reactions meant wasted samples and reagents
+- Limited to variants I specifically designed primers for
+- No way to discover <em>new</em> variants</p>
+<h3>SARS-CoV-2 Genomic Analysis (Computational)</h3>
+<p><strong>Question:</strong> How did this virus emerge, evolve, and what are its drug targets?<br />
+<strong>Sample Size:</strong> 100 complete genomes (publicly available)<br />
+<strong>Time Investment:</strong> 5-course specialization over 3 months<br />
+<strong>Consumables Cost:</strong> $0 (all data and tools are free/open-source)<br />
+<strong>Skills Required:</strong> Genome assembly, annotation, phylogenetics, pathway analysis<br />
+<strong>Output:</strong> Complete genome, 11 genes annotated, evolutionary tree, drug targets<br />
+<strong>Conclusions:</strong> Multiple biological insights simultaneously</p>
+<p><strong>Advantages:</strong>
+- Access to millions of sequences worldwide (GISAID, NCBI)
+- Can analyze entire genomes, not just targeted regions
+- Discover novel variants through assembly
+- Trace evolutionary history across time and geography
+- Identify functional impacts of mutations
+- Reproducible—anyone can re-run my analysis</p>
+<h2>The Best of Both Worlds</h2>
+<p>Here's what I've learned: <strong>the most powerful researchers are bilingual.</strong> They speak both the language of the bench and the language of code.</p>
+<p>My ATP8B1 project taught me:
+- How to handle biological samples with precision
+- The importance of experimental controls
+- That negative results (monomorphic locus) are still results
+- How genetic variants actually <em>work</em> in practice</p>
+<p>My SARS-CoV-2 project taught me:
+- How to leverage publicly available data at scale
+- That computational predictions need experimental validation
+- The power of integrating multiple analysis types
+- How bioinformatics accelerates discovery during public health emergencies</p>
+<p><strong>The future isn't wet-lab OR computational—it's wet-lab AND computational.</strong> The most impactful research I can imagine would be:
+1. Identify drug target computationally (like guanylate kinase in SARS-CoV-2)
+2. Validate experimentally through enzyme assays
+3. Design inhibitors using structural modeling
+4. Test in cell culture or animal models</p>
+<p>That workflow requires both skillsets.</p>
+<h2>Lessons for Biology Students Considering Bioinformatics</h2>
+<p>If you're where I was a year ago—comfortable in the lab but curious about computational biology—here's my honest advice:</p>
+<h3>Start With Your Strengths</h3>
+<p>Don't abandon your wet-lab skills. Use them as your foundation. When I learned genome assembly, I thought about it in terms of PCR products and Sanger sequencing I already understood. Make the new knowledge connect to the old.</p>
+<h3>Choose Projects With Real Data</h3>
+<p>Learning abstract algorithms is tedious. Learning by assembling the actual SARS-CoV-2 genome that caused a pandemic? That's motivating. Find courses or projects that use real biological datasets you care about.</p>
+<h3>Don't Wait Until You're "Ready"</h3>
+<p>I delayed starting bioinformatics because I thought I needed to learn Python first. Wrong. The best way to learn programming is to need it for a biological question. Learn tools as you need them, not in advance.</p>
+<h3>Embrace Imposter Syndrome</h3>
+<p>You'll feel like you don't belong—wet-lab people will say you're not a real biologist, computer science people will say you're not a real programmer. Ignore both. Bioinformatics is its own discipline, and your unique perspective is valuable.</p>
+<h3>Build a Portfolio</h3>
+<p>I created a GitHub repository for my SARS-CoV-2 project. It showcases skills better than any certificate. When applying to graduate programs or jobs, I can show exactly what I've done, not just claim it.</p>
+<h2>The Challenges I'm Still Facing</h2>
+<p>Let me be honest about what's still difficult:</p>
+<p><strong>1. Command-Line Intimidation</strong><br />
+I'm comfortable with Galaxy and web tools, but raw command-line bioinformatics still feels daunting. Running tools through a terminal requires a different mental model than clicking buttons.</p>
+<p><strong>2. Statistical Depth</strong><br />
+Understanding p-values from a t-test is different from understanding false discovery rates in GWAS or bootstrap values in phylogenetics. The statistics got deeper fast.</p>
+<p><strong>3. Programming Proficiency</strong><br />
+I can write basic Python scripts to parse FASTA files, but I'm not building machine learning models. That's okay—you don't need to be a software engineer to do valuable bioinformatics.</p>
+<p><strong>4. Keeping Up With Tools</strong><br />
+New tools emerge constantly. AlphaFold2, ChatGPT for protein design, long-read sequencing platforms—the field moves fast. Wet-lab protocols are more stable.</p>
+<p><strong>5. Missing the Tangible</strong><br />
+Sometimes I miss seeing DNA bands appear on a gel. There's something satisfying about physical results that digital output doesn't quite replicate. But then I build a phylogenetic tree of a million sequences and that feeling fades.</p>
+<h2>What's Next for Me</h2>
+<p>This journey isn't over—it's just beginning. Here's where I'm headed:</p>
+<p><strong>Short-term (Next 6 months):</strong>
+- Master command-line Linux/Unix
+- Learn R for statistical genomics
+- Complete projects combining wet-lab and computational approaches
+- Write blogs teaching others what I've learned</p>
+<p><strong>Medium-term (1-2 years):</strong>
+- Master's in Bioinformatics/Computational Biology (applying Fall 2026)
+- Specialize in viral genomics or cancer genomics
+- Publish research that integrates both methodologies
+- Contribute to open-source bioinformatics tools</p>
+<p><strong>Long-term vision:</strong>
+- Lead a research group that bridges experimental and computational biology
+- Mentor students making similar transitions
+- Apply AI/ML to biological problems I deeply understand
+- Maybe even develop new tools that make bioinformatics more accessible to wet-lab biologists</p>
+<h2>The Drug Target Discovery That Changed My Perspective</h2>
+<p>Let me tell you about the moment that crystallized why this transition matters.</p>
+<p>During the pathway analysis module of my SARS-CoV-2 project, I used BioCyc databases to explore viral metabolic dependencies. The question was elegant: what does the virus need from the host cell that we could block without harming the host?</p>
+<p>Through computational network analysis, I identified <strong>guanylate kinase</strong> as a high-priority drug target. Here's why that's fascinating:</p>
+<p><strong>The Biology (what I understood from wet-lab):</strong>
+- SARS-CoV-2 is an RNA virus (~30,000 nucleotides)
+- It needs massive amounts of GTP to synthesize new viral genomes
+- Each infected cell produces thousands of viral copies</p>
+<p><strong>The Computation (what I learned):</strong>
+- Metabolic pathway analysis shows humans recycle GTP from RNA degradation
+- Viruses remove GTP from the cell (non-renewable in infection context)
+- Blocking guanylate kinase starves virus, spares host cells
+- This is the "holy grail" of selective therapeutics</p>
+<p><strong>The Integration (why both matter):</strong>
+- Computational prediction: guanylate kinase is a target
+- Experimental validation needed: enzyme assays, knockout studies, inhibitor screening
+- Clinical application: drug development, trials, patient treatment</p>
+<p>This finding (published in <em>Cell Metabolism</em> by Renz et al., 2020) was discovered computationally but <em>requires</em> wet-lab validation. Neither approach alone gets you to a therapy. Both together might save lives.</p>
+<p>That's when I understood: <strong>the future of biology isn't choosing between lab bench and laptop. It's knowing when to use each.</strong></p>
+<h2>My Advice to Supervisors and Educators</h2>
+<p>If you're mentoring biology students, please consider this:</p>
+<p><strong>1. Integrate bioinformatics early</strong><br />
+Don't wait until graduate school. Even basic sequence alignment and database searching should be taught alongside PCR and gel electrophoresis.</p>
+<p><strong>2. Use real data</strong><br />
+Abstract exercises bore students. Let them BLAST their PCR products, visualize their sequences, analyze real experimental results computationally.</p>
+<p><strong>3. Normalize the transition</strong><br />
+Don't treat computational skills as optional "extra" skills. They're core competencies, like pipetting.</p>
+<p><strong>4. Provide resources</strong><br />
+Free courses (Coursera, Rosalind, DataCamp), institutional licenses (MATLAB, GraphPad), and mentorship from computational researchers.</p>
+<p><strong>5. Reward interdisciplinary projects</strong><br />
+The best undergraduate theses would combine wet-lab data generation with computational analysis. Why should students choose one or the other?</p>
+<h2>Final Thoughts: The Best Time to Start</h2>
+<p>If you're reading this and thinking "I should learn bioinformatics," you're right. But you're also wrong about one thing: you don't need to wait until you're "ready."</p>
+<p><strong>You're ready when you have a biological question that requires computational answers.</strong></p>
+<p>For me, that question was: <em>How can we analyze genomic variation beyond single SNPs?</em> Your question might be different. Maybe you want to:
+- Analyze RNA-seq data from your experiment
+- Build a phylogenetic tree of sequences you generated
+- Predict protein structures from gene sequences
+- Identify disease-associated variants in exome data
+- Classify microbiome communities from 16S data</p>
+<p>Whatever your question, the tools exist. The data exists. The courses exist (many free). What's missing is just your decision to start.</p>
+<h2>Resources That Helped Me</h2>
+<p>Since people always ask, here are the specific resources I found most valuable:</p>
+<p><strong>Courses:</strong>
+- UC San Diego Applied Bioinformatics Specialization (Coursera) - <em>This was my main course</em>
+- Bioinformatics Algorithms by Compeau &amp; Pevzner (book + Coursera)
+- Rosalind.info (problem-solving practice)</p>
+<p><strong>Tools I Learned:</strong>
+- SPAdes (genome assembly)
+- QUAST (quality assessment)<br />
+- Prokka (genome annotation)
+- BLAST (sequence similarity)
+- MUSCLE/MAFFT (multiple sequence alignment)
+- FastTree (phylogenetic inference)
+- LSD2 (molecular clock dating)
+- BioCyc (pathway analysis)
+- Galaxy (workflow platform)</p>
+<p><strong>Communities:</strong>
+- Biostars (Q&amp;A forum)
+- r/bioinformatics (Reddit)
+- Twitter/X #bioinformatics (amazing community)</p>
+<p><strong>Mindset Shifts:</strong>
+- Biology first, code second
+- Tools are means, not ends
+- Negative results teach as much as positive ones
+- Open science makes everything faster
+- Your unique perspective (wet-lab + computational) is valuable</p>
+<h2>One Year From Now</h2>
+<p>Where will I be in one year? Hopefully:
+- Admitted to a top bioinformatics Master's program
+- Publishing my SARS-CoV-2 analysis as a methods paper
+- Fluent in Python and R
+- Working on a project that generates wet-lab data I analyze computationally
+- Mentoring other students making this transition
+- Contributing to open-source bioinformatics tools</p>
+<p>But more importantly, I'll be a scientist who can ask bigger questions because I'm not limited by methodology. When I encounter a biological mystery, I won't think "Is this a wet-lab question or a computational question?" I'll think "Which tools best answer this question?" and have both at my disposal.</p>
+<h2>You're Not Leaving the Lab—You're Expanding It</h2>
+<p>The title of this blog says "From Wet Lab to Code," but that's not quite right. It should be "From Wet Lab to Code AND Lab."</p>
+<p>I haven't abandoned my pipettes. They're sitting in my drawer next to my laptop. Sometimes the answer to a biological question is a PCR reaction. Sometimes it's a Python script. Often, it's both.</p>
+<p>My ATP8B1 thesis taught me that wet-lab work generates data. My SARS-CoV-2 project taught me that computational work extracts meaning from data at scale. Together, they taught me that <strong>modern biology requires both languages.</strong></p>
+<p>I'm not a wet-lab biologist who learned coding.<br />
+I'm not a computational biologist who did some lab work.<br />
+<strong>I'm a biologist who uses whatever tools answer the question.</strong></p>
+<p>And so can you.</p>
+<hr />
+<h2>Update: Where I Am Now (March 2026)</h2>
+<p>Since starting this journey:
+- ✅ Completed full Applied Bioinformatics Specialization
+- ✅ Built complete SARS-CoV-2 analysis pipeline (29,903 bp genome assembled)
+- ✅ Identified 11 ORFs and designed diagnostic PCR primers<br />
+- ✅ Conducted phylogenetic analysis with molecular clock dating
+- ✅ Identified drug target through metabolic pathway analysis
+- ✅ Created GitHub portfolio showcasing all analyses
+- ✅ Currently applying to Bioinformatics Master's programs
+- 🔄 Learning advanced Python for genomics
+- 🔄 Exploring machine learning applications in biology
+- 🔄 Writing tutorials to help others make this transition</p>
+<p>The journey from pipette to Python isn't a straight line—it's a bridge you build while walking across it. Every wet-lab skill you have is a foundation stone. Every computational skill you gain is a spanning cable. Together, they let you cross distances neither alone could reach.</p>
+<p><strong>Start building your bridge today.</strong></p>
+<hr />
+<p><em>Syed Muhammad Ali Shirazi is a recent BS Biosciences graduate from COMSATS University Islamabad, Pakistan, specializing in the integration of wet-lab molecular biology and computational genomics. His research spans gallstone disease genetics, viral genomics, and bioinformatics pipeline development. He's currently preparing applications for Master's programs in Bioinformatics and Computational Biology.</em></p>
+<p><strong>Connect:</strong> <a href="https://github.com/alishirazi03">GitHub</a> | <a href="https://linkedin.com/in/syedmuhammadalishirazi">LinkedIn</a> | <a href="mailto:shirazi6503@gmail.com">Email</a></p>
+<p><strong>Read More:</strong> 
+- <a href="#">Assembling a Pandemic: My First Genome Assembly</a>
+- <a href="#">Finding Drug Targets in a Pandemic Virus</a>
+- <a href="#">Tools I Learned: A Bioinformatics Toolkit</a></p>
+<hr />
+<p><em>Have questions about transitioning from wet-lab to bioinformatics? Drop a comment below or reach out—I'm always happy to help fellow biology students navigate this journey!</em></p>
+  </article>
+</body>
+</html>
