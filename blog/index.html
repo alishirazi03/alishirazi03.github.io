@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog | Syed Muhammad Ali Shirazi</title>
+  <meta name="description" content="Bioinformatics tutorials, career development, and computational biology insights from wet-lab to code.">
+  <meta name="keywords" content="bioinformatics blog, computational biology, SARS-CoV-2, genome assembly, phylogenetics, career development">
+  
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  
+  <style>
+    :root {
+      --navy: #1a2744;
+      --teal: #0f7b6c;
+      --teal-light: #e6f4f2;
+      --accent: #d4a84b;
+      --text: #2d2d2d;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --bg: #fafafa;
+      --white: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      line-height: 1.7;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--navy), var(--teal));
+      color: white;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      opacity: 0.95;
+    }
+
+    nav {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      margin-right: 1.5rem;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--teal);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+
+    .blog-grid {
+      display: grid;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .blog-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--teal);
+      border-radius: 8px;
+      padding: 2rem;
+      transition: all 0.3s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .blog-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      border-left-color: var(--navy);
+    }
+
+    .blog-meta {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 1rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .blog-tag {
+      background: var(--teal-light);
+      color: var(--teal);
+      padding: 0.25rem 0.75rem;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+
+    .blog-card h2 {
+      font-size: 1.6rem;
+      color: var(--navy);
+      margin-bottom: 0.75rem;
+      line-height: 1.3;
+    }
+
+    .blog-card h2 a {
+      color: var(--navy);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .blog-card h2 a:hover {
+      color: var(--teal);
+    }
+
+    .blog-excerpt {
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .blog-stats {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .blog-stats i {
+      margin-right: 0.3rem;
+      color: var(--teal);
+    }
+
+    .read-more {
+      color: var(--teal);
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      margin-top: 0.5rem;
+    }
+
+    .read-more:hover {
+      gap: 0.6rem;
+    }
+
+    footer {
+      background: var(--navy);
+      color: white;
+      text-align: center;
+      padding: 2rem;
+      margin-top: 4rem;
+    }
+
+    footer a {
+      color: var(--teal-light);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>📝 Bioinformatics Blog</h1>
+    <p>From wet-lab to computational biology—tutorials, insights, and lessons learned</p>
+  </header>
+
+  <nav>
+    <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+    <a href="../index.html#portfolio"><i class="fas fa-project-diagram"></i> Portfolio</a>
+    <a href="../index.html#about"><i class="fas fa-user"></i> About</a>
+    <a href="../index.html#contact"><i class="fas fa-envelope"></i> Contact</a>
+  </nav>
+
+  <div class="container">
+    <h2 style="font-size: 1.2rem; color: var(--muted); margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.1em;">Featured Posts</h2>
+    
+    <div class="blog-grid">
+      
+      <!-- Blog Post 1: Career Development -->
+      <div class="blog-card">
+        <div class="blog-meta">
+          <span class="blog-tag">Career Development</span>
+          <span><i class="far fa-calendar"></i> March 2026</span>
+          <span><i class="far fa-clock"></i> 20 min read</span>
+        </div>
+        <h2><a href="wetlab-to-code.html">From Wet Lab to Code: My Journey into Bioinformatics</a></h2>
+        <p class="blog-excerpt">
+          How I transitioned from pipetting and PCR to Python and phylogenetics. Lessons learned from my first computational biology project analyzing SARS-CoV-2 genomes—the challenges, victories, and what I wish I'd known before starting.
+        </p>
+        <div class="blog-stats">
+          <span><i class="fas fa-tag"></i> Bioinformatics, Career, Learning</span>
+          <span><i class="fas fa-chart-line"></i> 5,000+ words</span>
+        </div>
+        <a href="wetlab-to-code.html" class="read-more">Read full article <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <!-- Blog Post 2: Technical Tutorial -->
+      <div class="blog-card">
+        <div class="blog-meta">
+          <span class="blog-tag">Technical Tutorial</span>
+          <span><i class="far fa-calendar"></i> March 2026</span>
+          <span><i class="far fa-clock"></i> 18 min read</span>
+        </div>
+        <h2><a href="genome-assembly.html">Assembling a Pandemic: My First Genome Assembly</a></h2>
+        <p class="blog-excerpt">
+          Walking through the process of reconstructing the complete SARS-CoV-2 genome from millions of short DNA reads using SPAdes and Galaxy. Understanding N50, de Bruijn graphs, and why genome assembly is like solving a massive jigsaw puzzle.
+        </p>
+        <div class="blog-stats">
+          <span><i class="fas fa-tag"></i> Genome Assembly, SPAdes, Algorithms</span>
+          <span><i class="fas fa-chart-line"></i> 4,500+ words</span>
+        </div>
+        <a href="genome-assembly.html" class="read-more">Read full article <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <!-- Blog Post 3: Tools Guide -->
+      <div class="blog-card">
+        <div class="blog-meta">
+          <span class="blog-tag">Tools & Resources</span>
+          <span><i class="far fa-calendar"></i> March 2026</span>
+          <span><i class="far fa-clock"></i> 15 min read</span>
+        </div>
+        <h2><a href="tools-toolkit.html">Tools I Learned: A Bioinformatics Toolkit for Viral Genomics</a></h2>
+        <p class="blog-excerpt">
+          A beginner's guide to essential bioinformatics tools for viral genome analysis: SPAdes, QUAST, Prokka, MUSCLE, FastTree, LSD2, BioCyc, and more. What each tool does, when to use them, and lessons from hands-on experience.
+        </p>
+        <div class="blog-stats">
+          <span><i class="fas fa-tag"></i> Tools, Workflow, Reference Guide</span>
+          <span><i class="fas fa-chart-line"></i> 3,500+ words</span>
+        </div>
+        <a href="tools-toolkit.html" class="read-more">Read full article <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+    </div>
+
+    <!-- Coming Soon Section -->
+    <div style="margin-top: 4rem; padding: 2rem; background: var(--teal-light); border-radius: 8px; border-left: 4px solid var(--teal);">
+      <h3 style="color: var(--navy); margin-bottom: 1rem;">📬 More Coming Soon</h3>
+      <p style="color: var(--muted); margin-bottom: 1rem;">
+        I'm working on additional posts about drug target discovery, phylogenetic analysis, and understanding open reading frames. Subscribe to my <a href="../index.html#contact" style="color: var(--teal); font-weight: 600;">newsletter</a> or follow me on <a href="https://linkedin.com/in/syedmuhammadalishirazi" target="_blank" style="color: var(--teal); font-weight: 600;">LinkedIn</a> to get notified when new posts go live.
+      </p>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>© 2026 Syed Muhammad Ali Shirazi · <a href="https://github.com/alishirazi03">GitHub</a> · <a href="https://linkedin.com/in/syedmuhammadalishirazi">LinkedIn</a></p>
+  </footer>
+
+</body>
+</html>
