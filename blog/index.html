@@ -1,278 +1,449 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="icon" type="image/x-icon" href="../favicon.ico?v=2">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog | Syed Muhammad Ali Shirazi</title>
-  <meta name="description" content="Bioinformatics tutorials, career development, and computational biology insights from wet-lab to code.">
-  <meta name="keywords" content="bioinformatics blog, computational biology, SARS-CoV-2, genome assembly, phylogenetics, career development">
-  
-  <!-- Font Awesome for icons -->
+  <title>Technical Blog | Syed Muhammad Ali Shirazi</title>
+  <meta name="description" content="Technical articles, bioinformatics tutorials, and computational genomics workflows by Syed Muhammad Ali Shirazi.">
+  <meta name="keywords" content="bioinformatics blog, computational biology, SARS-CoV-2, genome assembly, SPAdes, phylogenetics, Syed Muhammad Ali Shirazi">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  
+
   <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
     :root {
-      --navy: #1a2744;
-      --teal: #0f7b6c;
-      --teal-light: #e6f4f2;
-      --accent: #d4a84b;
-      --text: #2d2d2d;
-      --muted: #6b7280;
-      --border: #e5e7eb;
-      --bg: #fafafa;
-      --white: #ffffff;
+      --bg:            #fafaf9;
+      --surface:       #ffffff;
+      --surface-alt:   #f4f5f4;
+      --text:          #18181b;
+      --text-secondary:#3f3f46;
+      --muted:         #71717a;
+      --navy:          #0f172a;
+      --teal:          #0d7463;
+      --teal-hover:    #0a5c4f;
+      --teal-subtle:   #ecfdf5;
+      --teal-border:   #a7f3d0;
+      --border:        #e4e4e7;
+      --border-strong: #d4d4d8;
+      --radius:        10px;
+      --radius-sm:     6px;
+      --shadow-sm:     0 1px 2px rgba(0,0,0,0.03);
+      --shadow:        0 4px 20px -2px rgba(15, 23, 42, 0.05);
+      --shadow-hover:  0 10px 28px -4px rgba(15, 23, 42, 0.09);
+      --mono:          'JetBrains Mono', monospace;
+      --sans:          'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --serif:         'Crimson Pro', Georgia, serif;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    
+    body.dark {
+      --bg:            #090d16;
+      --surface:       #111827;
+      --surface-alt:   #1e293b;
+      --text:          #f1f5f9;
+      --text-secondary:#cbd5e1;
+      --muted:         #94a3b8;
+      --navy:          #f8fafc;
+      --teal:          #2dd4bf;
+      --teal-hover:    #5eead4;
+      --teal-subtle:   rgba(45, 212, 191, 0.1);
+      --teal-border:   rgba(45, 212, 191, 0.28);
+      --border:        #1e293b;
+      --border-strong: #334155;
+      --shadow-sm:     0 1px 2px rgba(0,0,0,0.3);
+      --shadow:        0 4px 20px -2px rgba(0,0,0,0.4);
+      --shadow-hover:  0 12px 30px -4px rgba(0,0,0,0.55);
+    }
+
     body {
-      font-family: 'Georgia', 'Times New Roman', serif;
+      font-family: var(--sans);
+      font-size: 15.5px;
       line-height: 1.7;
       color: var(--text);
       background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      transition: background-color 0.25s ease, color 0.25s ease;
     }
 
-    header {
-      background: linear-gradient(135deg, var(--navy), var(--teal));
-      color: white;
-      padding: 3rem 2rem;
-      text-align: center;
-    }
+    a { color: var(--teal); text-decoration: none; transition: color 0.18s ease; }
+    a:hover { color: var(--teal-hover); }
+    h1, h2, h3, h4 { font-family: var(--serif); font-weight: 600; color: var(--navy); line-height: 1.25; }
 
-    header h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-      font-weight: 600;
-    }
-
-    header p {
-      font-size: 1.1rem;
-      opacity: 0.95;
-    }
-
+    /* Sticky Navbar */
     nav {
-      background: var(--white);
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(250, 250, 249, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
-      padding: 1rem 2rem;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      padding: 0 1.5rem;
+    }
+    body.dark nav { background: rgba(9, 13, 22, 0.85); }
+
+    .nav-inner {
+      max-width: 960px; margin: 0 auto; height: 62px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-brand {
+      display: flex; align-items: center; gap: 0.6rem;
+      font-family: var(--serif); font-size: 1.15rem; font-weight: 600;
+      color: var(--navy); text-decoration: none;
+    }
+    .nav-brand-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--teal); }
+    .nav-brand span.sub {
+      font-family: var(--mono); font-size: 0.72rem; color: var(--muted);
+      font-weight: 400; padding-left: 0.4rem; border-left: 1px solid var(--border-strong);
     }
 
-    nav a {
-      color: var(--muted);
-      text-decoration: none;
-      margin-right: 1.5rem;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      transition: color 0.2s;
+    .nav-links { display: flex; align-items: center; gap: 0.35rem; }
+    .nav-links a {
+      font-size: 0.8rem; font-weight: 500; color: var(--muted);
+      padding: 0.38rem 0.7rem; border-radius: var(--radius-sm);
+      transition: all 0.15s ease;
+    }
+    .nav-links a:hover { background: var(--teal-subtle); color: var(--teal); }
+
+    .theme-btn {
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text-secondary); border-radius: var(--radius-sm);
+      width: 34px; height: 34px; cursor: pointer;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 0.88rem; transition: all 0.18s ease; margin-left: 0.35rem;
+    }
+    .theme-btn:hover { border-color: var(--teal); color: var(--teal); }
+
+    /* Hero Header */
+    header {
+      background-image: radial-gradient(var(--border-strong) 1px, transparent 1px);
+      background-size: 24px 24px;
+      border-bottom: 1px solid var(--border);
+      padding: 4rem 1.5rem 3rem;
+    }
+    .header-inner { max-width: 960px; margin: 0 auto; }
+    .header-kicker {
+      font-family: var(--mono); font-size: 0.73rem; font-weight: 500;
+      text-transform: uppercase; letter-spacing: 0.12em; color: var(--teal);
+      margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;
+    }
+    .header-kicker::before {
+      content: ""; display: inline-block; width: 18px; height: 1.5px; background: var(--teal);
+    }
+    header h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 0.6rem; }
+    header p { font-size: 1rem; color: var(--text-secondary); max-width: 660px; }
+
+    /* Main Container */
+    .container { max-width: 960px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+
+    /* Filter & Search Controls */
+    .controls-bar {
+      display: flex; flex-wrap: wrap; align-items: center;
+      justify-content: space-between; gap: 1rem; margin-bottom: 2rem;
+      padding-bottom: 1.25rem; border-bottom: 1px solid var(--border);
+    }
+    .filter-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .filter-btn {
+      font-family: var(--mono); font-size: 0.74rem; font-weight: 500;
+      padding: 0.32rem 0.75rem; border-radius: 999px;
+      border: 1px solid var(--border); background: var(--surface);
+      color: var(--muted); cursor: pointer; transition: all 0.15s ease;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--teal); color: #ffffff; border-color: var(--teal);
     }
 
-    nav a:hover {
-      color: var(--teal);
+    .search-box {
+      position: relative; min-width: 240px; flex: 0 1 280px;
     }
+    .search-box i {
+      position: absolute; left: 0.8rem; top: 50%; transform: translateY(-50%);
+      color: var(--muted); font-size: 0.8rem;
+    }
+    .search-box input {
+      width: 100%; padding: 0.42rem 0.85rem 0.42rem 2.15rem;
+      font-family: var(--sans); font-size: 0.83rem;
+      background: var(--surface); color: var(--text);
+      border: 1px solid var(--border); border-radius: var(--radius-sm);
+      outline: none; transition: border-color 0.2s;
+    }
+    .search-box input:focus { border-color: var(--teal); }
 
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 3rem 2rem;
-    }
-
-    .blog-grid {
-      display: grid;
-      gap: 2rem;
-      margin-top: 2rem;
-    }
+    /* Blog List Grid */
+    .blog-grid { display: flex; flex-direction: column; gap: 1.5rem; }
 
     .blog-card {
-      background: var(--white);
+      background: var(--surface);
       border: 1px solid var(--border);
-      border-left: 4px solid var(--teal);
-      border-radius: 8px;
-      padding: 2rem;
-      transition: all 0.3s;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      border-radius: var(--radius);
+      padding: 1.75rem 2rem;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s ease;
+      display: flex; flex-direction: column;
     }
-
     .blog-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-      border-left-color: var(--navy);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--teal);
     }
+    .blog-card.hidden { display: none; }
 
     .blog-meta {
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-      margin-bottom: 1rem;
-      font-size: 0.85rem;
-      color: var(--muted);
+      display: flex; flex-wrap: wrap; gap: 0.85rem; align-items: center;
+      margin-bottom: 0.75rem; font-family: var(--mono); font-size: 0.74rem; color: var(--muted);
     }
-
     .blog-tag {
-      background: var(--teal-light);
-      color: var(--teal);
-      padding: 0.25rem 0.75rem;
-      border-radius: 4px;
-      font-weight: 500;
+      background: var(--teal-subtle); color: var(--teal);
+      border: 1px solid var(--teal-border);
+      padding: 0.15rem 0.6rem; border-radius: 4px; font-weight: 500;
+    }
+    .blog-number {
+      font-family: var(--mono); font-size: 0.72rem; color: var(--muted);
+      margin-left: auto;
     }
 
-    .blog-card h2 {
-      font-size: 1.6rem;
-      color: var(--navy);
-      margin-bottom: 0.75rem;
-      line-height: 1.3;
-    }
-
-    .blog-card h2 a {
-      color: var(--navy);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .blog-card h2 a:hover {
-      color: var(--teal);
-    }
+    .blog-card h2 { font-size: 1.55rem; margin-bottom: 0.6rem; }
+    .blog-card h2 a { color: var(--navy); text-decoration: none; transition: color 0.18s; }
+    .blog-card h2 a:hover { color: var(--teal); }
 
     .blog-excerpt {
-      color: var(--muted);
-      line-height: 1.7;
-      margin-bottom: 1rem;
+      color: var(--text-secondary); font-size: 0.93rem;
+      line-height: 1.7; margin-bottom: 1.2rem;
     }
 
-    .blog-stats {
-      display: flex;
-      gap: 1.5rem;
-      font-size: 0.85rem;
-      color: var(--muted);
-      margin-top: 1rem;
-      padding-top: 1rem;
-      border-top: 1px solid var(--border);
+    .blog-footer {
+      display: flex; flex-wrap: wrap; align-items: center;
+      justify-content: space-between; gap: 1rem;
+      padding-top: 1rem; border-top: 1px solid var(--border);
     }
-
-    .blog-stats i {
-      margin-right: 0.3rem;
-      color: var(--teal);
+    .topic-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .topic-chip {
+      font-family: var(--mono); font-size: 0.7rem; color: var(--muted);
+      background: var(--surface-alt); border: 1px solid var(--border);
+      padding: 0.15rem 0.55rem; border-radius: 4px;
     }
 
     .read-more {
-      color: var(--teal);
-      font-weight: 600;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-      margin-top: 0.5rem;
+      font-family: var(--mono); font-size: 0.78rem; font-weight: 500;
+      color: var(--teal); display: inline-flex; align-items: center; gap: 0.4rem;
     }
+    .read-more:hover { gap: 0.65rem; }
 
-    .read-more:hover {
-      gap: 0.6rem;
+    /* Upcoming Topics Callout */
+    .upcoming-box {
+      margin-top: 3rem; padding: 1.6rem 1.8rem;
+      background: var(--surface); border: 1px solid var(--border);
+      border-left: 3px solid var(--teal); border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+    }
+    .upcoming-box h3 { font-size: 1.15rem; margin-bottom: 0.45rem; }
+    .upcoming-box p { font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 0.9rem; }
+    .upcoming-list {
+      display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none;
+    }
+    .upcoming-list li {
+      font-family: var(--mono); font-size: 0.73rem;
+      background: var(--surface-alt); color: var(--text-secondary);
+      border: 1px solid var(--border); padding: 0.25rem 0.65rem; border-radius: 5px;
     }
 
     footer {
-      background: var(--navy);
-      color: white;
-      text-align: center;
-      padding: 2rem;
-      margin-top: 4rem;
+      text-align: center; padding: 2.5rem 1rem; font-size: 0.8rem;
+      color: var(--muted); border-top: 1px solid var(--border);
     }
+    footer span { color: var(--teal); font-weight: 500; }
 
-    footer a {
-      color: var(--teal-light);
-      text-decoration: none;
+    @media (max-width: 720px) {
+      header h1 { font-size: 2rem; }
+      .blog-card { padding: 1.35rem 1.4rem; }
+      .nav-brand span.sub { display: none; }
+      .search-box { flex: 1 1 100%; }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>📝 Bioinformatics Blog</h1>
-    <p>From wet-lab to computational biology—tutorials, insights, and lessons learned</p>
-  </header>
-
+  <!-- NAVBAR -->
   <nav>
-    <a href="../index.html"><i class="fas fa-home"></i> Home</a>
-    <a href="../index.html#portfolio"><i class="fas fa-project-diagram"></i> Portfolio</a>
-    <a href="../index.html#about"><i class="fas fa-user"></i> About</a>
-    <a href="../index.html#contact"><i class="fas fa-envelope"></i> Contact</a>
+    <div class="nav-inner">
+      <a class="nav-brand" href="../index.html">
+        <span class="nav-brand-dot"></span>
+        Syed Muhammad Ali Shirazi
+        <span class="sub">Notebook &amp; Tutorials</span>
+      </a>
+      <div class="nav-links">
+        <a href="../index.html"><i class="fas fa-arrow-left"></i> Portfolio</a>
+        <a href="../index.html#portfolio">Projects</a>
+        <a href="../index.html#cv">CV</a>
+        <a href="../index.html#contact">Contact</a>
+        <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme" title="Switch theme">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+    </div>
   </nav>
 
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <p class="header-kicker">Research Notebook &amp; Technical Writing</p>
+      <h1>Bioinformatics &amp; Molecular Genetics Blog</h1>
+      <p>From wet-lab protocols to computational genomics pipelines: long-form tutorials, algorithmic breakdowns, and lessons learned.</p>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
   <div class="container">
-    <h2 style="font-size: 1.2rem; color: var(--muted); margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.1em;">Featured Posts</h2>
-    
-    <div class="blog-grid">
-      
-      <!-- Blog Post 1: Career Development -->
-      <div class="blog-card">
+
+    <!-- Filter & Search Controls -->
+    <div class="controls-bar">
+      <div class="filter-pills">
+        <button class="filter-btn active" onclick="filterPosts('all', this)">All Articles (3)</button>
+        <button class="filter-btn" onclick="filterPosts('transition', this)">Wet-Lab to Code</button>
+        <button class="filter-btn" onclick="filterPosts('assembly', this)">Genome Assembly</button>
+        <button class="filter-btn" onclick="filterPosts('toolkit', this)">Bioinformatics Toolkit</button>
+      </div>
+      <div class="search-box">
+        <i class="fas fa-magnifying-glass"></i>
+        <input type="text" id="searchInput" placeholder="Filter by tool or topic..." oninput="searchPosts()"/>
+      </div>
+    </div>
+
+    <div class="blog-grid" id="blogGrid">
+
+      <!-- Post 1 -->
+      <article class="blog-card" data-cat="transition">
         <div class="blog-meta">
-          <span class="blog-tag">Career Development</span>
+          <span class="blog-tag">Career &amp; Transition</span>
           <span><i class="far fa-calendar"></i> March 2026</span>
-          <span><i class="far fa-clock"></i> 20 min read</span>
+          <span><i class="far fa-clock"></i> 20 min read &middot; 5,000+ words</span>
+          <span class="blog-number">01</span>
         </div>
         <h2><a href="wetlab-to-code.html">From Wet Lab to Code: My Journey into Bioinformatics</a></h2>
         <p class="blog-excerpt">
-          How I transitioned from pipetting and PCR to Python and phylogenetics. Lessons learned from my first computational biology project analyzing SARS-CoV-2 genomes—the challenges, victories, and what I wish I'd known before starting.
+          How I transitioned from phenol-chloroform DNA extraction and TETRA-ARMS PCR to Python, Galaxy, and viral phylogenetics. Key lessons from building an end-to-end computational workflow analyzing 100 SARS-CoV-2 genomes, and how wet-lab intuition strengthens dry-lab debugging.
         </p>
-        <div class="blog-stats">
-          <span><i class="fas fa-tag"></i> Bioinformatics, Career, Learning</span>
-          <span><i class="fas fa-chart-line"></i> 5,000+ words</span>
+        <div class="blog-footer">
+          <div class="topic-chips">
+            <span class="topic-chip">Bioinformatics</span>
+            <span class="topic-chip">SARS-CoV-2</span>
+            <span class="topic-chip">Python &amp; Galaxy</span>
+            <span class="topic-chip">Wet-Lab vs Dry-Lab</span>
+          </div>
+          <a href="wetlab-to-code.html" class="read-more">Read article <i class="fas fa-arrow-right"></i></a>
         </div>
-        <a href="wetlab-to-code.html" class="read-more">Read full article <i class="fas fa-arrow-right"></i></a>
-      </div>
+      </article>
 
-      <!-- Blog Post 2: Technical Tutorial -->
-      <div class="blog-card">
+      <!-- Post 2 -->
+      <article class="blog-card" data-cat="assembly">
         <div class="blog-meta">
           <span class="blog-tag">Technical Tutorial</span>
           <span><i class="far fa-calendar"></i> March 2026</span>
-          <span><i class="far fa-clock"></i> 18 min read</span>
+          <span><i class="far fa-clock"></i> 18 min read &middot; 4,500+ words</span>
+          <span class="blog-number">02</span>
         </div>
         <h2><a href="genome-assembly.html">Assembling a Pandemic: My First Genome Assembly</a></h2>
         <p class="blog-excerpt">
-          Walking through the process of reconstructing the complete SARS-CoV-2 genome from millions of short DNA reads using SPAdes and Galaxy. Understanding N50, de Bruijn graphs, and why genome assembly is like solving a massive jigsaw puzzle.
+          A step-by-step walkthrough of reconstructing the complete 29,903 bp SARS-CoV-2 viral genome from millions of short Illumina sequencing reads using SPAdes and QUAST. Covers k-mer selection, de Bruijn graph traversal, N50 contiguity metrics, and Prokka ORF annotation.
         </p>
-        <div class="blog-stats">
-          <span><i class="fas fa-tag"></i> Genome Assembly, SPAdes, Algorithms</span>
-          <span><i class="fas fa-chart-line"></i> 4,500+ words</span>
+        <div class="blog-footer">
+          <div class="topic-chips">
+            <span class="topic-chip">SPAdes</span>
+            <span class="topic-chip">QUAST (N50: 29,903 bp)</span>
+            <span class="topic-chip">de Bruijn Graphs</span>
+            <span class="topic-chip">Prokka</span>
+          </div>
+          <a href="genome-assembly.html" class="read-more">Read article <i class="fas fa-arrow-right"></i></a>
         </div>
-        <a href="genome-assembly.html" class="read-more">Read full article <i class="fas fa-arrow-right"></i></a>
-      </div>
+      </article>
 
-      <!-- Blog Post 3: Tools Guide -->
-      <div class="blog-card">
+      <!-- Post 3 -->
+      <article class="blog-card" data-cat="toolkit">
         <div class="blog-meta">
-          <span class="blog-tag">Tools & Resources</span>
+          <span class="blog-tag">Tools &amp; Workflows</span>
           <span><i class="far fa-calendar"></i> March 2026</span>
-          <span><i class="far fa-clock"></i> 15 min read</span>
+          <span><i class="far fa-clock"></i> 15 min read &middot; 3,500+ words</span>
+          <span class="blog-number">03</span>
         </div>
         <h2><a href="tools-toolkit.html">Tools I Learned: A Bioinformatics Toolkit for Viral Genomics</a></h2>
         <p class="blog-excerpt">
-          A beginner's guide to essential bioinformatics tools for viral genome analysis: SPAdes, QUAST, Prokka, MUSCLE, FastTree, LSD2, BioCyc, and more. What each tool does, when to use them, and lessons from hands-on experience.
+          A practical reference guide to essential software for viral comparative genomics: SPAdes, QUAST, Prokka, MUSCLE, ViralMSA, FastTree, LSD2, Taxonium, Primer3, and BioCyc. Explains how each tool fits into a modular pipeline from raw FASTQ reads to drug target discovery.
         </p>
-        <div class="blog-stats">
-          <span><i class="fas fa-tag"></i> Tools, Workflow, Reference Guide</span>
-          <span><i class="fas fa-chart-line"></i> 3,500+ words</span>
+        <div class="blog-footer">
+          <div class="topic-chips">
+            <span class="topic-chip">MUSCLE &amp; ViralMSA</span>
+            <span class="topic-chip">FastTree &amp; LSD2</span>
+            <span class="topic-chip">Primer3 &amp; BLAST</span>
+            <span class="topic-chip">BioCyc Pathways</span>
+          </div>
+          <a href="tools-toolkit.html" class="read-more">Read article <i class="fas fa-arrow-right"></i></a>
         </div>
-        <a href="tools-toolkit.html" class="read-more">Read full article <i class="fas fa-arrow-right"></i></a>
-      </div>
+      </article>
 
     </div>
 
-    <!-- Coming Soon Section -->
-    <div style="margin-top: 4rem; padding: 2rem; background: var(--teal-light); border-radius: 8px; border-left: 4px solid var(--teal);">
-      <h3 style="color: var(--navy); margin-bottom: 1rem;">📬 More Coming Soon</h3>
-      <p style="color: var(--muted); margin-bottom: 1rem;">
-        I'm working on additional posts about drug target discovery, phylogenetic analysis, and understanding open reading frames. Subscribe to my <a href="../index.html#contact" style="color: var(--teal); font-weight: 600;">newsletter</a> or follow me on <a href="https://linkedin.com/in/syedmuhammadalishirazi" target="_blank" style="color: var(--teal); font-weight: 600;">LinkedIn</a> to get notified when new posts go live.
+    <!-- Upcoming Articles -->
+    <div class="upcoming-box">
+      <h3><i class="fas fa-flask" style="color:var(--teal);margin-right:0.4rem;"></i> Upcoming Technical Notes</h3>
+      <p>
+        Drafting new write-ups on wet-lab genotyping workflows and metabolic pathway analysis. Connect on <a href="https://linkedin.com/in/syedmuhammadalishirazi" target="_blank">LinkedIn</a> or reach out via the <a href="../index.html#contact">contact form</a> for updates.
       </p>
+      <ul class="upcoming-list">
+        <li>Designing Allele-Specific TETRA-ARMS PCR Primers in Primer3</li>
+        <li>Molecular Clock Dating with FastTree &amp; LSD2</li>
+        <li>Hardy-Weinberg Equilibrium &amp; Case-Control Statistics in R</li>
+      </ul>
     </div>
 
   </div>
 
+  <!-- FOOTER -->
   <footer>
-    <p>© 2026 Syed Muhammad Ali Shirazi · <a href="https://github.com/alishirazi03">GitHub</a> · <a href="https://linkedin.com/in/syedmuhammadalishirazi">LinkedIn</a></p>
+    <p>&copy; 2026 <span>Syed Muhammad Ali Shirazi</span> &middot; <a href="../index.html">Portfolio Home</a> &middot; <a href="https://github.com/alishirazi03" target="_blank">GitHub</a> &middot; <a href="https://linkedin.com/in/syedmuhammadalishirazi" target="_blank">LinkedIn</a></p>
   </footer>
+
+  <script>
+    // Sync Dark/Light Theme with main portfolio
+    const themeBtn = document.getElementById('themeBtn');
+    function applyTheme(dark) {
+      document.body.classList.toggle('dark', dark);
+      themeBtn.innerHTML = dark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    }
+    const savedTheme = localStorage.getItem('shirazi_theme');
+    if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      applyTheme(true);
+    }
+    function toggleTheme() {
+      const isDark = !document.body.classList.contains('dark');
+      applyTheme(isDark);
+      localStorage.setItem('shirazi_theme', isDark ? 'dark' : 'light');
+    }
+
+    // Category Filter
+    function filterPosts(cat, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('searchInput').value = '';
+      document.querySelectorAll('#blogGrid .blog-card').forEach(card => {
+        if (cat === 'all' || card.getAttribute('data-cat') === cat) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    // Live Keyword Search
+    function searchPosts() {
+      const q = document.getElementById('searchInput').value.toLowerCase();
+      document.querySelectorAll('#blogGrid .blog-card').forEach(card => {
+        const match = card.textContent.toLowerCase().includes(q);
+        card.classList.toggle('hidden', !match);
+      });
+    }
+  </script>
 
 </body>
 </html>
