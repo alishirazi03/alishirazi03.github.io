@@ -1,279 +1,328 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="icon" type="image/x-icon" href="../favicon.ico?v=2">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>From Wet Lab to Code: My Journey into Bioinformatics | Syed Muhammad Ali Shirazi</title>
-  <meta name="description" content="From Wet Lab to Code: My Journey into Bioinformatics">
+  <meta name="description" content="How I transitioned from phenol-chloroform DNA extraction and TETRA-ARMS PCR to Python, Galaxy, and viral phylogenetics analyzing 100 SARS-CoV-2 genomes.">
+  <meta name="keywords" content="wet lab to bioinformatics, computational biology transition, ATP8B1, TETRA-ARMS PCR, SARS-CoV-2 genomics, Syed Muhammad Ali Shirazi">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link rel="stylesheet" href="blog-style.css">
+  <style>
+    #progress-bar {
+      position: fixed; top: 0; left: 0; height: 2px; background: var(--teal);
+      width: 0%; z-index: 1001; transition: width 0.1s ease-out;
+    }
+    .nav-inner {
+      max-width: 960px; margin: 0 auto; display: flex;
+      align-items: center; justify-content: space-between;
+    }
+    .nav-brand {
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      font-family: var(--serif); font-size: 1.1rem; font-weight: 600;
+      color: var(--navy); text-decoration: none; margin-right: 0;
+    }
+    .nav-brand-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--teal); }
+    .nav-right { display: flex; align-items: center; gap: 0.25rem; }
+    .theme-btn {
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text-secondary); border-radius: var(--radius-sm);
+      width: 34px; height: 34px; cursor: pointer;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 0.88rem; transition: all 0.18s ease; margin-left: 0.35rem;
+    }
+    .theme-btn:hover { border-color: var(--teal); color: var(--teal); }
+    .subtitle-lead {
+      font-size: 1.12rem; color: var(--text-secondary); font-weight: 400;
+      line-height: 1.65; margin-bottom: 1.25rem;
+    }
+    .compare-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 1.15rem; margin: 1.75rem 0 2.25rem;
+    }
+    .compare-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-top: 3px solid var(--teal); border-radius: var(--radius);
+      padding: 1.35rem 1.45rem; box-shadow: var(--shadow-sm);
+    }
+    .compare-card h4 {
+      margin-top: 0; margin-bottom: 0.35rem; font-family: var(--serif); font-size: 1.2rem;
+    }
+    .compare-kicker {
+      font-family: var(--mono); font-size: 0.7rem; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--teal); margin-bottom: 0.3rem; display: block;
+    }
+    .compare-card ol {
+      margin: 0.75rem 0 0.75rem 1.25rem; font-size: 0.88rem; line-height: 1.7;
+    }
+    .compare-card li { margin-bottom: 0.35rem; }
+    @media (max-width: 720px) {
+      .compare-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
+
+  <div id="progress-bar"></div>
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-brand" href="../index.html">
+        <span class="nav-brand-dot"></span>
+        Syed Muhammad Ali Shirazi
+      </a>
+      <div class="nav-right">
+        <a href="index.html"><i class="fas fa-arrow-left"></i> All Articles</a>
+        <a href="../index.html#portfolio">Projects</a>
+        <a href="../index.html#cv">CV</a>
+        <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme" title="Switch theme">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ARTICLE CONTENT -->
   <article class="blog-post">
-<h1>From Wet Lab to Code: My Journey into Bioinformatics</h1>
-<p><strong>How I transitioned from pipetting and PCR to Python and phylogenetics, and what I learned analyzing SARS-CoV-2 genomes</strong></p>
-<hr />
-<h2>The Pipette and the Terminal</h2>
-<p>I still remember the first time I successfully amplified the ATP8B1 gene fragment. After hours of optimizing PCR conditions, adjusting annealing temperatures, and troubleshooting failed reactions, those beautiful DNA bands finally appeared under UV light. That moment of seeing my target amplicon at exactly 486 bp on the agarose gel felt like pure victory. I had coaxed genetic information out of blood samples using nothing but precise volumes, careful timing, and a thermal cycler.</p>
-<p>That was my world as an undergraduate biosciences student at COMSATS University Islamabad—a world of micropipettes, gel electrophoresis, PCR tubes, and UV transilluminators. My final year project investigated the role of ATP8B1 gene variants in gallstone disease in Pakistani patients. I spent months in the lab extracting DNA, designing TETRA-ARMS PCR primers, running gels, and genotyping samples. It was meticulous, hands-on work that taught me patience, precision, and the fundamental principles of molecular biology.</p>
-<p>But something was missing.</p>
-<h2>The Realization</h2>
-<p>As I analyzed my genotyping results, manually recording each band pattern and calculating allele frequencies in Excel, a question kept nagging at me: <em>What happens to all this genomic data after we generate it?</em> </p>
-<p>My thesis concluded that the ATP8B1 rs766737165 (T&gt;A) variant wasn't associated with gallstone disease in our population—everyone had the wild-type TT genotype. But I found myself wondering: What about other variants in this gene? What about the entire exome? How do researchers analyze thousands of variants simultaneously? How did scientists sequence the first SARS-CoV-2 genome in just weeks during the pandemic?</p>
-<p>The answer, I realized, wasn't in more pipettes. It was in code.</p>
-<p>Every major breakthrough I read about—from GWAS studies identifying disease genes to the rapid characterization of emerging pathogens—relied heavily on computational analysis. The wet-lab work I loved was essential, but it was only half the story. The other half was happening in terminals and programming languages I didn't know.</p>
-<p>That realization was both exciting and terrifying. I had spent four years becoming proficient at PCR, gel electrophoresis, and DNA extraction. Now I was contemplating starting over in a completely different domain. Could a biology student with minimal coding experience really learn bioinformatics?</p>
-<h2>Taking the Leap</h2>
-<p>In late 2024, while writing up my thesis results, I made a decision that would change my research trajectory: I enrolled in the <strong>Applied Bioinformatics Specialization</strong> offered by UC San Diego on Coursera. The course was called "Hacking COVID-19," and it promised to teach genome assembly, annotation, and phylogenetics using real SARS-CoV-2 pandemic data.</p>
-<p>I'll be honest—the first week was intimidating. Terms like "de Bruijn graphs," "k-mers," and "N50 statistics" felt as foreign as a new language. I was used to thinking about DNA as something tangible that I could see on a gel. Now I had to think about it as <em>data</em>—millions of short reads that needed to be computationally assembled into a genome.</p>
-<p>But I had an advantage I didn't initially recognize: <strong>my wet-lab experience gave me biological intuition that pure programmers often lack.</strong> When the course talked about paired-end sequencing, I immediately understood it because I'd worked with PCR primers that flank a target region. When we discussed open reading frames, I knew exactly what start and stop codons were from my genetics courses. The biology wasn't the hard part—learning to think computationally was.</p>
-<h2>The Transformation: From Bench to Terminal</h2>
-<p>Let me give you a concrete example of how my thinking changed.</p>
-<h3>Wet-Lab Approach (ATP8B1 Project):</h3>
-<ol>
-<li><strong>Design primers</strong> using Primer3 software (manual, ~2 hours)</li>
-<li><strong>Optimize PCR</strong> through trial and error (1-2 days of bench work)</li>
-<li><strong>Run gel electrophoresis</strong> and manually photograph bands (~30 minutes per gel)</li>
-<li><strong>Score genotypes</strong> by visual inspection under UV light</li>
-<li><strong>Calculate frequencies</strong> in Excel spreadsheet</li>
-<li><strong>Analyze</strong> 104 samples over 3-4 months</li>
-</ol>
-<p><strong>Result:</strong> Determined that one specific SNP (rs766737165) is monomorphic in our population.</p>
-<h3>Computational Approach (SARS-CoV-2 Project):</h3>
-<ol>
-<li><strong>Download raw sequencing data</strong> from NCBI SRA (millions of reads, minutes)</li>
-<li><strong>Assemble genome</strong> using SPAdes algorithm (automated, ~1 hour compute time)</li>
-<li><strong>Assess quality</strong> with QUAST (generates comprehensive statistics automatically)</li>
-<li><strong>Annotate genes</strong> using Prokka (identifies all 11 ORFs in minutes)</li>
-<li><strong>Build phylogenetic tree</strong> with 100 sequences using FastTree (minutes to hours)</li>
-<li><strong>Date evolutionary emergence</strong> using molecular clock methods</li>
-</ol>
-<p><strong>Result:</strong> Complete genomic characterization, evolutionary timeline, drug target identification, and phylogenetic context—all from publicly available data.</p>
-<p>The contrast was staggering. What took me months of painstaking lab work for a single gene variant could be accomplished computationally in hours for an entire genome. But here's the crucial insight: <strong>neither approach invalidates the other.</strong> Wet-lab work generates the data; computational work makes sense of it at scale. The future belongs to scientists who can bridge both worlds.</p>
-<h2>Five Things I Wish I'd Known Before Starting</h2>
-<h3>1. <strong>You Don't Need to Be a Programmer (Yet)</strong></h3>
-<p>My biggest fear was that I'd need years of computer science background. I didn't. The specialization started with web-based platforms like Galaxy that require zero coding. I learned to use tools like SPAdes and BLAST through graphical interfaces before ever touching command-line tools.</p>
-<p><strong>Lesson:</strong> Start with GUI-based tools. Understanding <em>what</em> tools do is more important than <em>how</em> they're coded.</p>
-<h3>2. <strong>Biology Knowledge Is Your Superpower</strong></h3>
-<p>In one assignment, I had to design diagnostic PCR primers for SARS-CoV-2. My wet-lab experience with primer design (Tm calculations, avoiding hairpins, checking specificity) made this trivial. Classmates without lab background struggled with concepts I took for granted.</p>
-<p><strong>Lesson:</strong> Your wet-lab skills aren't obsolete—they're contextual knowledge that makes you a better bioinformatician.</p>
-<h3>3. <strong>Failed PCRs Taught Me Troubleshooting</strong></h3>
-<p>Remember those failed PCR reactions I mentioned? Every failed assembly, alignment error, or crashed program in bioinformatics requires the same systematic troubleshooting: check your inputs, verify your parameters, read the error messages, try different conditions. The mindset is identical.</p>
-<p><strong>Lesson:</strong> Lab skills transfer. Patience, systematic thinking, and troubleshooting are universal.</p>
-<h3>4. <strong>The Data Tells Stories Wet Labs Can't</strong></h3>
-<p>When I built my first phylogenetic tree of SARS-CoV-2 sequences and dated the pandemic's emergence to October-November 2019 using molecular clock analysis, I experienced something profound: <strong>I was looking at evolutionary history.</strong> No amount of PCR work could have revealed that timeline. Computational biology doesn't replace wet-lab work—it answers different questions.</p>
-<p><strong>Lesson:</strong> Each approach has unique strengths. Choose your methods based on your biological questions.</p>
-<h3>5. <strong>The Learning Curve Is Steep but Conquerable</strong></h3>
-<p>Here's what I learned in 5 months:
-- Genome assembly (SPAdes, QUAST)
-- Functional annotation (Prokka, BLAST)
-- Sequence alignment (MUSCLE, MAFFT)
-- Phylogenetics (FastTree, LSD2, molecular clock dating)
-- Pathway analysis (BioCyc, metabolic networks)
-- Basic Python and R for data handling</p>
-<p>Could I have learned this alongside my wet-lab thesis? Absolutely. Would I recommend doing both simultaneously? Only if you enjoy sleep deprivation.</p>
-<p><strong>Lesson:</strong> The skills build on each other. Master one tool before adding the next.</p>
-<h2>The Moment It Clicked</h2>
-<p>There was a specific moment when everything came together. I was analyzing the spike protein of SARS-CoV-2 using multiple sequence alignment to compare it with related coronaviruses. The alignment showed that SARS-CoV-2 had 6 key amino acid substitutions in the receptor-binding domain compared to SARS-CoV-1. These weren't random—they were precisely the residues that contact the human ACE2 receptor.</p>
-<p>Suddenly, I understood why this virus was so transmissible. I could <em>see</em> evolution optimizing the spike protein for human cell entry. And I realized something profound: <strong>I was doing the same kind of detective work I did in the wet lab, but at a completely different scale.</strong> Instead of genotyping 104 samples for one variant, I was comparing entire viral genomes across evolutionary time.</p>
-<p>That's when the wet-lab researcher and the computational biologist merged into one person.</p>
-<h2>Comparing Workflows: Then and Now</h2>
-<p>Let me show you how my thinking has evolved by contrasting my two projects:</p>
-<h3>ATP8B1 Gallstone Study (Wet-Lab)</h3>
-<p><strong>Question:</strong> Is this specific SNP associated with disease?<br />
-<strong>Sample Size:</strong> 104 patients (75 cases, 29 controls)<br />
-<strong>Time Investment:</strong> 4-5 months of daily lab work<br />
-<strong>Consumables Cost:</strong> ~$500-1000 (DNA extraction kits, PCR reagents, gels)<br />
-<strong>Skills Required:</strong> DNA extraction, PCR, gel electrophoresis, primer design<br />
-<strong>Output:</strong> Genotypic frequencies, allele distribution<br />
-<strong>Conclusion:</strong> This variant is monomorphic (not informative)</p>
-<p><strong>Limitations I Encountered:</strong>
-- Could only test one variant at a time
-- Sample collection was time-consuming and required ethical approval
-- Failed PCR reactions meant wasted samples and reagents
-- Limited to variants I specifically designed primers for
-- No way to discover <em>new</em> variants</p>
-<h3>SARS-CoV-2 Genomic Analysis (Computational)</h3>
-<p><strong>Question:</strong> How did this virus emerge, evolve, and what are its drug targets?<br />
-<strong>Sample Size:</strong> 100 complete genomes (publicly available)<br />
-<strong>Time Investment:</strong> 5-course specialization over 3 months<br />
-<strong>Consumables Cost:</strong> $0 (all data and tools are free/open-source)<br />
-<strong>Skills Required:</strong> Genome assembly, annotation, phylogenetics, pathway analysis<br />
-<strong>Output:</strong> Complete genome, 11 genes annotated, evolutionary tree, drug targets<br />
-<strong>Conclusions:</strong> Multiple biological insights simultaneously</p>
-<p><strong>Advantages:</strong>
-- Access to millions of sequences worldwide (GISAID, NCBI)
-- Can analyze entire genomes, not just targeted regions
-- Discover novel variants through assembly
-- Trace evolutionary history across time and geography
-- Identify functional impacts of mutations
-- Reproducible—anyone can re-run my analysis</p>
-<h2>The Best of Both Worlds</h2>
-<p>Here's what I've learned: <strong>the most powerful researchers are bilingual.</strong> They speak both the language of the bench and the language of code.</p>
-<p>My ATP8B1 project taught me:
-- How to handle biological samples with precision
-- The importance of experimental controls
-- That negative results (monomorphic locus) are still results
-- How genetic variants actually <em>work</em> in practice</p>
-<p>My SARS-CoV-2 project taught me:
-- How to leverage publicly available data at scale
-- That computational predictions need experimental validation
-- The power of integrating multiple analysis types
-- How bioinformatics accelerates discovery during public health emergencies</p>
-<p><strong>The future isn't wet-lab OR computational—it's wet-lab AND computational.</strong> The most impactful research I can imagine would be:
-1. Identify drug target computationally (like guanylate kinase in SARS-CoV-2)
-2. Validate experimentally through enzyme assays
-3. Design inhibitors using structural modeling
-4. Test in cell culture or animal models</p>
-<p>That workflow requires both skillsets.</p>
-<h2>Lessons for Biology Students Considering Bioinformatics</h2>
-<p>If you're where I was a year ago—comfortable in the lab but curious about computational biology—here's my honest advice:</p>
-<h3>Start With Your Strengths</h3>
-<p>Don't abandon your wet-lab skills. Use them as your foundation. When I learned genome assembly, I thought about it in terms of PCR products and Sanger sequencing I already understood. Make the new knowledge connect to the old.</p>
-<h3>Choose Projects With Real Data</h3>
-<p>Learning abstract algorithms is tedious. Learning by assembling the actual SARS-CoV-2 genome that caused a pandemic? That's motivating. Find courses or projects that use real biological datasets you care about.</p>
-<h3>Don't Wait Until You're "Ready"</h3>
-<p>I delayed starting bioinformatics because I thought I needed to learn Python first. Wrong. The best way to learn programming is to need it for a biological question. Learn tools as you need them, not in advance.</p>
-<h3>Embrace Imposter Syndrome</h3>
-<p>You'll feel like you don't belong—wet-lab people will say you're not a real biologist, computer science people will say you're not a real programmer. Ignore both. Bioinformatics is its own discipline, and your unique perspective is valuable.</p>
-<h3>Build a Portfolio</h3>
-<p>I created a GitHub repository for my SARS-CoV-2 project. It showcases skills better than any certificate. When applying to graduate programs or jobs, I can show exactly what I've done, not just claim it.</p>
-<h2>The Challenges I'm Still Facing</h2>
-<p>Let me be honest about what's still difficult:</p>
-<p><strong>1. Command-Line Intimidation</strong><br />
-I'm comfortable with Galaxy and web tools, but raw command-line bioinformatics still feels daunting. Running tools through a terminal requires a different mental model than clicking buttons.</p>
-<p><strong>2. Statistical Depth</strong><br />
-Understanding p-values from a t-test is different from understanding false discovery rates in GWAS or bootstrap values in phylogenetics. The statistics got deeper fast.</p>
-<p><strong>3. Programming Proficiency</strong><br />
-I can write basic Python scripts to parse FASTA files, but I'm not building machine learning models. That's okay—you don't need to be a software engineer to do valuable bioinformatics.</p>
-<p><strong>4. Keeping Up With Tools</strong><br />
-New tools emerge constantly. AlphaFold2, ChatGPT for protein design, long-read sequencing platforms—the field moves fast. Wet-lab protocols are more stable.</p>
-<p><strong>5. Missing the Tangible</strong><br />
-Sometimes I miss seeing DNA bands appear on a gel. There's something satisfying about physical results that digital output doesn't quite replicate. But then I build a phylogenetic tree of a million sequences and that feeling fades.</p>
-<h2>What's Next for Me</h2>
-<p>This journey isn't over—it's just beginning. Here's where I'm headed:</p>
-<p><strong>Short-term (Next 6 months):</strong>
-- Master command-line Linux/Unix
-- Learn R for statistical genomics
-- Complete projects combining wet-lab and computational approaches
-- Write blogs teaching others what I've learned</p>
-<p><strong>Medium-term (1-2 years):</strong>
-- Master's in Bioinformatics/Computational Biology (applying Fall 2026)
-- Specialize in viral genomics or cancer genomics
-- Publish research that integrates both methodologies
-- Contribute to open-source bioinformatics tools</p>
-<p><strong>Long-term vision:</strong>
-- Lead a research group that bridges experimental and computational biology
-- Mentor students making similar transitions
-- Apply AI/ML to biological problems I deeply understand
-- Maybe even develop new tools that make bioinformatics more accessible to wet-lab biologists</p>
-<h2>The Drug Target Discovery That Changed My Perspective</h2>
-<p>Let me tell you about the moment that crystallized why this transition matters.</p>
-<p>During the pathway analysis module of my SARS-CoV-2 project, I used BioCyc databases to explore viral metabolic dependencies. The question was elegant: what does the virus need from the host cell that we could block without harming the host?</p>
-<p>Through computational network analysis, I identified <strong>guanylate kinase</strong> as a high-priority drug target. Here's why that's fascinating:</p>
-<p><strong>The Biology (what I understood from wet-lab):</strong>
-- SARS-CoV-2 is an RNA virus (~30,000 nucleotides)
-- It needs massive amounts of GTP to synthesize new viral genomes
-- Each infected cell produces thousands of viral copies</p>
-<p><strong>The Computation (what I learned):</strong>
-- Metabolic pathway analysis shows humans recycle GTP from RNA degradation
-- Viruses remove GTP from the cell (non-renewable in infection context)
-- Blocking guanylate kinase starves virus, spares host cells
-- This is the "holy grail" of selective therapeutics</p>
-<p><strong>The Integration (why both matter):</strong>
-- Computational prediction: guanylate kinase is a target
-- Experimental validation needed: enzyme assays, knockout studies, inhibitor screening
-- Clinical application: drug development, trials, patient treatment</p>
-<p>This finding (published in <em>Cell Metabolism</em> by Renz et al., 2020) was discovered computationally but <em>requires</em> wet-lab validation. Neither approach alone gets you to a therapy. Both together might save lives.</p>
-<p>That's when I understood: <strong>the future of biology isn't choosing between lab bench and laptop. It's knowing when to use each.</strong></p>
-<h2>My Advice to Supervisors and Educators</h2>
-<p>If you're mentoring biology students, please consider this:</p>
-<p><strong>1. Integrate bioinformatics early</strong><br />
-Don't wait until graduate school. Even basic sequence alignment and database searching should be taught alongside PCR and gel electrophoresis.</p>
-<p><strong>2. Use real data</strong><br />
-Abstract exercises bore students. Let them BLAST their PCR products, visualize their sequences, analyze real experimental results computationally.</p>
-<p><strong>3. Normalize the transition</strong><br />
-Don't treat computational skills as optional "extra" skills. They're core competencies, like pipetting.</p>
-<p><strong>4. Provide resources</strong><br />
-Free courses (Coursera, Rosalind, DataCamp), institutional licenses (MATLAB, GraphPad), and mentorship from computational researchers.</p>
-<p><strong>5. Reward interdisciplinary projects</strong><br />
-The best undergraduate theses would combine wet-lab data generation with computational analysis. Why should students choose one or the other?</p>
-<h2>Final Thoughts: The Best Time to Start</h2>
-<p>If you're reading this and thinking "I should learn bioinformatics," you're right. But you're also wrong about one thing: you don't need to wait until you're "ready."</p>
-<p><strong>You're ready when you have a biological question that requires computational answers.</strong></p>
-<p>For me, that question was: <em>How can we analyze genomic variation beyond single SNPs?</em> Your question might be different. Maybe you want to:
-- Analyze RNA-seq data from your experiment
-- Build a phylogenetic tree of sequences you generated
-- Predict protein structures from gene sequences
-- Identify disease-associated variants in exome data
-- Classify microbiome communities from 16S data</p>
-<p>Whatever your question, the tools exist. The data exists. The courses exist (many free). What's missing is just your decision to start.</p>
-<h2>Resources That Helped Me</h2>
-<p>Since people always ask, here are the specific resources I found most valuable:</p>
-<p><strong>Courses:</strong>
-- UC San Diego Applied Bioinformatics Specialization (Coursera) - <em>This was my main course</em>
-- Bioinformatics Algorithms by Compeau &amp; Pevzner (book + Coursera)
-- Rosalind.info (problem-solving practice)</p>
-<p><strong>Tools I Learned:</strong>
-- SPAdes (genome assembly)
-- QUAST (quality assessment)<br />
-- Prokka (genome annotation)
-- BLAST (sequence similarity)
-- MUSCLE/MAFFT (multiple sequence alignment)
-- FastTree (phylogenetic inference)
-- LSD2 (molecular clock dating)
-- BioCyc (pathway analysis)
-- Galaxy (workflow platform)</p>
-<p><strong>Communities:</strong>
-- Biostars (Q&amp;A forum)
-- r/bioinformatics (Reddit)
-- Twitter/X #bioinformatics (amazing community)</p>
-<p><strong>Mindset Shifts:</strong>
-- Biology first, code second
-- Tools are means, not ends
-- Negative results teach as much as positive ones
-- Open science makes everything faster
-- Your unique perspective (wet-lab + computational) is valuable</p>
-<h2>One Year From Now</h2>
-<p>Where will I be in one year? Hopefully:
-- Admitted to a top bioinformatics Master's program
-- Publishing my SARS-CoV-2 analysis as a methods paper
-- Fluent in Python and R
-- Working on a project that generates wet-lab data I analyze computationally
-- Mentoring other students making this transition
-- Contributing to open-source bioinformatics tools</p>
-<p>But more importantly, I'll be a scientist who can ask bigger questions because I'm not limited by methodology. When I encounter a biological mystery, I won't think "Is this a wet-lab question or a computational question?" I'll think "Which tools best answer this question?" and have both at my disposal.</p>
-<h2>You're Not Leaving the Lab—You're Expanding It</h2>
-<p>The title of this blog says "From Wet Lab to Code," but that's not quite right. It should be "From Wet Lab to Code AND Lab."</p>
-<p>I haven't abandoned my pipettes. They're sitting in my drawer next to my laptop. Sometimes the answer to a biological question is a PCR reaction. Sometimes it's a Python script. Often, it's both.</p>
-<p>My ATP8B1 thesis taught me that wet-lab work generates data. My SARS-CoV-2 project taught me that computational work extracts meaning from data at scale. Together, they taught me that <strong>modern biology requires both languages.</strong></p>
-<p>I'm not a wet-lab biologist who learned coding.<br />
-I'm not a computational biologist who did some lab work.<br />
-<strong>I'm a biologist who uses whatever tools answer the question.</strong></p>
-<p>And so can you.</p>
-<hr />
-<h2>Update: Where I Am Now (March 2026)</h2>
-<p>Since starting this journey:
-- ✅ Completed full Applied Bioinformatics Specialization
-- ✅ Built complete SARS-CoV-2 analysis pipeline (29,903 bp genome assembled)
-- ✅ Identified 11 ORFs and designed diagnostic PCR primers<br />
-- ✅ Conducted phylogenetic analysis with molecular clock dating
-- ✅ Identified drug target through metabolic pathway analysis
-- ✅ Created GitHub portfolio showcasing all analyses
-- ✅ Currently applying to Bioinformatics Master's programs
-- 🔄 Learning advanced Python for genomics
-- 🔄 Exploring machine learning applications in biology
-- 🔄 Writing tutorials to help others make this transition</p>
-<p>The journey from pipette to Python isn't a straight line—it's a bridge you build while walking across it. Every wet-lab skill you have is a foundation stone. Every computational skill you gain is a spanning cable. Together, they let you cross distances neither alone could reach.</p>
-<p><strong>Start building your bridge today.</strong></p>
-<hr />
-<p><em>Syed Muhammad Ali Shirazi is a recent BS Biosciences graduate from COMSATS University Islamabad, Pakistan, specializing in the integration of wet-lab molecular biology and computational genomics. His research spans gallstone disease genetics, viral genomics, and bioinformatics pipeline development. He's currently preparing applications for Master's programs in Bioinformatics and Computational Biology.</em></p>
-<p><strong>Connect:</strong> <a href="https://github.com/alishirazi03">GitHub</a> | <a href="https://linkedin.com/in/syedmuhammadalishirazi">LinkedIn</a> | <a href="mailto:shirazi6503@gmail.com">Email</a></p>
-<p><strong>Read More:</strong> 
-- <a href="#">Assembling a Pandemic: My First Genome Assembly</a>
-- <a href="#">Finding Drug Targets in a Pandemic Virus</a>
-- <a href="#">Tools I Learned: A Bioinformatics Toolkit</a></p>
-<hr />
-<p><em>Have questions about transitioning from wet-lab to bioinformatics? Drop a comment below or reach out—I'm always happy to help fellow biology students navigate this journey!</em></p>
+
+    <a href="index.html" class="back-to-blog"><i class="fas fa-arrow-left"></i> Back to Technical Blog</a>
+
+    <h1>From Wet Lab to Code: My Journey into Bioinformatics</h1>
+    <p class="subtitle-lead">
+      How I transitioned from phenol-chloroform DNA extraction and TETRA-ARMS PCR to Python, Galaxy, and viral phylogenetics, and what I learned analyzing 100 SARS-CoV-2 genomes.
+    </p>
+
+    <div class="article-meta">
+      <span><i class="far fa-calendar"></i> March 2026</span>
+      <span><i class="far fa-clock"></i> 20 min read</span>
+      <span><i class="fas fa-flask-vial"></i> Wet-Lab + Dry-Lab</span>
+      <span><i class="fas fa-dna"></i> ATP8B1 &amp; SARS-CoV-2</span>
+    </div>
+
+    <h2>The Pipette and the Terminal</h2>
+    <p>
+      I still remember the first time I successfully amplified our target <em>ATP8B1</em> gene fragment in the Translational Genomics Lab at COMSATS University Islamabad. After hours of optimizing thermal cycling profiles, adjusting annealing temperatures, and troubleshooting non-specific bands, crisp amplicons finally resolved under UV transillumination. Seeing that exact band pattern on the agarose gel felt like a genuine victory: coaxing genetic information out of whole blood samples using precise reagent volumes, organic extraction, and allele-specific primers.
+    </p>
+    <p>
+      That was my foundation as an undergraduate Biosciences student: a world of micropipettes, phenol-chloroform extractions, PCR tubes, and agarose gels. For my 12-credit final year thesis (awarded Grade A), I investigated the association of the <em>ATP8B1</em> gene variant <code>rs766737165 (T&gt;A)</code> with gallstone disease (cholelithiasis) across 104 clinical participants (75 confirmed patients and 29 healthy controls) in the Pakistani population. Spending months at the bench designing TETRA-ARMS PCR primers, running gels, and scoring genotypes taught me experimental discipline, quality control, and molecular genetics from first principles.
+    </p>
+    <p>Yet as our cohort data came together, a larger question emerged.</p>
+
+    <hr />
+
+    <h2>The Realization: Scaling Beyond a Single Locus</h2>
+    <p>
+      As I compiled our genotyping dataset and ran Chi-square and Hardy-Weinberg equilibrium models in R and Excel, a question kept nagging at me: <em>How do we scale from querying a single candidate SNP to analyzing entire genomes and populations simultaneously?</em>
+    </p>
+    <p>
+      Our experimental study revealed a monomorphic wild-type distribution for <code>rs766737165</code> across our sampled cohort, establishing local baseline data and pointing toward the need for broader multi-exon screening. That finding made me think bigger: What about the rest of the 28 exons in <em>ATP8B1</em>? What about polygenic interactions across hepatobiliary transporters? And how did researchers assemble and track thousands of complete viral genomes within weeks during the COVID-19 pandemic?
+    </p>
+    <p>
+      The answer was not more pipettes alone. It was uniting wet-lab molecular biology with computational genomics.
+    </p>
+    <p>
+      Every modern genomic study I read, from population-scale variant discovery to real-time pathogen phylodynamics, relied on algorithmic pipelines. Wet-lab benchwork generates high-fidelity biological signal, while bioinformatics extracts patterns at genomic scale. Having spent four years building proficiency in molecular protocols, I decided to build the computational half of the bridge.
+    </p>
+
+    <hr />
+
+    <h2>Taking the Leap into Computational Genomics</h2>
+    <p>
+      Alongside completing my undergraduate thesis, I enrolled in the <strong>Applied Bioinformatics Specialization</strong> from the University of California San Diego, complemented by courses in <strong>Python for Genomic Data Science</strong> and <strong>Genomic Technologies</strong> from Johns Hopkins University, and <strong>Clinical Data</strong> and <strong>Healthcare</strong> from Stanford University.
+    </p>
+    <p>
+      At first, terms like <em>de Bruijn graphs</em>, <em>k-mer decomposition</em>, <em>N50 contiguity</em>, and <em>least-squares molecular clock dating</em> felt like a foreign vocabulary. I was accustomed to thinking of DNA as a physical molecule precipitating in cold ethanol or migrating through an agarose matrix. Now I was looking at DNA as millions of 150 bp paired-end strings inside gigabyte-scale FASTQ files.
+    </p>
+    <div class="note">
+      <strong>The unexpected advantage:</strong> Wet-lab training gives you biological intuition that pure software backgrounds rarely provide. Paired-end read orientation immediately made sense because I had designed forward and reverse PCR primers flanking a template. Open reading frame (ORF) prediction clicked immediately because of my coursework in molecular biology and biochemistry. The biology was familiar; I simply had to map it onto graph algorithms and command-line workflows.
+    </div>
+
+    <hr />
+
+    <h2>The Transformation: Bench Protocol vs. Computational Pipeline</h2>
+    <p>Comparing my two primary research projects side by side illustrates how experimental and computational workflows complement one another:</p>
+
+    <div class="compare-grid">
+      <div class="compare-card">
+        <span class="compare-kicker">Wet-Lab Molecular Genetics</span>
+        <h4>ATP8B1 Case-Control Study</h4>
+        <ol>
+          <li><strong>Sample Processing:</strong> Extract genomic DNA from 104 blood samples via phenol-chloroform protocol.</li>
+          <li><strong>Primer Engineering:</strong> Design inner/outer allele-specific primers in Primer3 and validate with BLAST.</li>
+          <li><strong>Assay Optimization:</strong> Tune MgCl<sub>2</sub> and annealing temperature for TETRA-ARMS PCR.</li>
+          <li><strong>Gel Genotyping:</strong> Resolve amplicons via agarose gel electrophoresis and score bands under UV.</li>
+          <li><strong>Statistical Modeling:</strong> Compute Chi-square and Hardy-Weinberg equilibrium in R and Excel.</li>
+        </ol>
+        <p style="font-size:0.84rem;margin-bottom:0;"><strong>Outcome:</strong> Baseline population genotype distribution for SNP <code>rs766737165</code> across 104 clinical subjects.</p>
+      </div>
+
+      <div class="compare-card">
+        <span class="compare-kicker">Computational Genomics</span>
+        <h4>SARS-CoV-2 100-Genome Pipeline</h4>
+        <ol>
+          <li><strong>Data Ingestion:</strong> Fetch 2.5 million raw Illumina reads (<code>SRR10971381</code>) and 100 isolate genomes from NCBI.</li>
+          <li><strong>De Novo Assembly &amp; QC:</strong> Reconstruct the 29,903 bp genome in SPAdes and benchmark in QUAST.</li>
+          <li><strong>Functional Annotation:</strong> Identify all 11 viral ORFs with Prokka and design diagnostic primers.</li>
+          <li><strong>Comparative Alignment:</strong> Align Spike variants in MUSCLE and 100 full genomes via ViralMSA.</li>
+          <li><strong>Phylodynamics &amp; Pathways:</strong> Build ML trees in FastTree, date tMRCA in LSD2, and map BioCyc targets.</li>
+        </ol>
+        <p style="font-size:0.84rem;margin-bottom:0;"><strong>Outcome:</strong> Full viral assembly, evolutionary dating (Oct&ndash;Nov 2019), and guanylate kinase drug target identification.</p>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Dimension</th>
+          <th>Wet-Lab Study (<em>ATP8B1</em> Thesis)</th>
+          <th>Computational Pipeline (<em>SARS-CoV-2</em>)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Primary Question</strong></td>
+          <td>Is SNP rs766737165 associated with cholelithiasis in our local cohort?</td>
+          <td>How did SARS-CoV-2 emerge, evolve, and which host enzymes can be targeted?</td>
+        </tr>
+        <tr>
+          <td><strong>Dataset Scale</strong></td>
+          <td>104 clinical blood samples (75 cases, 29 controls)</td>
+          <td>2.5M raw sequencing reads + 100 complete viral genomes</td>
+        </tr>
+        <tr>
+          <td><strong>Genomic Resolution</strong></td>
+          <td>Single targeted SNP locus via allele-specific PCR</td>
+          <td>Complete 29,903 bp genome (11 ORFs) across 100 isolates</td>
+        </tr>
+        <tr>
+          <td><strong>Core Instruments / Stack</strong></td>
+          <td>Phenol-chloroform, thermal cycler, gel rig, Primer3, BLAST, R, Excel</td>
+          <td>SPAdes, QUAST, Prokka, MUSCLE, ViralMSA, FastTree, LSD2, BioCyc, Python</td>
+        </tr>
+        <tr>
+          <td><strong>Key Strength</strong></td>
+          <td>Generates primary clinical &amp; experimental ground truth from physical samples</td>
+          <td>Scales across whole genomes, global repositories, and evolutionary time</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <hr />
+
+    <h2>Five Lessons I Wish I Knew Before Starting</h2>
+
+    <h3>1. Start with Workflows Before Worrying About Software Engineering</h3>
+    <p>
+      A common misconception among biology students is that you must spend years mastering computer science before running your first genomic analysis. Beginning with workflow engines like <strong>Galaxy</strong> allowed me to master the logic of k-mer assembly, quality metrics, and substitution models first, and then transition smoothly into Python, R, and Bash scripting.
+    </p>
+
+    <h3>2. Wet-Lab Knowledge Is a Major Analytical Advantage</h3>
+    <p>
+      When designing diagnostic RT-PCR primers for the SARS-CoV-2 Nucleocapsid (N) gene or evaluating sequencing artifacts, my bench experience with melting temperatures ($T_m$), GC clamps, primer dimers, and DNA extraction contaminants paid immediate dividends. Understanding how biological samples are prepared makes it much easier to spot technical noise in sequencing data.
+    </p>
+
+    <h3>3. Troubleshooting Failed PCRs Transfers Directly to Debugging Code</h3>
+    <p>
+      Troubleshooting a failed TETRA-ARMS PCR reaction and debugging a broken bioinformatics pipeline rely on the exact same scientific method: isolate variables, inspect input quality, verify parameter flags, and test against positive controls.
+    </p>
+
+    <h3>4. Computational Models Reveal Evolutionary Time</h3>
+    <p>
+      Running <strong>FastTree</strong> and <strong>LSD2</strong> across 100 dated viral isolates to estimate the pandemic's time to most recent common ancestor (tMRCA: October&ndash;November 2019, $R^2 = 0.96$) showed me how sequence divergence encodes historical timelines. Aligning the Spike receptor-binding domain (RBD) in <strong>MUSCLE</strong> and observing the 6 key amino acid substitutions relative to SARS-CoV-1 made molecular evolution visible at single-residue resolution.
+    </p>
+
+    <h3>5. Negative Wet-Lab Results and Computational Predictions Reinforce Each Other</h3>
+    <p>
+      In my thesis, observing a monomorphic genotype distribution at a single candidate SNP highlighted why whole-exome and bioinformatic pre-screening are so valuable before committing wet-lab reagents. Conversely, identifying <strong>guanylate kinase (EC 2.7.4.8)</strong> as an antiviral metabolic chokepoint in <strong>BioCyc</strong> underscored that computational target discovery ultimately requires wet-lab enzymatic and cellular validation.
+    </p>
+
+    <hr />
+
+    <h2>Advice for Biosciences Students Making the Transition</h2>
+    <ul>
+      <li><strong>Anchor new algorithms to familiar wet-lab concepts:</strong> Relate paired-end read insert sizes to PCR amplicons, and relate de Bruijn graph contigs to Sanger sequencing chromatograms.</li>
+      <li><strong>Learn on real biological datasets:</strong> Working on actual clinical cohorts or pandemic sequencing accessions (such as <code>SRR10971381</code>) keeps the algorithmic math grounded in biological discovery.</li>
+      <li><strong>Document everything in public repositories:</strong> Publishing reproducible workflows, raw outputs, and technical write-ups on GitHub demonstrates your capabilities far more effectively than listing tool names on a CV alone.</li>
+      <li><strong>Treat wet-lab and dry-lab as a single discipline:</strong> You are not leaving the laboratory behind; you are expanding the scale of questions you can ask.</li>
+    </ul>
+
+    <hr />
+
+    <h2>Current Milestones &amp; Next Steps</h2>
+    <p>Since beginning this transition from bench protocols to computational workflows, I have:</p>
+    <ul>
+      <li>Completed my <strong>B.S. in Biosciences</strong> at COMSATS University Islamabad (134 credit hours; 12-credit thesis on <em>ATP8B1</em> in 104 participants awarded Grade A).</li>
+      <li>Built and documented an end-to-end <strong>SARS-CoV-2 genomic analysis pipeline</strong> across 100 viral genomes and de novo reference assembly (29,903 bp).</li>
+      <li>Completed specialized coursework in <strong>Applied Bioinformatics</strong> (UC San Diego), <strong>Python for Genomic Data Science</strong> &amp; <strong>Genomic Technologies</strong> (Johns Hopkins), and <strong>Clinical Data / Healthcare</strong> (Stanford).</li>
+      <li>Joined the <strong>International Society for Computational Biology (ISCB)</strong> as a Student Member (ID: 46230) and achieved an <strong>IELTS Academic Overall Band 7.5 (CEFR Level C1)</strong>.</li>
+    </ul>
+    <p>
+      I am currently preparing applications for European Master's programs in <strong>Bioinformatics, Computational Biology, and Molecular Biosciences</strong> (2027 intake), with the goal of conducting integrative research that combines experimental molecular genetics with high-throughput computational analysis.
+    </p>
+
+    <!-- AUTHOR BIO -->
+    <div class="author-bio">
+      <h4>About the Author</h4>
+      <p>
+        <strong>Syed Muhammad Ali Shirazi</strong> is a Biosciences graduate from COMSATS University Islamabad (134 credits; 12-credit undergraduate thesis awarded Grade A) working at the intersection of wet-lab molecular genetics and computational biology. He is a Student Member of the International Society for Computational Biology (ISCB #46230).
+      </p>
+      <p style="margin-bottom:0;">
+        <a href="../index.html">Portfolio</a> &middot;
+        <a href="https://github.com/alishirazi03" target="_blank">GitHub</a> &middot;
+        <a href="https://linkedin.com/in/syedmuhammadalishirazi" target="_blank">LinkedIn</a> &middot;
+        <a href="mailto:shirazi6503@gmail.com">Email</a>
+      </p>
+    </div>
+
+    <!-- RELATED POSTS -->
+    <div class="related-posts">
+      <h3>Continue Reading in This Series</h3>
+      <ul>
+        <li>
+          <a href="genome-assembly.html">Assembling a Pandemic: My First Genome Assembly &rarr;</a>
+          <p style="font-size:0.85rem;color:var(--muted);margin:0.25rem 0 0;">Reconstructing the complete 29,903 bp SARS-CoV-2 viral genome from 2.5 million short Illumina reads.</p>
+        </li>
+        <li>
+          <a href="tools-toolkit.html">Tools I Learned: A Bioinformatics Toolkit for Viral Genomics &rarr;</a>
+          <p style="font-size:0.85rem;color:var(--muted);margin:0.25rem 0 0;">A practical reference guide to SPAdes, QUAST, Prokka, MUSCLE, ViralMSA, FastTree, LSD2, and BioCyc.</p>
+        </li>
+      </ul>
+    </div>
+
   </article>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 Syed Muhammad Ali Shirazi &middot; <a href="../index.html">Portfolio Home</a> &middot; <a href="index.html">All Articles</a> &middot; <a href="https://github.com/alishirazi03" target="_blank">GitHub</a></p>
+  </footer>
+
+  <script>
+    // Sync Dark/Light Theme with main portfolio
+    const themeBtn = document.getElementById('themeBtn');
+    function applyTheme(dark) {
+      document.body.classList.toggle('dark', dark);
+      themeBtn.innerHTML = dark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    }
+    const savedTheme = localStorage.getItem('shirazi_theme');
+    if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      applyTheme(true);
+    }
+    function toggleTheme() {
+      const isDark = !document.body.classList.contains('dark');
+      applyTheme(isDark);
+      localStorage.setItem('shirazi_theme', isDark ? 'dark' : 'light');
+    }
+
+    // Reading Progress Bar
+    const progressBar = document.getElementById('progress-bar');
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      progressBar.style.width = (docHeight > 0 ? (scrollTop / docHeight) * 100 : 0) + '%';
+    });
+  </script>
+
 </body>
 </html>
