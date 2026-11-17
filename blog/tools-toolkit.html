@@ -1,717 +1,583 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="icon" type="image/x-icon" href="../favicon.ico?v=2">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tools I Learned: A Bioinformatics Toolkit for Viral Genomics | Syed Muhammad Ali Shirazi</title>
-  <meta name="description" content="Tools I Learned: A Bioinformatics Toolkit for Viral Genomics">
+  <meta name="description" content="A practical reference guide to 13 essential bioinformatics tools for viral genome analysis: SPAdes, QUAST, Prokka, BLAST, MUSCLE, ViralMSA, FastTree, LSD2, BioCyc, Primer3, Taxonium, Jalview, and Galaxy.">
+  <meta name="keywords" content="bioinformatics toolkit, viral genomics, SPAdes, QUAST, Prokka, BLAST, MUSCLE, ViralMSA, FastTree, LSD2, BioCyc, Primer3, Galaxy, Syed Muhammad Ali Shirazi">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link rel="stylesheet" href="blog-style.css">
+  <style>
+    #progress-bar {
+      position: fixed; top: 0; left: 0; height: 2px; background: var(--teal);
+      width: 0%; z-index: 1001; transition: width 0.1s ease-out;
+    }
+    .nav-inner {
+      max-width: 960px; margin: 0 auto; display: flex;
+      align-items: center; justify-content: space-between;
+    }
+    .nav-brand {
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      font-family: var(--serif); font-size: 1.1rem; font-weight: 600;
+      color: var(--navy); text-decoration: none; margin-right: 0;
+    }
+    .nav-brand-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--teal); }
+    .nav-right { display: flex; align-items: center; gap: 0.25rem; }
+    .theme-btn {
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text-secondary); border-radius: var(--radius-sm);
+      width: 34px; height: 34px; cursor: pointer;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 0.88rem; transition: all 0.18s ease; margin-left: 0.35rem;
+    }
+    .theme-btn:hover { border-color: var(--teal); color: var(--teal); }
+    .subtitle-lead {
+      font-size: 1.12rem; color: var(--text-secondary); font-weight: 400;
+      line-height: 1.65; margin-bottom: 1.25rem;
+    }
+    .toolkit-nav {
+      background: var(--surface); border: 1px solid var(--border);
+      border-top: 3px solid var(--teal); border-radius: var(--radius);
+      padding: 1.25rem 1.4rem; margin: 1.75rem 0 2.25rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .toolkit-nav-title {
+      font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--teal); margin-bottom: 0.8rem;
+      font-weight: 600;
+    }
+    .toolkit-chips {
+      display: flex; flex-wrap: wrap; gap: 0.45rem;
+    }
+    .toolkit-chip {
+      font-family: var(--mono); font-size: 0.75rem;
+      background: var(--surface-alt); color: var(--text-secondary);
+      border: 1px solid var(--border) !important; border-radius: 5px;
+      padding: 0.25rem 0.65rem; text-decoration: none;
+      transition: all 0.15s ease;
+    }
+    .toolkit-chip:hover {
+      background: var(--teal-subtle); color: var(--teal);
+      border-color: var(--teal) !important;
+    }
+    .decision-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.85rem; margin: 1.5rem 0;
+    }
+    .decision-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 1rem 1.15rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .decision-card strong {
+      display: block; font-size: 0.86rem; color: var(--navy); margin-bottom: 0.35rem;
+    }
+    .decision-card p {
+      font-family: var(--mono); font-size: 0.76rem; color: var(--teal);
+      margin-bottom: 0; line-height: 1.5;
+    }
+  </style>
 </head>
 <body>
+
+  <div id="progress-bar"></div>
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-brand" href="../index.html">
+        <span class="nav-brand-dot"></span>
+        Syed Muhammad Ali Shirazi
+      </a>
+      <div class="nav-right">
+        <a href="index.html"><i class="fas fa-arrow-left"></i> All Articles</a>
+        <a href="../index.html#portfolio">Projects</a>
+        <a href="../index.html#cv">CV</a>
+        <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme" title="Switch theme">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ARTICLE CONTENT -->
   <article class="blog-post">
-<h1>Tools I Learned: A Bioinformatics Toolkit for Viral Genomics</h1>
-<p><strong>A beginner's guide to essential bioinformatics tools for viral genome analysis—what each does, when to use them, and lessons from analyzing SARS-CoV-2</strong></p>
-<hr />
-<h2>The Toolbox Problem</h2>
-<p>When I started my SARS-CoV-2 genomic analysis project, I faced a overwhelming question: <strong>Which tools do I use for what?</strong></p>
-<p>Bioinformatics has hundreds of tools. BLAST, SPAdes, Prokka, MUSCLE, FastTree, LSD2, BioCyc, QUAST, Taxonium... the names alone were intimidating. Worse, many tools do similar things (5+ different genome assemblers! 10+ alignment tools!), and choosing the wrong one can waste hours or give wrong results.</p>
-<p>Coming from a wet-lab background where I used the same equipment for years (my trusty thermal cycler, UV transilluminator, pipettes), the bioinformatics toolkit felt chaotic and ever-changing.</p>
-<p>This blog is the guide I wish I had when I started. I'll walk through the <strong>15 essential tools</strong> I used to analyze SARS-CoV-2 genomes—from raw sequencing reads to drug target discovery—explaining what each does, when to use it, and the mistakes I made so you don't have to.</p>
-<p>Think of this as your <strong>bioinformatics toolkit reference card</strong>—bookmark it, refer back, and use it when you're stuck wondering "Wait, which tool do I use for this?"</p>
-<hr />
-<h2>The Workflow: Tools by Analysis Stage</h2>
-<p>Before diving into individual tools, here's the big picture—the complete workflow I used and where each tool fits:</p>
-<pre><code>Raw Sequencing Data (FASTQ)
-    ↓
-[SPAdes] → Genome Assembly
-    ↓
-[QUAST] → Quality Assessment
-    ↓
-[Prokka] → Gene Annotation
-    ↓
-[BLAST] → Homology Search
-    ↓
-[MUSCLE] → Multiple Sequence Alignment
-    ↓
-[FastTree] → Phylogenetic Tree
-    ↓
-[LSD2] → Molecular Clock Dating
-    ↓
-[BioCyc] → Pathway Analysis
-    ↓
-Drug Target Discovery
-</code></pre>
-<p>Each arrow represents a tool transforming data from one form to another. Let's break down each tool.</p>
-<hr />
-<h2>🔧 PART 1: Assembly &amp; Quality Control</h2>
-<h3><strong>1. SPAdes — The Genome Assembler</strong></h3>
-<p><strong>What it does:</strong> Reconstructs complete genomes from millions of short DNA reads using de Bruijn graph algorithms.</p>
-<p><strong>When to use it:</strong>
-- You have Illumina paired-end sequencing data
-- You want de novo assembly (no reference genome)
-- Genome size: bacterial/viral (works best for &lt;100 Mb)</p>
-<p><strong>My use case:</strong> Assembled 2.5 million SARS-CoV-2 reads into a 29,903 bp genome.</p>
-<p><strong>Key parameters:</strong></p>
+
+    <a href="index.html" class="back-to-blog"><i class="fas fa-arrow-left"></i> Back to Technical Blog</a>
+
+    <h1>Tools I Learned: A Bioinformatics Toolkit for Viral Genomics</h1>
+    <p class="subtitle-lead">
+      A practical reference guide to essential bioinformatics software for viral genome analysis: what each tool does, when to deploy it, and lessons from analyzing 100 SARS-CoV-2 genomes.
+    </p>
+
+    <div class="article-meta">
+      <span><i class="far fa-calendar"></i> March 2026</span>
+      <span><i class="far fa-clock"></i> 15 min read</span>
+      <span><i class="fas fa-screwdriver-wrench"></i> 13 Core Tools</span>
+      <span><i class="fas fa-diagram-project"></i> End-to-End Pipeline</span>
+    </div>
+
+    <!-- Quick Jump Index -->
+    <div class="toolkit-nav">
+      <div class="toolkit-nav-title"><i class="fas fa-compass"></i> Quick Jump to Tool Reference</div>
+      <div class="toolkit-chips">
+        <a href="#tool-spades" class="toolkit-chip">01. SPAdes</a>
+        <a href="#tool-quast" class="toolkit-chip">02. QUAST</a>
+        <a href="#tool-prokka" class="toolkit-chip">03. Prokka</a>
+        <a href="#tool-blast" class="toolkit-chip">04. BLAST</a>
+        <a href="#tool-muscle" class="toolkit-chip">05. MUSCLE</a>
+        <a href="#tool-viralmsa" class="toolkit-chip">06. ViralMSA</a>
+        <a href="#tool-fasttree" class="toolkit-chip">07. FastTree</a>
+        <a href="#tool-lsd2" class="toolkit-chip">08. LSD2</a>
+        <a href="#tool-biocyc" class="toolkit-chip">09. BioCyc / MetaCyc</a>
+        <a href="#tool-primer3" class="toolkit-chip">10. Primer3</a>
+        <a href="#tool-taxonium" class="toolkit-chip">11. Taxonium</a>
+        <a href="#tool-jalview" class="toolkit-chip">12. Jalview</a>
+        <a href="#tool-galaxy" class="toolkit-chip">13. Galaxy</a>
+      </div>
+    </div>
+
+    <h2>The Toolbox Problem</h2>
+    <p>
+      When I began my SARS-CoV-2 genomic analysis project, I ran into an immediate practical question: <strong>Which tools should I use for each step of the pipeline?</strong>
+    </p>
+    <p>
+      Bioinformatics offers hundreds of specialized packages: BLAST, SPAdes, Prokka, MUSCLE, FastTree, LSD2, BioCyc, QUAST, Taxonium, and more. Worse, multiple tools address similar tasks (five or more genome assemblers and over a dozen sequence aligners), and selecting an ill-suited algorithm for your dataset size or read type can cost hours of compute or introduce subtle artifacts.
+    </p>
+    <p>
+      Coming from a wet-lab molecular genetics background where I relied on the same core bench instruments (thermal cycler, gel electrophoresis rig, micropipettes, spectrophotometer), the computational software ecosystem initially felt sprawling.
+    </p>
+    <p>
+      This article is the structured reference guide I wish I had on day one. I walk through the <strong>13 core tools and databases</strong> I used to analyze SARS-CoV-2 genomes, from raw Illumina FASTQ reads to metabolic drug target discovery, detailing key parameters, expected outputs, and common pitfalls to avoid.
+    </p>
+
+    <hr />
+
+    <h2>The Complete Workflow: Tools by Pipeline Stage</h2>
+    <p>Before examining individual software packages, here is how each tool connects in the end-to-end viral genomics workflow:</p>
+<pre><code>Raw Paired-End Sequencing Reads (FASTQ)
+   ↓
+[01. SPAdes]     → De Novo Genome Assembly (contigs.fasta)
+   ↓
+[02. QUAST]      → Assembly Contiguity &amp; GC% Quality Control
+   ↓
+[03. Prokka]     → ORF Prediction &amp; Functional Gene Annotation
+   ↓
+[04. BLAST]      → Sequence Homology &amp; Taxonomic Validation
+   ↓
+[05. MUSCLE]     → Protein / Gene Multiple Sequence Alignment
+[06. ViralMSA]   → Reference-Guided Alignment (100 Viral Genomes)
+   ↓
+[07. FastTree]   → Maximum-Likelihood Phylogenetic Reconstruction
+   ↓
+[08. LSD2]       → Molecular-Clock Dating &amp; tMRCA Estimation
+   ↓
+[09. BioCyc]     → Host-Pathogen Metabolic Pathway Mapping
+[10. Primer3]    → Diagnostic RT-PCR Primer Design
+   ↓
+[11-13. Taxonium / Jalview / Galaxy] → Visualization &amp; Execution</code></pre>
+
+    <hr />
+
+    <h2>Part 1: Genome Assembly &amp; Quality Control</h2>
+
+    <h3 id="tool-spades">1. SPAdes: De Novo Genome Assembler</h3>
+    <p><strong>What it does:</strong> Reconstructs contiguous genome sequences from millions of short Illumina reads using iterative multi-k-mer de Bruijn graphs.</p>
+    <p><strong>When to use it:</strong></p>
+    <ul>
+      <li>You have Illumina paired-end short-read sequencing data.</li>
+      <li>You want an unbiased de novo assembly without relying on a reference genome.</li>
+      <li>Your target organism is viral, bacterial, or small eukaryotic (&lt;100 Mb).</li>
+    </ul>
+    <p><strong>Project application:</strong> Assembled 2,512,682 paired-end reads (<code>SRR10971381</code>) into a complete 29,903 bp SARS-CoV-2 viral genome.</p>
+    <p><strong>Standard CLI invocation:</strong></p>
 <pre><code class="language-bash">spades.py \
   -1 forward_reads.fastq \
   -2 reverse_reads.fastq \
-  -o output_directory \
-  -k 21,33,55  # Multiple k-mer sizes
-</code></pre>
-<p><strong>What I learned:</strong>
-- <strong>Multiple k-mers are essential:</strong> SPAdes automatically tries different k-mer sizes (21, 33, 55). Small k-mers handle low coverage, large k-mers resolve repeats.
-- <strong>Takes time:</strong> My 30kb viral genome took 45 minutes. Larger genomes take hours to days.
-- <strong>RAM hungry:</strong> Needs 16+ GB for bacterial genomes. Galaxy servers handle this for you.</p>
-<p><strong>Common mistakes:</strong>
-- Using only single-end reads (paired-end gives much better results)
-- Not checking error correction (--careful flag improves accuracy)
-- Running out of memory (use --memory parameter)</p>
-<p><strong>Output files:</strong>
-- <code>contigs.fasta</code> — Your assembled genome!
-- <code>scaffolds.fasta</code> — Contigs joined by N's
-- <code>assembly_graph.fastg</code> — The actual de Bruijn graph</p>
-<p><strong>Alternatives:</strong> MEGAHIT (faster, less accurate), Unicycler (hybrid assembly), Canu (long reads)</p>
-<p><strong>Installation:</strong> Available in Galaxy, or <code>conda install spades</code></p>
-<p><strong>Documentation:</strong> http://cab.spbu.ru/software/spades/</p>
-<hr />
-<h3><strong>2. QUAST — The Quality Police</strong></h3>
-<p><strong>What it does:</strong> Evaluates genome assembly quality with detailed statistics.</p>
-<p><strong>When to use it:</strong>
-- Immediately after assembly (every time!)
-- Comparing multiple assemblies
-- Checking if assembly meets publication standards</p>
-<p><strong>My use case:</strong> Verified my SARS-CoV-2 assembly had N50 of 29,903 bp (perfect!), correct GC%, and minimal contamination.</p>
-<p><strong>Key metrics QUAST reports:</strong></p>
-<pre><code>Number of contigs: 3
-Largest contig: 29,903 bp
-Total length: 30,121 bp
-N50: 29,903 bp
-GC%: 37.97%
-</code></pre>
-<p><strong>What each metric means:</strong>
-- <strong>N50:</strong> Length of contig at 50% cumulative assembly length (higher = better)
-- <strong>Largest contig:</strong> Your best assembled piece
-- <strong># of contigs:</strong> Fewer = better (ideally 1 for small genomes)
-- <strong>GC%:</strong> Should match expected value (~38% for SARS-CoV-2)</p>
-<p><strong>What I learned:</strong>
-- <strong>N50 is king:</strong> Single most important quality metric. My 29,903 bp N50 meant almost the entire genome in one piece.
-- <strong>Compare to reference:</strong> Use <code>-r reference.fasta</code> to get detailed alignment statistics
-- <strong>Watch for contamination:</strong> Extra small contigs with low coverage are usually contamination</p>
-<p><strong>Common mistakes:</strong>
-- Not running QUAST (never skip quality assessment!)
-- Misinterpreting N50 (it's not average contig length)
-- Ignoring GC% deviation (big difference = problem)</p>
-<p><strong>Quick command:</strong></p>
-<pre><code class="language-bash">quast.py contigs.fasta -o quast_results
-</code></pre>
-<p><strong>Alternatives:</strong> assembly-stats, Bandage (visualization)</p>
-<p><strong>Installation:</strong> Galaxy, or <code>conda install quast</code></p>
-<hr />
-<h2>🧬 PART 2: Annotation &amp; Gene Finding</h2>
-<h3><strong>3. Prokka — The Gene Finder</strong></h3>
-<p><strong>What it does:</strong> Automatically annotates bacterial/viral genomes—finds genes, predicts functions, identifies proteins.</p>
-<p><strong>When to use it:</strong>
-- You have an assembled genome
-- You want to know: Where are the genes? What do they do?
-- Working with prokaryotes or viruses (not eukaryotes)</p>
-<p><strong>My use case:</strong> Identified all 11 SARS-CoV-2 genes (ORF1ab, spike, envelope, membrane, nucleocapsid, etc.) and predicted their functions.</p>
-<p><strong>What Prokka finds:</strong>
-- Open Reading Frames (ORFs)
-- tRNA genes
-- rRNA genes
-- Signal peptides
-- Protein functions (by homology)</p>
-<p><strong>Key parameters:</strong></p>
+  -o spades_output/ \
+  -k 21,33,55 \
+  --careful</code></pre>
+    <p><strong>Key lessons &amp; best practices:</strong></p>
+    <ul>
+      <li><strong>Iterative k-mers are essential:</strong> SPAdes builds graphs across multiple k-mer sizes (<code>21, 33, 55</code>). Smaller k-mers bridge low-coverage regions, while larger k-mers resolve short repetitive elements.</li>
+      <li><strong>Memory footprint:</strong> Viral assemblies run in ~45 minutes, whereas bacterial and larger datasets require 16+ GB RAM (which cloud platforms like Galaxy handle automatically).</li>
+      <li><strong>Primary outputs:</strong> <code>contigs.fasta</code> (assembled contiguous sequences), <code>scaffolds.fasta</code> (paired-end scaffolded contigs), and <code>assembly_graph.fastg</code> (de Bruijn graph structure).</li>
+    </ul>
+    <p><strong>Alternatives:</strong> MEGAHIT (faster, lower memory for metagenomics), Unicycler (hybrid short + long reads), Canu / Flye (PacBio and Nanopore long reads).</p>
+
+    <hr />
+
+    <h3 id="tool-quast">2. QUAST: Assembly Quality Assessment</h3>
+    <p><strong>What it does:</strong> Benchmarks genome assemblies by computing contiguity, length, and base-composition metrics.</p>
+    <p><strong>When to use it:</strong></p>
+    <ul>
+      <li>Immediately after every genome assembly run.</li>
+      <li>When comparing assemblies generated with different k-mer sets or assemblers.</li>
+      <li>When verifying whether an assembly meets publication thresholds.</li>
+    </ul>
+    <p><strong>Project output on SARS-CoV-2 assembly:</strong></p>
+<pre><code>Number of contigs : 3
+Largest contig    : 29,903 bp
+Total length      : 30,121 bp
+N50               : 29,903 bp
+GC%               : 37.97%</code></pre>
+    <p><strong>How to interpret QUAST metrics:</strong></p>
+    <ul>
+      <li><strong>N50:</strong> The contig length at which 50% of the total assembly bases are contained in contigs of that length or longer. Our N50 of 29,903 bp confirmed that the entire viral genome assembled into a single primary contig.</li>
+      <li><strong>GC%:</strong> Should match the expected biological composition (~38% for SARS-CoV-2).</li>
+      <li><strong>Contig count:</strong> Extra short, low-coverage contigs typically indicate residual host RNA or bacterial background.</li>
+    </ul>
+    <p><strong>Standard CLI invocation:</strong></p>
+<pre><code class="language-bash">quast.py spades_output/contigs.fasta -r reference.fasta -o quast_results/</code></pre>
+
+    <hr />
+
+    <h2>Part 2: Functional Annotation &amp; Homology Search</h2>
+
+    <h3 id="tool-prokka">3. Prokka: Rapid Prokaryotic &amp; Viral Genome Annotation</h3>
+    <p><strong>What it does:</strong> Identifies open reading frames (ORFs), RNA features, and signal peptides, and assigns putative protein functions via curated sequence databases.</p>
+    <p><strong>When to use it:</strong></p>
+    <ul>
+      <li>You have a finished or draft bacterial or viral genome assembly.</li>
+      <li>You need standardized annotation coordinates (<code>.gff</code>, <code>.gbk</code>) and translated protein sequences (<code>.faa</code>).</li>
+    </ul>
+    <p><strong>Standard CLI invocation:</strong></p>
 <pre><code class="language-bash">prokka \
   --kingdom Viruses \
   --genus Betacoronavirus \
-  genome.fasta \
-  --outdir prokka_output
-</code></pre>
-<p><strong>Output files:</strong>
-- <code>.gff</code> — Gene locations (standard format)
-- <code>.faa</code> — Protein sequences (amino acids)
-- <code>.ffn</code> — Gene sequences (nucleotides)
-- <code>.gbk</code> — GenBank format (for visualization)</p>
-<p><strong>What I learned:</strong>
-- <strong>Kingdom matters:</strong> Use <code>--kingdom Viruses</code> for viruses, <code>Bacteria</code> for bacteria
-- <strong>Quick results:</strong> Annotated 30kb SARS-CoV-2 genome in ~2 minutes
-- <strong>Gene names are predictions:</strong> Cross-check with BLAST for important genes</p>
-<p><strong>Common mistakes:</strong>
-- Using eukaryotic genomes (Prokka is prokaryote/virus only)
-- Not specifying kingdom (reduces accuracy)
-- Trusting predictions blindly (always validate key genes)</p>
-<p><strong>Real example from my project:</strong></p>
-<pre><code>Prokka found:
-- ORF1ab: 7,096 amino acids (polyprotein)
-- Spike: 1,273 amino acids (receptor binding)
-- N gene: 419 amino acids (nucleocapsid)
-Total: 11 ORFs identified
-</code></pre>
-<p><strong>Alternatives:</strong> RAST (bacteria), GeneMarkS, Glimmer</p>
-<p><strong>Installation:</strong> <code>conda install prokka</code></p>
-<p><strong>Documentation:</strong> https://github.com/tseemann/prokka</p>
-<hr />
-<h3><strong>4. BLAST — The Homology Detective</strong></h3>
-<p><strong>What it does:</strong> Finds similar sequences in databases—answers "What is this sequence similar to?"</p>
-<p><strong>When to use it:</strong>
-- Identifying unknown sequences
-- Finding closest relatives
-- Validating assembly/annotation
-- Designing specific primers</p>
-<p><strong>My use cases:</strong>
-1. <strong>Validated assembly:</strong> BLASTed my assembled genome → 99.99% match to Wuhan-Hu-1 reference
-2. <strong>Found closest relative:</strong> BLASTed against pre-2020 viruses → Bat coronavirus RaTG13 (96.1% identity)
-3. <strong>Checked primer specificity:</strong> BLASTed primer sequences against human genome</p>
-<p><strong>BLAST flavors:</strong>
-- <strong>blastn:</strong> DNA vs DNA (what I used most)
-- <strong>blastp:</strong> Protein vs protein
-- <strong>blastx:</strong> DNA translated to protein vs protein database
-- <strong>tblastn:</strong> Protein vs DNA database (translated)</p>
-<p><strong>Key parameters:</strong></p>
+  contigs.fasta \
+  --outdir prokka_annotation/</code></pre>
+    <p><strong>Project results:</strong></p>
+<pre><code>Identified 11 major SARS-CoV-2 ORFs in ~2 minutes:
+- ORF1ab polyprotein : 7,096 aa (replicase/transcriptase complex)
+- Spike (S) protein  : 1,273 aa (ACE2 receptor binding)
+- Nucleocapsid (N)   : 419 aa   (viral RNA packaging)</code></pre>
+    <div class="note">
+      <strong>Important caveat:</strong> Always specify <code>--kingdom Viruses</code> (or <code>Bacteria</code>) so Prokka queries the appropriate protein database, and cross-validate hypothetical or critical gene calls using BLAST.
+    </div>
+
+    <hr />
+
+    <h3 id="tool-blast">4. NCBI BLAST: Sequence Homology &amp; Specificity Search</h3>
+    <p><strong>What it does:</strong> Aligns query DNA or protein sequences against local or global reference databases to identify homologous sequences and taxonomic origins.</p>
+    <p><strong>Core modes:</strong></p>
+    <ul>
+      <li><code>blastn</code>: Nucleotide query vs. nucleotide database.</li>
+      <li><code>blastp</code>: Protein query vs. protein database.</li>
+      <li><code>blastx</code>: Six-frame translated nucleotide query vs. protein database.</li>
+      <li><code>tblastn</code>: Protein query vs. six-frame translated nucleotide database.</li>
+    </ul>
+    <p><strong>Three distinct ways I used BLAST in the pipeline:</strong></p>
+    <ol>
+      <li><strong>Assembly validation:</strong> Aligned the 29,903 bp contig against NCBI <code>nt</code>, confirming 100% query coverage and 99.99% identity to isolate <code>Wuhan-Hu-1</code> ($E = 0.0$).</li>
+      <li><strong>Evolutionary origin check:</strong> Excluded SARS-CoV-2 taxids to query pre-2020 viruses, identifying bat coronavirus <code>RaTG13</code> at 96.1% nucleotide identity.</li>
+      <li><strong>Diagnostic primer validation:</strong> Screened candidate RT-PCR primers against the human reference genome and respiratory pathogen panels to confirm zero off-target binding.</li>
+    </ol>
+    <p><strong>Standard CLI invocation:</strong></p>
 <pre><code class="language-bash">blastn \
-  -query my_sequence.fasta \
-  -db nt \  # NCBI nucleotide database
-  -outfmt 6 \  # Tabular output
-  -max_target_seqs 10  # Top 10 hits
-</code></pre>
-<p><strong>What I learned:</strong>
-- <strong>Database choice matters:</strong> 
-  - <code>nt</code> = all nucleotides (huge, slow)
-  - <code>nr</code> = all proteins
-  - Custom databases for specific searches
-- <strong>E-value is key:</strong> Lower = better. E &lt; 1e-10 is significant. E &gt; 0.01 is probably noise.
-- <strong>Filter by date:</strong> I used entrez query to exclude SARS-CoV-2 sequences when finding closest relative</p>
-<p><strong>Common mistakes:</strong>
-- Not filtering results (too many irrelevant hits)
-- Ignoring E-value (low similarity hits)
-- Wrong database (viral query against bacterial database)</p>
-<p><strong>Real results:</strong></p>
-<pre><code>Top BLAST hit:
-Query Coverage: 100%
-Percent Identity: 99.99%
-E-value: 0.0
-Match: SARS-CoV-2 isolate Wuhan-Hu-1
-</code></pre>
-<p><strong>Web version:</strong> https://blast.ncbi.nlm.nih.gov/Blast.cgi</p>
-<p><strong>Installation:</strong> <code>conda install blast</code></p>
-<hr />
-<h2>🌳 PART 3: Comparative Analysis &amp; Phylogenetics</h2>
-<h3><strong>5. MUSCLE — The Alignment Tool</strong></h3>
-<p><strong>What it does:</strong> Aligns multiple DNA or protein sequences to identify conserved regions and differences.</p>
-<p><strong>When to use it:</strong>
-- Comparing 3+ sequences
-- Finding conserved/variable regions
-- Preparing data for phylogenetic analysis</p>
-<p><strong>My use case:</strong> Aligned SARS-CoV-2 spike protein with SARS-CoV-1 and RaTG13 to identify key mutations in receptor-binding domain.</p>
-<p><strong>How it works:</strong></p>
-<pre><code>Unaligned sequences:
-Seq1: ATCGATCG
-Seq2: ATC--TCG
-Seq3: ATCGAACG
+  -query contigs.fasta \
+  -db nt \
+  -outfmt 6 \
+  -max_target_seqs 10 \
+  -out blast_hits.tsv</code></pre>
 
-MUSCLE aligns:
-Seq1: ATCGATCG
-Seq2: ATC--TCG
-Seq3: ATCGAACG
-      *** * **  (conserved positions)
-</code></pre>
-<p><strong>Key parameters:</strong></p>
-<pre><code class="language-bash">muscle \
-  -in unaligned.fasta \
-  -out aligned.fasta \
-  -maxiters 16  # More iterations = better alignment
-</code></pre>
-<p><strong>What I learned:</strong>
-- <strong>Protein vs DNA:</strong> Protein alignments more reliable for divergent sequences
-- <strong>Gaps matter:</strong> Insertions/deletions (indels) are biologically meaningful
-- <strong>Check by eye:</strong> Always visualize alignment (use Jalview)</p>
-<p><strong>Key findings from my alignment:</strong>
-- <strong>6 critical mutations</strong> in spike RBD compared to SARS-CoV-1
-- <strong>Furin cleavage site</strong> (PRRA) absent in RaTG13
-- <strong>~90% amino acid identity</strong> in spike protein</p>
-<p><strong>Common mistakes:</strong>
-- Aligning too-divergent sequences (&lt; 30% identity doesn't align well)
-- Not trimming poorly aligned regions
-- Forgetting to specify sequence type (DNA vs protein)</p>
-<p><strong>Alternatives:</strong> MAFFT (faster), Clustal Omega, T-Coffee</p>
-<p><strong>Installation:</strong> <code>conda install muscle</code></p>
-<p><strong>Visualization:</strong> Use Jalview or MEGA to view alignments</p>
-<hr />
-<h3><strong>6. ViralMSA — Viral Genome Aligner</strong></h3>
-<p><strong>What it does:</strong> Specialized multiple sequence alignment tool optimized for viral genomes (especially SARS-CoV-2).</p>
-<p><strong>When to use it:</strong>
-- Aligning full viral genomes (not just genes)
-- Working with large datasets (100+ sequences)
-- Need fast alignment of closely related sequences</p>
-<p><strong>My use case:</strong> Aligned 100 complete SARS-CoV-2 genomes spanning January 2020–March 2023 for phylogenetic analysis.</p>
-<p><strong>Why use ViralMSA instead of MUSCLE:</strong>
-- <strong>Speed:</strong> 100 genomes in minutes vs hours
-- <strong>Viral-optimized:</strong> Handles common viral features (recombination, high mutation rates)
-- <strong>Integration:</strong> Works with Minimap2 (ultra-fast aligner)</p>
-<p><strong>Command:</strong></p>
+    <hr />
+
+    <h2>Part 3: Comparative Genomics &amp; Phylogenetics</h2>
+
+    <h3 id="tool-muscle">5. MUSCLE: Multiple Sequence Alignment (Proteins &amp; Genes)</h3>
+    <p><strong>What it does:</strong> Aligns three or more homologous DNA or amino acid sequences to reveal conserved functional motifs, substitutions, and insertions/deletions (indels).</p>
+    <p><strong>When to use it:</strong></p>
+    <ul>
+      <li>Comparing individual genes or translated proteins (such as the Spike glycoprotein) across related species or variants.</li>
+      <li>Working with small-to-medium datasets (&lt;100 sequences) where high alignment accuracy is critical.</li>
+    </ul>
+    <p><strong>Standard CLI invocation:</strong></p>
+<pre><code class="language-bash">muscle -in spike_unaligned.faa -out spike_aligned.faa -maxiters 16</code></pre>
+    <p><strong>Project findings:</strong> Aligning the Spike protein across SARS-CoV-2, SARS-CoV-1, and RaTG13 pinpointed 6 critical amino acid substitutions in the receptor-binding domain (RBD) and highlighted the polybasic furin cleavage site insertion (<code>PRRA</code>) absent in RaTG13.</p>
+
+    <hr />
+
+    <h3 id="tool-viralmsa">6. ViralMSA: Ultra-Fast Reference-Guided Viral Genome Alignment</h3>
+    <p><strong>What it does:</strong> Performs rapid reference-guided multiple sequence alignment tailored specifically for full-length viral genomes.</p>
+    <p><strong>Why use ViralMSA over MUSCLE for whole genomes:</strong></p>
+    <ul>
+      <li><strong>Scalability:</strong> Aligns 100+ complete 30 kb coronavirus genomes in minutes rather than hours by leveraging <code>Minimap2</code> read-to-reference mapping coordinates.</li>
+      <li><strong>Position consistency:</strong> Preserves reference coordinate numbering, streamlining downstream phylogenetic and mutation tracking.</li>
+    </ul>
+    <p><strong>Standard CLI invocation:</strong></p>
 <pre><code class="language-bash">ViralMSA.py \
-  -s sequences.fasta \
-  -r reference.fasta \
-  -e email@example.com \
-  -o output_directory
-</code></pre>
-<p><strong>What I learned:</strong>
-- <strong>Reference-guided:</strong> Uses reference genome to guide alignment (faster, more accurate for similar sequences)
-- <strong>Automatic trimming:</strong> Removes poorly aligned ends
-- <strong>Position filtering:</strong> Excludes positions with excessive gaps</p>
-<p><strong>Output:</strong> Aligned sequences ready for phylogenetic analysis</p>
-<p><strong>Installation:</strong> <code>pip install viralmsa</code></p>
-<p><strong>Documentation:</strong> https://github.com/niemasd/ViralMSA</p>
-<hr />
-<h3><strong>7. FastTree — The Tree Builder</strong></h3>
-<p><strong>What it does:</strong> Constructs phylogenetic trees from aligned sequences using maximum likelihood methods.</p>
-<p><strong>When to use it:</strong>
-- You have a multiple sequence alignment
-- You want to infer evolutionary relationships
-- Working with 50-10,000+ sequences</p>
-<p><strong>My use case:</strong> Built phylogenetic tree of 100 SARS-CoV-2 genomes to trace pandemic evolution and identify lineages.</p>
-<p><strong>What phylogenetic trees show:</strong>
-- <strong>Evolutionary relationships:</strong> Which sequences are most closely related
-- <strong>Divergence:</strong> Branch lengths show genetic distance
-- <strong>Common ancestors:</strong> Internal nodes represent ancestral sequences</p>
-<p><strong>Key parameters:</strong></p>
-<pre><code class="language-bash">FastTree -nt -gtr -gamma \
-  aligned_sequences.fasta \
-  &gt; phylogenetic_tree.nwk
-</code></pre>
-<p><strong>Flags explained:</strong>
-- <code>-nt</code> = nucleotide sequences (use <code>-lg</code> for proteins)
-- <code>-gtr</code> = General Time Reversible model (standard for DNA)
-- <code>-gamma</code> = rate variation across sites (more realistic)</p>
-<p><strong>What I learned:</strong>
-- <strong>Model selection matters:</strong> GTR+Gamma is good default for DNA
-- <strong>Bootstrap values:</strong> Show confidence in tree topology (optional with <code>-boot 1000</code>)
-- <strong>Outgroup rooting:</strong> Include distantly related sequence (RaTG13) to root tree properly</p>
-<p><strong>Output format (Newick):</strong></p>
-<pre><code>((Seq1:0.001,Seq2:0.002):0.005,Seq3:0.01);
-</code></pre>
-<p><strong>Tree interpretation:</strong>
-- Numbers after colons = branch lengths (genetic distance)
-- Parentheses show groupings (clades)</p>
-<p><strong>Common mistakes:</strong>
-- Not using aligned sequences (FastTree needs aligned input!)
-- Wrong substitution model (DNA vs protein)
-- Not rooting tree (outgroup method is best)</p>
-<p><strong>Alternatives:</strong> RAxML (slower, more accurate), IQ-TREE (model selection), PhyML</p>
-<p><strong>Installation:</strong> <code>conda install fasttree</code></p>
-<p><strong>Visualization:</strong> FigTree, Taxonium, or iTOL</p>
-<hr />
-<h3><strong>8. LSD2 — The Molecular Clock</strong></h3>
-<p><strong>What it does:</strong> Estimates divergence times (dates) for phylogenetic trees using molecular clock methods.</p>
-<p><strong>When to use it:</strong>
-- You have a phylogenetic tree with known sample dates
-- You want to estimate when ancestors existed (tMRCA = time to most recent common ancestor)
-- Studying temporal evolution (pandemics, outbreaks)</p>
-<p><strong>My use case:</strong> Dated SARS-CoV-2 phylogenetic tree to estimate pandemic emergence: <strong>October–November 2019</strong> (95% CI: September–December 2019).</p>
-<p><strong>How molecular clocks work:</strong>
-- Assumes ~constant mutation rate over time
-- Uses sample collection dates as calibration points
-- Estimates dates of internal nodes (ancestors)</p>
-<p><strong>Input files needed:</strong></p>
-<pre><code>1. phylogenetic_tree.nwk (from FastTree)
-2. dates.txt (sample collection dates)
-</code></pre>
-<p><strong>Dates file format:</strong></p>
-<pre><code>Wuhan-Hu-1  2019.96  # December 2019
-USA-CA1     2020.00  # January 2020
-Italy-123   2020.15  # February 2020
-</code></pre>
-<p><strong>Key command:</strong></p>
-<pre><code class="language-bash">lsd2 \
-  -i phylogenetic_tree.nwk \
-  -d dates.txt \
-  -c \  # Use calendar dates
-  -r a  # Estimate root position
-</code></pre>
-<p><strong>What I learned:</strong>
-- <strong>Mutation rate:</strong> SARS-CoV-2 evolves at ~8.9 × 10⁻⁴ substitutions/site/year
-- <strong>R² value:</strong> Measures clock-like evolution (my result: 0.96 = excellent temporal signal)
-- <strong>Confidence intervals:</strong> Always report uncertainty (tMRCA: Oct–Nov 2019 ± 2 months)</p>
-<p><strong>Key results:</strong></p>
-<pre><code>Mutation rate: 8.9e-04 subs/site/year
-tMRCA: October–November 2019
-R²: 0.96 (strong temporal signal)
-</code></pre>
-<p><strong>This analysis:</strong>
-- <strong>Rejected</strong> "Italy June 2019" origin hypothesis
-- <strong>Supported</strong> Wuhan late-2019 emergence
-- <strong>Matched</strong> epidemiological data</p>
-<p><strong>Common mistakes:</strong>
-- Not having enough temporal signal (samples from narrow time range)
-- Wrong date format (use decimal years: 2020.5 = July 2020)
-- Not checking R² (&lt; 0.8 = weak clock signal)</p>
-<p><strong>Installation:</strong> https://github.com/tothuhien/lsd2</p>
-<p><strong>Output:</strong> Dated tree in Nexus format</p>
-<hr />
-<h2>💊 PART 4: Functional Analysis</h2>
-<h3><strong>9. BioCyc / EcoCyc / MetaCyc — The Pathway Databases</strong></h3>
-<p><strong>What it does:</strong> Provides comprehensive metabolic pathway information for identifying enzyme functions and metabolic dependencies.</p>
-<p><strong>When to use it:</strong>
-- Identifying drug targets
-- Understanding metabolic requirements
-- Pathway reconstruction
-- Analyzing enzyme networks</p>
-<p><strong>My use case:</strong> Identified <strong>guanylate kinase</strong> as SARS-CoV-2 drug target through metabolic pathway analysis.</p>
-<p><strong>How I used it:</strong>
-1. <strong>Query:</strong> "What nucleotides does SARS-CoV-2 need?"
-2. <strong>Answer:</strong> Massive amounts of GTP for RNA synthesis (~30,000 nt × thousands of copies)
-3. <strong>Analysis:</strong> Guanylate kinase catalyzes: ATP + GMP ↔ ADP + GDP
-4. <strong>Insight:</strong> Virus needs high de novo GTP synthesis; human cells recycle from RNA pools
-5. <strong>Target:</strong> Block guanylate kinase = starve virus, spare host cells</p>
-<p><strong>BioCyc databases:</strong>
-- <strong>EcoCyc:</strong> E. coli pathways (model organism)
-- <strong>MetaCyc:</strong> General metabolic pathways (all organisms)
-- <strong>BioCyc:</strong> Organism-specific databases (thousands of species)</p>
-<p><strong>Key concepts:</strong>
-- <strong>Reachability analysis:</strong> Can organism synthesize compound X from available nutrients?
-- <strong>Chokepoint reactions:</strong> Enzymes that are sole producers/consumers of metabolites
-- <strong>Dead-end metabolites:</strong> Compounds with only one reaction (potential drug targets)</p>
-<p><strong>What I learned:</strong>
-- <strong>Web-based:</strong> No installation needed (https://biocyc.org)
-- <strong>Pathway diagrams:</strong> Visual representation of enzyme networks
-- <strong>Substrate-product relationships:</strong> Trace metabolic flow
-- <strong>Literature integration:</strong> Links to papers validating predictions</p>
-<p><strong>Real discovery:</strong></p>
-<pre><code>Target: Guanylate Kinase (EC 2.7.4.8)
-Reaction: ATP + GMP → ADP + GDP
-Rationale: SARS-CoV-2 requires high GTP synthesis
-Validation: Renz et al., Cell Metabolism (2020)
-Status: Experimentally validated drug target
-</code></pre>
-<p><strong>This is the power of computational biology:</strong> Predict drug targets from metabolic analysis, validate experimentally.</p>
-<p><strong>Alternatives:</strong> KEGG, Reactome, Pathway Tools</p>
-<p><strong>Access:</strong> https://biocyc.org (free for academic use)</p>
-<hr />
-<h3><strong>10. Primer3 — The Primer Designer</strong></h3>
-<p><strong>What it does:</strong> Designs PCR primers for amplification, sequencing, or diagnostic assays.</p>
-<p><strong>When to use it:</strong>
-- Need primers for specific gene/region
-- Designing diagnostic RT-PCR assays
-- Validating bioinformatic predictions experimentally</p>
-<p><strong>My use case:</strong> Designed RT-PCR primers targeting SARS-CoV-2 N gene for diagnostic detection.</p>
-<p><strong>Key parameters:</strong></p>
-<pre><code>Product size: 75-150 bp (RT-PCR optimal)
-Primer length: 18-25 bp
-Tm: 58-62°C (annealing temperature)
-GC%: 40-60%
-</code></pre>
-<p><strong>What Primer3 checks:</strong>
-- <strong>No hairpins:</strong> Primers shouldn't fold on themselves
-- <strong>No self-dimers:</strong> Forward/reverse shouldn't bind each other
-- <strong>Specificity:</strong> Unique to target (verify with BLAST)
-- <strong>Tm matching:</strong> Forward and reverse Tm within 2°C</p>
-<p><strong>Workflow:</strong>
-1. <strong>Get target sequence</strong> (from Prokka annotation)
-2. <strong>Run Primer3</strong> (web or command-line)
-3. <strong>BLAST primers</strong> against human genome (check specificity)
-4. <strong>Validate:</strong> No human hits = good primers</p>
-<p><strong>My primers:</strong></p>
-<pre><code>N gene target (positions 28,000-28,500)
-Forward: 5'-GGGGAACTTCTCCTGCTAGAAT-3' (Tm: 59.8°C)
-Reverse: 5'-CAGACATTTTGCTCTCAAGCTG-3' (Tm: 60.1°C)
-Product: 113 bp
+  -s 100_sarscov2_genomes.fasta \
+  -r NC_045512.2_reference.fasta \
+  -e shirazi6503@gmail.com \
+  -o viralmsa_aligned/</code></pre>
 
-BLAST result: 100% specific to SARS-CoV-2
-             0 hits to human genome ✓
-             0 hits to common respiratory pathogens ✓
-</code></pre>
-<p><strong>What I learned:</strong>
-- <strong>Gene choice matters:</strong> N gene highly expressed, conserved across SARS-CoV-2 variants
-- <strong>Avoid repetitive regions:</strong> Primers in unique sequences only
-- <strong>Test in silico first:</strong> BLAST saves expensive wet-lab failures</p>
-<p><strong>Common mistakes:</strong>
-- Not checking specificity with BLAST
-- Designing primers across splice junctions (for eukaryotes)
-- Ignoring secondary structure</p>
-<p><strong>Web version:</strong> https://primer3.ut.ee</p>
-<p><strong>Installation:</strong> <code>conda install primer3</code></p>
-<hr />
-<h2>🎨 PART 5: Visualization &amp; Platforms</h2>
-<h3><strong>11. Taxonium — The Tree Visualizer</strong></h3>
-<p><strong>What it does:</strong> Interactive visualization of massive phylogenetic trees (millions of sequences).</p>
-<p><strong>When to use it:</strong>
-- Viewing large phylogenies
-- Exploring pandemic spread patterns
-- Interactive tree navigation</p>
-<p><strong>My use case:</strong> Visualized 100-sequence SARS-CoV-2 phylogeny with temporal metadata and variant annotations.</p>
-<p><strong>Features:</strong>
-- <strong>Zoom/pan:</strong> Navigate huge trees smoothly
-- <strong>Search:</strong> Find specific sequences instantly
-- <strong>Metadata:</strong> Color by date, location, variant
-- <strong>Time-scaled:</strong> X-axis = time (from LSD2 dating)</p>
-<p><strong>What I learned:</strong>
-- <strong>Web-based:</strong> No installation (https://taxonium.org)
-- <strong>Fast rendering:</strong> Handles millions of sequences
-- <strong>Publication-ready:</strong> Export high-res figures</p>
-<p><strong>Installation:</strong> Web-based (upload your tree)</p>
-<hr />
-<h3><strong>12. Jalview — The Alignment Viewer</strong></h3>
-<p><strong>What it does:</strong> Visualizes and edits multiple sequence alignments.</p>
-<p><strong>When to use it:</strong>
-- Checking alignment quality
-- Identifying conserved residues
-- Annotating functional regions
-- Preparing publication figures</p>
-<p><strong>My use case:</strong> Visualized spike protein alignment to identify 6 key RBD mutations.</p>
-<p><strong>Features:</strong>
-- <strong>Color schemes:</strong> Highlight conservation, chemistry, mutations
-- <strong>Consensus sequence:</strong> See most common residue at each position
-- <strong>Manual editing:</strong> Fix alignment errors
-- <strong>Export:</strong> Publish-quality figures</p>
-<p><strong>Installation:</strong> https://www.jalview.org (Java application)</p>
-<hr />
-<h3><strong>13. Galaxy — The Workflow Platform</strong></h3>
-<p><strong>What it does:</strong> Web-based platform for running bioinformatics tools without command-line skills.</p>
-<p><strong>When to use it:</strong>
-- Learning bioinformatics (beginner-friendly)
-- Running standard workflows
-- No access to computing cluster</p>
-<p><strong>Why I used Galaxy:</strong>
-- <strong>No installation:</strong> Everything browser-based
-- <strong>Point-and-click:</strong> Select tools, set parameters, execute
-- <strong>Workflows:</strong> Save and repeat multi-step analyses
-- <strong>Server resources:</strong> Uses their computing power (not your laptop)</p>
-<p><strong>Tools available:</strong>
-- SPAdes, QUAST, Prokka, BLAST, MUSCLE, FastTree, and 500+ more</p>
-<p><strong>What I learned:</strong>
-- <strong>Perfect for learning:</strong> See tool inputs/outputs clearly
-- <strong>History tracking:</strong> All analyses saved automatically
-- <strong>Sharable:</strong> Export workflows for reproducibility</p>
-<p><strong>Limitations:</strong>
-- <strong>Slower</strong> than command-line (web overhead)
-- <strong>Less control</strong> over advanced parameters
-- <strong>File size limits</strong> on public servers</p>
-<p><strong>Access:</strong> https://usegalaxy.org (free)</p>
-<p><strong>When to graduate to command-line:</strong>
-- Running hundreds of analyses
-- Need custom parameters
-- Building automated pipelines</p>
-<hr />
-<h2>🎯 Quick Reference: Which Tool When?</h2>
-<p><strong>I have raw sequencing reads → Want: Genome</strong>
-- Use: <strong>SPAdes</strong> (assembly)
-- Then: <strong>QUAST</strong> (check quality)</p>
-<p><strong>I have a genome → Want: Gene locations</strong>
-- Use: <strong>Prokka</strong> (annotation)
-- Validate: <strong>BLAST</strong> top genes</p>
-<p><strong>I have sequences → Want: Find similar ones</strong>
-- Use: <strong>BLAST</strong> (homology search)</p>
-<p><strong>I have multiple sequences → Want: Compare them</strong>
-- Use: <strong>MUSCLE</strong> or <strong>ViralMSA</strong> (alignment)
-- View: <strong>Jalview</strong></p>
-<p><strong>I have aligned sequences → Want: Evolutionary tree</strong>
-- Use: <strong>FastTree</strong> (phylogeny)
-- View: <strong>Taxonium</strong></p>
-<p><strong>I have tree + dates → Want: Emergence time</strong>
-- Use: <strong>LSD2</strong> (molecular clock)</p>
-<p><strong>I have annotated genes → Want: Drug targets</strong>
-- Use: <strong>BioCyc</strong> (pathway analysis)</p>
-<p><strong>I want PCR primers → Want: Validated primers</strong>
-- Use: <strong>Primer3</strong> (design)
-- Then: <strong>BLAST</strong> (validate specificity)</p>
-<p><strong>I'm a beginner → Want: Try tools easily</strong>
-- Use: <strong>Galaxy</strong> (web platform)</p>
-<hr />
-<h2>💡 Lessons from the Trenches</h2>
-<h3><strong>Lesson 1: Don't Optimize Prematurely</strong></h3>
-<p><strong>Mistake:</strong> Spending hours tweaking SPAdes parameters before seeing results.<br />
-<strong>Fix:</strong> Run with defaults first. Only optimize if results are bad.</p>
-<h3><strong>Lesson 2: Validate Everything</strong></h3>
-<p><strong>Mistake:</strong> Trusting Prokka gene predictions blindly.<br />
-<strong>Fix:</strong> BLAST important genes. Check against literature.</p>
-<h3><strong>Lesson 3: Keep File Naming Consistent</strong></h3>
-<p><strong>Mistake:</strong> Files named <code>output.fasta</code>, <code>output_2.fasta</code>, <code>final.fasta</code>, <code>final_FINAL.fasta</code><br />
-<strong>Fix:</strong> Use descriptive names: <code>sarscov2_assembly_spades_k25.fasta</code></p>
-<h3><strong>Lesson 4: Document Your Commands</strong></h3>
-<p><strong>Mistake:</strong> Running tools, getting results, forgetting exact parameters used.<br />
-<strong>Fix:</strong> Keep a notebook (physical or digital) with every command.</p>
-<h3><strong>Lesson 5: Visualization Catches Errors</strong></h3>
-<p><strong>Mistake:</strong> Seeing good N50 number, not visualizing alignment.<br />
-<strong>Fix:</strong> Always visualize. Numbers lie; plots don't.</p>
-<h3><strong>Lesson 6: Read the Manual (Really)</strong></h3>
-<p><strong>Mistake:</strong> Googling random tutorials instead of reading official docs.<br />
-<strong>Fix:</strong> Official documentation is better than blog posts (usually).</p>
-<hr />
-<h2>📚 Building Your Toolkit: Installation Guide</h2>
-<h3><strong>Beginner (No Command Line):</strong></h3>
-<ol>
-<li>Start with <strong>Galaxy</strong> (https://usegalaxy.org)</li>
-<li>All tools available through web interface</li>
-<li>Perfect for learning workflow</li>
-</ol>
-<h3><strong>Intermediate (Basic Terminal Skills):</strong></h3>
-<p>Install via Conda (package manager):</p>
-<pre><code class="language-bash"># Install Miniconda first
-conda create -n viral_genomics python=3.9
+    <hr />
+
+    <h3 id="tool-fasttree">7. FastTree: Maximum-Likelihood Phylogenetic Inference</h3>
+    <p><strong>What it does:</strong> Reconstructs approximately maximum-likelihood phylogenetic trees from large multiple sequence alignments.</p>
+    <p><strong>Standard CLI invocation:</strong></p>
+<pre><code class="language-bash">FastTree -nt -gtr -gamma aligned_genomes.fasta &gt; sarscov2_tree.nwk</code></pre>
+    <p><strong>Key flags explained:</strong></p>
+    <ul>
+      <li><code>-nt</code>: Specifies nucleotide alignment input.</li>
+      <li><code>-gtr</code>: Applies the General Time-Reversible nucleotide substitution model.</li>
+      <li><code>-gamma</code>: Accounts for rate heterogeneity across genomic sites using a discrete Gamma distribution.</li>
+    </ul>
+    <p><strong>Alternatives:</strong> IQ-TREE 2 (automated ModelFinder + ultrafast bootstrap), RAxML-NG.</p>
+
+    <hr />
+
+    <h3 id="tool-lsd2">8. LSD2: Least-Squares Dating &amp; Molecular Clock Analysis</h3>
+    <p><strong>What it does:</strong> Converts branch lengths (substitutions per site) into calendar dates using sample collection timestamps, estimating evolutionary rates and the time to most recent common ancestor (tMRCA).</p>
+    <p><strong>Required inputs:</strong></p>
+    <ol>
+      <li>Rooted or unrooted Newick phylogeny from FastTree (<code>sarscov2_tree.nwk</code>).</li>
+      <li>Tab-delimited sample collection date file in decimal year format (e.g., <code>Wuhan-Hu-1 2019.96</code>).</li>
+    </ol>
+    <p><strong>Standard CLI invocation:</strong></p>
+<pre><code class="language-bash">lsd2 -i sarscov2_tree.nwk -d collection_dates.txt -c -r a</code></pre>
+    <p><strong>Project results across 100 SARS-CoV-2 isolates:</strong></p>
+<pre><code>Substitution rate : 8.9 x 10^-4 substitutions/site/year
+Estimated tMRCA   : October - November 2019 (95% CI: Sep - Dec 2019)
+Root-to-tip R^2   : 0.96 (strong clock-like temporal signal)</code></pre>
+
+    <hr />
+
+    <h2>Part 4: Metabolic Pathways &amp; Diagnostic Assay Design</h2>
+
+    <h3 id="tool-biocyc">9. BioCyc / EcoCyc / MetaCyc: Metabolic Pathway Databases</h3>
+    <p><strong>What it does:</strong> Maps annotated enzymes onto curated metabolic networks to identify metabolic chokepoints, essential cofactors, and host-pathogen dependencies.</p>
+    <p><strong>How I used pathway analysis for antiviral target discovery:</strong></p>
+    <ol>
+      <li><strong>Biological premise:</strong> Rapid SARS-CoV-2 replication requires massive intracellular pools of ribonucleotides (especially GTP) to synthesize thousands of ~30,000 nt viral RNA copies.</li>
+      <li><strong>Chokepoint analysis:</strong> Traced purine salvage and de novo synthesis pathways in BioCyc, focusing on <strong>guanylate kinase (EC 2.7.4.8)</strong>, which catalyzes $\text{ATP} + \text{GMP} \leftrightarrow \text{ADP} + \text{GDP}$.</li>
+      <li><strong>Therapeutic rationale:</strong> Inhibiting host guanylate kinase restricts the high-flux GTP synthesis demanded by viral replication while uninfected host cells tolerate transient depletion via salvage pathways (consistent with flux-balance findings by Renz et al., 2020).</li>
+    </ol>
+
+    <hr />
+
+    <h3 id="tool-primer3">10. Primer3: PCR &amp; Diagnostic RT-PCR Primer Design</h3>
+    <p><strong>What it does:</strong> Designs optimal forward and reverse oligonucleotide primers while controlling melting temperature ($T_m$), GC content, self-complementarity, and hairpin stability.</p>
+    <p><strong>Diagnostic design parameters (SARS-CoV-2 N gene):</strong></p>
+<pre><code>Target locus   : Nucleocapsid (N) gene (positions 28,000 - 28,500)
+Forward primer : 5'-GGGGAACTTCTCCTGCTAGAAT-3' (Tm: 59.8 °C)
+Reverse primer : 5'-CAGACATTTTGCTCTCAAGCTG-3' (Tm: 60.1 °C)
+Amplicon size  : 113 bp
+BLAST check    : 100% specific to SARS-CoV-2; 0 hits to human genome</code></pre>
+    <div class="tip">
+      <strong>Wet-lab + dry-lab bridge:</strong> I used this exact same Primer3 + NCBI BLAST workflow in my undergraduate thesis to design allele-specific inner and outer TETRA-ARMS PCR primers for the human <em>ATP8B1</em> SNP rs766737165.
+    </div>
+
+    <hr />
+
+    <h2>Part 5: Visualization &amp; Execution Platforms</h2>
+
+    <h3 id="tool-taxonium">11. Taxonium: High-Scale Phylogenetic Tree Explorer</h3>
+    <p><strong>What it does:</strong> WebGL-accelerated browser tool (<a href="https://taxonium.org" target="_blank">taxonium.org</a>) for interactively zooming, searching, and coloring phylogenetic trees containing hundreds to millions of viral sequences by lineage, collection date, or geography.</p>
+
+    <h3 id="tool-jalview">12. Jalview: Multiple Sequence Alignment Workbench</h3>
+    <p><strong>What it does:</strong> Desktop and web workbench (<a href="https://www.jalview.org" target="_blank">jalview.org</a>) for inspecting multiple sequence alignments, coloring residues by physicochemical conservation or mutation frequency, and exporting publication-quality alignment figures.</p>
+
+    <h3 id="tool-galaxy">13. Galaxy: Reproducible Web Bioinformatics Workbench</h3>
+    <p><strong>What it does:</strong> Cloud-backed scientific workflow platform (<a href="https://usegalaxy.org" target="_blank">usegalaxy.org</a>) providing graphical interfaces, job histories, and cluster compute for 500+ bioinformatics packages (including SPAdes, QUAST, Prokka, BLAST, MUSCLE, and FastTree).</p>
+
+    <hr />
+
+    <h2>Quick Decision Matrix: Which Tool When?</h2>
+    <div class="decision-grid">
+      <div class="decision-card">
+        <strong>Raw FASTQ Reads &rarr; Genome</strong>
+        <p>Run SPAdes &rarr; Validate with QUAST</p>
+      </div>
+      <div class="decision-card">
+        <strong>Assembled Contig &rarr; Genes</strong>
+        <p>Run Prokka &rarr; Confirm via BLAST</p>
+      </div>
+      <div class="decision-card">
+        <strong>Compare Protein Variants</strong>
+        <p>Align in MUSCLE &rarr; View in Jalview</p>
+      </div>
+      <div class="decision-card">
+        <strong>Align 100+ Viral Genomes</strong>
+        <p>Run ViralMSA (Reference-Guided)</p>
+      </div>
+      <div class="decision-card">
+        <strong>Build &amp; Date Phylogeny</strong>
+        <p>FastTree (ML) &rarr; LSD2 &rarr; Taxonium</p>
+      </div>
+      <div class="decision-card">
+        <strong>Design Specific PCR Primers</strong>
+        <p>Primer3 &rarr; Specificity check in BLASTn</p>
+      </div>
+    </div>
+
+    <hr />
+
+    <h2>Tool Selection Cheat Sheet</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Analytical Task</th>
+          <th>Primary Tool</th>
+          <th>Key Alternative</th>
+          <th>Selection Rationale</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>De Novo Assembly</strong></td>
+          <td>SPAdes</td>
+          <td>MEGAHIT</td>
+          <td>High contiguity via multi-k-mer de Bruijn graphs</td>
+        </tr>
+        <tr>
+          <td><strong>Assembly QC</strong></td>
+          <td>QUAST</td>
+          <td>Bandage</td>
+          <td>Standardized N50, NG50, and GC% reporting</td>
+        </tr>
+        <tr>
+          <td><strong>Viral/Bacterial Annotation</strong></td>
+          <td>Prokka</td>
+          <td>RAST / Bakta</td>
+          <td>Fast, standardized GFF3 and GenBank outputs</td>
+        </tr>
+        <tr>
+          <td><strong>Sequence Homology</strong></td>
+          <td>NCBI BLAST+</td>
+          <td>DIAMOND</td>
+          <td>Gold-standard sensitivity and curated databases</td>
+        </tr>
+        <tr>
+          <td><strong>Protein / Gene Alignment</strong></td>
+          <td>MUSCLE</td>
+          <td>MAFFT</td>
+          <td>High accuracy for conserved domain inspection</td>
+        </tr>
+        <tr>
+          <td><strong>Whole-Genome Viral Alignment</strong></td>
+          <td>ViralMSA</td>
+          <td>MAFFT</td>
+          <td>Scales to hundreds of genomes in minutes</td>
+        </tr>
+        <tr>
+          <td><strong>Phylogenetic Inference</strong></td>
+          <td>FastTree</td>
+          <td>IQ-TREE 2</td>
+          <td>Rapid ML tree construction with GTR+Gamma</td>
+        </tr>
+        <tr>
+          <td><strong>Molecular-Clock Dating</strong></td>
+          <td>LSD2</td>
+          <td>TreeTime / BEAST</td>
+          <td>Fast least-squares tMRCA and rate estimation</td>
+        </tr>
+        <tr>
+          <td><strong>Metabolic Pathway Mapping</strong></td>
+          <td>BioCyc / MetaCyc</td>
+          <td>KEGG</td>
+          <td>Curated chokepoint and enzyme reaction data</td>
+        </tr>
+        <tr>
+          <td><strong>Primer Design</strong></td>
+          <td>Primer3</td>
+          <td>NCBI Primer-BLAST</td>
+          <td>Granular thermodynamic and dimer control</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <hr />
+
+    <h2>Setting Up Your Local Conda Environment</h2>
+    <p>Once you are ready to move beyond Galaxy and automate workflows in a Linux/Bash environment, you can install the core command-line suite in a single isolated Bioconda environment:</p>
+<pre><code class="language-bash"># 1. Create and activate an isolated environment
+conda create -n viral_genomics python=3.10 -y
 conda activate viral_genomics
 
-# Install tools
-conda install -c bioconda spades quast prokka blast muscle fasttree
-</code></pre>
-<h3><strong>Advanced (HPC/Cluster Access):</strong></h3>
-<ul>
-<li>Use environment modules: <code>module load spades</code></li>
-<li>Build from source for latest versions</li>
-<li>Containerize with Docker/Singularity</li>
-</ul>
-<hr />
-<h2>🚀 Your First Analysis: Step-by-Step</h2>
-<p><strong>Goal:</strong> Assemble and annotate a viral genome</p>
-<p><strong>Data:</strong> SARS-CoV-2 (SRR10971381)</p>
-<p><strong>Steps:</strong></p>
-<pre><code class="language-bash"># 1. Assemble genome
-spades.py -1 forward.fastq -2 reverse.fastq -o assembly/
+# 2. Install the core viral genomics toolkit via Bioconda
+conda install -c conda-forge -c bioconda \
+  spades quast prokka blast muscle fasttree primer3 -y
 
-# 2. Check quality
-quast.py assembly/contigs.fasta -o quast_results/
+# 3. Install ViralMSA via pip
+pip install viralmsa</code></pre>
 
-# 3. Annotate genes
-prokka --kingdom Viruses assembly/contigs.fasta --outdir annotation/
+    <hr />
 
-# 4. BLAST best contig
-blastn -query assembly/contigs.fasta -db nt -max_target_seqs 5
+    <h2>Six Practical Lessons from the Trenches</h2>
+    <ol>
+      <li><strong>Start with sensible defaults before tuning hyperparameters:</strong> Run SPAdes or FastTree with standard settings first, inspect the QUAST or tree output, and only adjust k-mers or substitution priors when the data warrants it.</li>
+      <li><strong>Never trust automated annotations blindly:</strong> Treat Prokka gene calls as hypotheses and verify key ORFs and functional domains with BLASTp and literature benchmarks.</li>
+      <li><strong>Enforce deterministic file naming:</strong> Replace ambiguous filenames like <code>final_output2.fasta</code> with self-documenting names such as <code>SRR10971381_spades_k21-33-55_contigs.fasta</code>.</li>
+      <li><strong>Log every command and software version:</strong> Maintain a reproducible Bash script or Markdown lab notebook recording exact flags and database versions.</li>
+      <li><strong>Inspect alignments visually:</strong> Summary statistics can mask local frameshifts or adapter artifacts; always load alignments into Jalview before building trees.</li>
+      <li><strong>Let biology drive the pipeline:</strong> Algorithms are instruments. Always anchor computational outputs back to the underlying molecular biology and epidemiological context.</li>
+    </ol>
 
-# Done! You've assembled and annotated a genome.
-</code></pre>
-<p><strong>Time required:</strong> 1-2 hours (mostly waiting for tools to run)</p>
-<hr />
-<h2>🎓 Tool Selection Cheat Sheet</h2>
-<table>
-<thead>
-<tr>
-<th>Task</th>
-<th>Recommended Tool</th>
-<th>Alternative</th>
-<th>Why This One?</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Genome Assembly</strong></td>
-<td>SPAdes</td>
-<td>MEGAHIT</td>
-<td>Best balance of speed/accuracy</td>
-</tr>
-<tr>
-<td><strong>Quality Check</strong></td>
-<td>QUAST</td>
-<td>assembly-stats</td>
-<td>Comprehensive metrics</td>
-</tr>
-<tr>
-<td><strong>Annotation</strong></td>
-<td>Prokka</td>
-<td>RAST</td>
-<td>Fast, automated, good for viruses</td>
-</tr>
-<tr>
-<td><strong>Homology</strong></td>
-<td>BLAST</td>
-<td>Diamond</td>
-<td>Industry standard, huge databases</td>
-</tr>
-<tr>
-<td><strong>Alignment (small)</strong></td>
-<td>MUSCLE</td>
-<td>MAFFT</td>
-<td>Accurate for &lt;100 sequences</td>
-</tr>
-<tr>
-<td><strong>Alignment (large)</strong></td>
-<td>MAFFT</td>
-<td>ViralMSA</td>
-<td>Faster for 100+ sequences</td>
-</tr>
-<tr>
-<td><strong>Phylogeny</strong></td>
-<td>FastTree</td>
-<td>IQ-TREE</td>
-<td>Speed without sacrificing much accuracy</td>
-</tr>
-<tr>
-<td><strong>Dating</strong></td>
-<td>LSD2</td>
-<td>TreeTime</td>
-<td>Better for viral datasets</td>
-</tr>
-<tr>
-<td><strong>Pathways</strong></td>
-<td>BioCyc</td>
-<td>KEGG</td>
-<td>More detailed metabolic info</td>
-</tr>
-<tr>
-<td><strong>Visualization</strong></td>
-<td>Jalview/Taxonium</td>
-<td>MEGA</td>
-<td>Open-source, feature-rich</td>
-</tr>
-<tr>
-<td><strong>Platform</strong></td>
-<td>Galaxy</td>
-<td>Command-line</td>
-<td>Beginner-friendly</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2>🔮 What's Next: Expanding Your Toolkit</h2>
-<p>Once you've mastered these 13 core tools, level up with:</p>
-<p><strong>Variant Calling:</strong>
-- <strong>VCF tools:</strong> Identify SNPs and indels
-- <strong>SnpEff:</strong> Annotate variant effects</p>
-<p><strong>Structural Analysis:</strong>
-- <strong>AlphaFold:</strong> Protein structure prediction
-- <strong>PyMOL:</strong> Structure visualization</p>
-<p><strong>Metagenomics:</strong>
-- <strong>Kraken2:</strong> Taxonomic classification
-- <strong>MetaPhlAn:</strong> Microbial profiling</p>
-<p><strong>RNA-seq:</strong>
-- <strong>Salmon:</strong> Transcript quantification
-- <strong>DESeq2:</strong> Differential expression</p>
-<p><strong>Long-Read Sequencing:</strong>
-- <strong>Canu:</strong> Long-read assembly
-- <strong>Minimap2:</strong> Long-read alignment</p>
-<hr />
-<h2>💬 Final Thoughts: Tools Are Just Tools</h2>
-<p>After using 15+ bioinformatics tools for my SARS-CoV-2 project, here's what I learned:</p>
-<p><strong>The tools don't matter as much as:</strong>
-1. <strong>Understanding the biology</strong> (What question am I asking?)
-2. <strong>Knowing the workflow</strong> (Which tool outputs feed into which inputs?)
-3. <strong>Validating results</strong> (Does this make biological sense?)
-4. <strong>Reading documentation</strong> (How does this tool actually work?)</p>
-<p><strong>The best bioinformatician isn't the one who knows the most tools.</strong></p>
-<p>The best bioinformatician is the one who:
-- Knows which tool to use when
-- Can troubleshoot when tools fail
-- Validates results skeptically
-- Understands the biological context</p>
-<p>This toolkit got me from raw sequencing reads to:
-- ✅ Complete viral genome (29,903 bp)
-- ✅ 11 annotated genes
-- ✅ Evolutionary origins (96.1% to RaTG13)
-- ✅ Pandemic timeline (Oct-Nov 2019)
-- ✅ Drug target discovery (guanylate kinase)</p>
-<p>The same toolkit can take you there too.</p>
-<p><strong>Start with one tool. Master it. Add the next. Repeat.</strong></p>
-<p>Before you know it, you'll have a complete bioinformatics toolkit for viral genomics—just like I did.</p>
-<hr />
-<p><strong>Syed Muhammad Ali Shirazi</strong> is a bioinformatics researcher bridging wet-lab molecular biology and computational genomics. His work focuses on viral evolution, genome assembly, and drug target discovery.</p>
-<p><strong>Connect:</strong> <a href="https://github.com/alishirazi03">GitHub</a> | <a href="https://linkedin.com/in/syedmuhammadalishirazi">LinkedIn</a> | <a href="mailto:shirazi6503@gmail.com">Email</a></p>
-<p><strong>Read More in This Series:</strong>
-- <a href="#">From Wet Lab to Code: My Journey into Bioinformatics</a>
-- <a href="#">Assembling a Pandemic: My First Genome Assembly</a>
-- <a href="#">Finding Drug Targets in a Pandemic Virus</a> <em>(coming soon)</em>
-- <a href="#">Tracing Origins: Phylogenetic Analysis of SARS-CoV-2</a> <em>(coming soon)</em></p>
-<hr />
-<p><strong>Bookmark this guide!</strong> Return to it whenever you're wondering "Which tool do I use for this?"</p>
-<p><em>Have questions about any of these tools? Stuck on a particular analysis? Drop a comment or reach out—I'm happy to help!</em></p>
+    <!-- AUTHOR BIO -->
+    <div class="author-bio">
+      <h4>About the Author</h4>
+      <p>
+        <strong>Syed Muhammad Ali Shirazi</strong> is a Biosciences graduate from COMSATS University Islamabad (134 credits; 12-credit undergraduate thesis awarded Grade A) working at the intersection of wet-lab molecular genetics and computational biology. He is a Student Member of the International Society for Computational Biology (ISCB #46230).
+      </p>
+      <p style="margin-bottom:0;">
+        <a href="../index.html">Portfolio</a> &middot;
+        <a href="https://github.com/alishirazi03/Hacking-COVID-19-Applied-Bioinformatics-Genomic-Analysis" target="_blank">Project Repository</a> &middot;
+        <a href="https://linkedin.com/in/syedmuhammadalishirazi" target="_blank">LinkedIn</a> &middot;
+        <a href="mailto:shirazi6503@gmail.com">Email</a>
+      </p>
+    </div>
+
+    <!-- RELATED POSTS -->
+    <div class="related-posts">
+      <h3>Continue Reading in This Series</h3>
+      <ul>
+        <li>
+          <a href="wetlab-to-code.html">From Wet Lab to Code: My Journey into Bioinformatics &rarr;</a>
+          <p style="font-size:0.85rem;color:var(--muted);margin:0.25rem 0 0;">How I transitioned from DNA extraction and TETRA-ARMS PCR to computational genomics pipelines.</p>
+        </li>
+        <li>
+          <a href="genome-assembly.html">Assembling a Pandemic: My First Genome Assembly &rarr;</a>
+          <p style="font-size:0.85rem;color:var(--muted);margin:0.25rem 0 0;">Reconstructing the complete 29,903 bp SARS-CoV-2 viral genome from 2.5 million short Illumina reads.</p>
+        </li>
+      </ul>
+    </div>
+
   </article>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 Syed Muhammad Ali Shirazi &middot; <a href="../index.html">Portfolio Home</a> &middot; <a href="index.html">All Articles</a> &middot; <a href="https://github.com/alishirazi03" target="_blank">GitHub</a></p>
+  </footer>
+
+  <script>
+    // Sync Dark/Light Theme with main portfolio
+    const themeBtn = document.getElementById('themeBtn');
+    function applyTheme(dark) {
+      document.body.classList.toggle('dark', dark);
+      themeBtn.innerHTML = dark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    }
+    const savedTheme = localStorage.getItem('shirazi_theme');
+    if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      applyTheme(true);
+    }
+    function toggleTheme() {
+      const isDark = !document.body.classList.contains('dark');
+      applyTheme(isDark);
+      localStorage.setItem('shirazi_theme', isDark ? 'dark' : 'light');
+    }
+
+    // Reading Progress Bar
+    const progressBar = document.getElementById('progress-bar');
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      progressBar.style.width = (docHeight > 0 ? (scrollTop / docHeight) * 100 : 0) + '%';
+    });
+  </script>
+
 </body>
 </html>
